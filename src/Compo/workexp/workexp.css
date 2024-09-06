@@ -1,0 +1,94 @@
+/* Container for the line with the color-dropping effect */
+.exp-list-container {
+    position: relative;
+    padding-left: 30px; /* Space between the line and ul */
+}
+
+/* Thin vertical line with the dropping gradient effect */
+.exp-list-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px; /* Adjust based on your preference */
+    width: 1px; /* Thinner line */
+    height: 100%;
+    background: linear-gradient(to bottom, #06B6D4, #094f5b); /* Gradient color */
+    background-size: 100% 200%; /* Allows the gradient to move */
+    animation: colorDrop 3s ease-in-out infinite; /* Continuous dropping effect */
+}
+
+/* Color dropping animation from top to bottom */
+@keyframes colorDrop {
+    0% {
+        background-position: 0% -100%; /* Start with the gradient off the top */
+    }
+    100% {
+        background-position: 0% 100%; /* Move the gradient to the bottom */
+    }
+}
+
+/* Existing styles for your list */
+.exp-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 79px;
+    border-radius: 0.4rem;
+    margin-top: 1rem;
+   
+}
+
+.exp-first-img {
+    height: 1rem;
+}
+
+.exp-p {
+    position: relative;
+    left: 1rem;
+    top: 0.4rem;
+}
+
+.exp-flex-two {
+    display: flex;
+    justify-content: end;
+}
+
+.exp-p-p {
+    position: relative;
+    top: 0.4rem;
+    left:1rem
+}
+
+.exp-first-img-two {
+    /* position: relative;
+    left: 1rem; */
+    margin-left: 2rem;
+}
+
+.exp-flex:hover {
+    background-color: rgb(91, 87, 87);
+}
+.exp-con-span-main{
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.exp-con-span-two{
+    color:#06B6D4;
+}
+.exp-p-color{
+    color:#73737A;
+    font-size: 13px;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@media screen and (max-width:990px) {
+    .exp-flex{
+        justify-content: start;
+    }
+    .exp-first-img-two{
+        margin-left: 0rem;
+    }
+    
+}
