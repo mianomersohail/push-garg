@@ -46,3 +46,9 @@ i{
 .home-first-i:hover{
     color:#06B6D4;
 }
+@media screen and (max-width:768px) {
+    .home-p-one{
+        text-align: justify;
+    }
+    
+}
