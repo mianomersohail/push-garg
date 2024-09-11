@@ -8,7 +8,7 @@ function App() {
   return (
     <>
 
-   <HashRouter>
+   <Router>
           <Nav/>       
           <Routes>
           <Route path="*" element={<Home/>} />
@@ -16,7 +16,7 @@ function App() {
           <Route path="home" element={''} />
           <Route path="/contact" element={''} />
           </Routes>
-        </HashRouter>   
+        </Router>   
     
     </>
   );
