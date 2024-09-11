@@ -1,3 +1,26 @@
 .courses-main{
     margin-top: 8rem;
+    
+}
+.course-one-img{
+    width: 100%;
+    border-radius: 1rem;
+}
+.course-p-one{
+    color:#73737A;
+    margin-top: 1rem;
+    padding: 0 20px 0 20px;
+    text-align: start;
+}
+.course-box{
+    background-color: #27272A;
+    margin-top: 3rem;
+     border: solid;
+     border-radius: 1rem;
+      border-color: #27272A;
+}
+.course-h5{
+    margin-top: 2rem;
+    padding: 0 0px 0 20px;
+
 }

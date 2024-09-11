@@ -1,0 +1,17 @@
+.trusted-main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+
+}
+@media screen and (max-width:768px) {
+    
+    .trusted-h3-one{
+        text-align: center;
+    }
+    .trusted-empowering-p{
+        text-align: center;
+    }
+}

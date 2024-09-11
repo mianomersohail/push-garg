@@ -1,0 +1,30 @@
+.footer-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-img-one{
+    height: 2rem;
+    border-radius: 50%;
+}
+.footer-p{
+    font-weight: bold;
+    position: relative;
+    top:0.5rem;
+    left:0.5rem;
+
+}
+.footer-box ul{
+    display: flex;
+
+}
+.footer-box li{
+    list-style: none;
+    color:white;
+    margin-left:1rem;
+    margin-top: 1rem;
+}
+.footer-link{
+    text-decoration: none;
+    color:white;
+}

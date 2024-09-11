@@ -2,6 +2,8 @@ import './Home.css'
 import {Link } from 'react-router-dom'
 import WorkExperience from '../workexp/workexp'
 import Courses from '../courses/Courses'
+import Trusted from '../trustedanimation/Trusted'
+import Footer from '../Footer/Footer'
 
 export default function Home(){
     return(
@@ -9,8 +11,13 @@ export default function Home(){
         <div className='container offset-lg-1'>
             <div className='row'>
                 <div className='col-lg-6 home-main'>
-                    <span>Trust me, I'm  a</span><span className='home-span-color'>software engineer.</span>
-                    <p className='home-p-one'>Meet Piyush Garg, content creator, educator, and entrepreneur known for his expertise in the tech industry. He has successfully launched numerous technical courses on various platforms. Founder of Teachyst, white-labeled Learning Management System (LMS) to help educators monetize their content globally.</p>
+                    <span>I'm  a</span><span className='home-span-color'>software engineer.</span>
+                    <p className='home-p-one'>I’m Muhammad Umer Sohail . Over a 3+ yearsexperience in trading markets,
+working in Lahore, I have played an essential role in developing and improving a
+wide range of digital products and services across different industries and
+business models and Ecommerce platforms where I have found my biggest
+passion. Paying close attention to user feedback, spot user behavior patterns,
+and iterating from there has always been my motto</p>
                     <p style={{color:"#73737A"}}>~ ChatGPT</p>
                     <p className="home-p-one">Building Teachyst when I'm not working on my day job.</p>
                 </div>
@@ -29,6 +36,8 @@ export default function Home(){
         </div>
         <WorkExperience/>
         <Courses/>
+        <Trusted/>
+        <Footer/>
 
         
         </>
