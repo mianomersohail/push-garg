@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mianomersohail/push-garg.git/static/css/main.54a3badc.css",
-    "main.js": "/mianomersohail/push-garg.git/static/js/main.881021e7.js",
+    "main.css": "/mianomersohail/push-garg.git/static/css/main.8a5f2dd6.css",
+    "main.js": "/mianomersohail/push-garg.git/static/js/main.ab4bf52d.js",
     "static/js/453.ed3810f9.chunk.js": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js",
     "index.html": "/mianomersohail/push-garg.git/index.html",
-    "main.54a3badc.css.map": "/mianomersohail/push-garg.git/static/css/main.54a3badc.css.map",
-    "main.881021e7.js.map": "/mianomersohail/push-garg.git/static/js/main.881021e7.js.map",
+    "main.8a5f2dd6.css.map": "/mianomersohail/push-garg.git/static/css/main.8a5f2dd6.css.map",
+    "main.ab4bf52d.js.map": "/mianomersohail/push-garg.git/static/js/main.ab4bf52d.js.map",
     "453.ed3810f9.chunk.js.map": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.54a3badc.css",
-    "static/js/main.881021e7.js"
+    "static/css/main.8a5f2dd6.css",
+    "static/js/main.ab4bf52d.js"
   ]
 }
