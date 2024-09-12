@@ -1,10 +1,11 @@
-import Navbar from "../Compo/Nav/Nav"
-import Footer from "../Compo/Footer/Footer"
+import Navbar from "../Nav/Nav"
+import Footer from "../Footer/Footer"
 import './LoginPage.css'
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 export default function UserLogin(){
     const [email,setemail]=useState()
+    const [servermessage,setservermessage]=useState('')
     const [password,setpassword]=useState()
     const navigate=useNavigate()
     const emailchange=(event)=>{
@@ -26,7 +27,7 @@ export default function UserLogin(){
               
         })  
         if(!Response){
-            alert('No Response from server')
+            setservermessage('No Response from server')
         }
         
         const Data=await Response.json()
@@ -36,10 +37,10 @@ export default function UserLogin(){
 
         }
         if(Data.message=='Un-Auhorized'){
-            alert(Data.message)
+            setservermessage('CHECK YOUR EMAIL PASSWORD',Data.message)
         }
     }catch(error){
-        alert(error.message)
+        setservermessage(error.message)
     }
     }
 
@@ -54,6 +55,7 @@ export default function UserLogin(){
                 </div>
                 <div className="col-lg-6">
                     <form className="login-page-form" onSubmit={submitform}>
+                        <div><p style={{color:'#06B5D3'}}>{servermessage}</p></div>
                     <div><h3>Login</h3></div>
                         <div><label>Email/Phone</label></div>
                         <div><input value={email} onChange={emailchange} name="email" type="email" placeholder="Enter your Email/Phone"/></div>

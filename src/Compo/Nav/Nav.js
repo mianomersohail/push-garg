@@ -2,9 +2,6 @@ import './Nav.css';
 import {  Link,useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import PaidUser from '../PaidUser/PaidUser';
-import UserLogin from '../../UserLoginPage/UserLogin';
-import Nav from '../Nav/Nav.js'
-
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
