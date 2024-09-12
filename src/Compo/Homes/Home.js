@@ -1,13 +1,16 @@
 import './Home.css'
 import {Link } from 'react-router-dom'
+import Navbar from '../Nav/Nav'
 import WorkExperience from '../workexp/workexp'
 import Courses from '../courses/Courses'
 import Trusted from '../trustedanimation/Trusted'
 import Footer from '../Footer/Footer'
 
+
 export default function Home(){
     return(
         <>
+        <Navbar/>
         <div className='container offset-lg-1'>
             <div className='row'>
                 <div className='col-lg-6 home-main'>
@@ -34,6 +37,7 @@ and iterating from there has always been my motto</p>
                 </div>
             </div>
         </div>
+        
         <WorkExperience/>
         <Courses/>
         <Trusted/>

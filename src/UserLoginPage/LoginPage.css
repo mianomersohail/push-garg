@@ -1,0 +1,59 @@
+.Login-Page-Main{
+    margin-top: 2rem;
+}
+.login-page-form{
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-page-form label{
+    font-size: 20px;
+}
+.login-page-form input{
+    width: 100%;
+    padding:2px;
+}
+.login-page-form div{
+    margin-top: 0.5rem;
+}
+.login-page-form button{
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+.login-page-form button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.login-page-form button:active {
+    transform: translateY(0); /* Button returns to original position on click */
+}
+.login-page-img {
+    
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+    
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
