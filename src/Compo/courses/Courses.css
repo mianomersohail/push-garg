@@ -42,3 +42,6 @@
 .course-box:hover video {
     play: true;
 }
+#course-main-video{
+    height: 50vh;
+}

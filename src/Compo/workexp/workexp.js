@@ -50,7 +50,7 @@ export default function WorkExperience() {
                                     ref={emitrrRef}
                                 >
                                     <img className="exp-first-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Femitrr.jpeg&w=32&q=75" alt="Emitrr Logo" />
-                                    <p className="exp-p">Fiver</p>
+                                    <p className="exp-p">Upwork</p>
                                 </li>
                                 <li
                                     className={`exp-flex ${selectedCompany === 'Trryst' ? 'active' : ''}`}

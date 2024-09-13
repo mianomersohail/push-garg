@@ -1,0 +1,32 @@
+.scrolling-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    background: black; /* Optional background color */
+  }
+  
+  .prices-box {
+    display: inline-flex;
+    animation: scroll-left 18s linear infinite;
+  }
+  
+  .price-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between items */
+  }
+  
+  .price-icon {
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 10px; /* Space between icon and text */
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
