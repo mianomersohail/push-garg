@@ -2,9 +2,9 @@ import './Courses.css'
 export default function Courses(){
     return(
         <>
-        <div className='container offset-lg-1'>
+        <div className='container '>
             <div className='row'>
-                <div className='col-12 courses-main'>
+                <div className='col-11 courses-main '>
                     <h1 style={{fontWeight:'bold'}}>Projects</h1>
                     <p style={{color:"#73737A"}}>Explore a selection of Projects designed to help you enhance my skills.</p>
                 </div>

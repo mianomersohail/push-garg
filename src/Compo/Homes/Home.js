@@ -1,18 +1,19 @@
 import './Home.css';
 import { Link } from 'react-router-dom';
-import Navbar from '../Nav/Nav';
+import  Navbar from '../Nav/Nav'
 import WorkExperience from '../workexp/workexp';
 import Courses from '../courses/Courses';
 import Trusted from '../trustedanimation/Trusted';
 import Footer from '../Footer/Footer';
-import BitcoinPrice from '../../BitcoinPrice/Bitcoinprice';
+import BitcoinPrice from '../BitcoinPrice/Bitcoinprice';
 import TypingEffect from 'react-typing-effect';
 
 export default function Home() {
-  return (
-    <>
+return(
+<>
       <BitcoinPrice />
       <Navbar />
+     
       <div className='container offset-lg-1'>
         <div className='row'>
           <div className='col-lg-6 home-main'>
