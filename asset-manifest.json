@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mianomersohail/push-garg.git/static/css/main.708129e2.css",
+    "main.js": "/mianomersohail/push-garg.git/static/js/main.d9c48c6e.js",
+    "static/js/453.ed3810f9.chunk.js": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/mianomersohail/push-garg.git/index.html",
+    "main.708129e2.css.map": "/mianomersohail/push-garg.git/static/css/main.708129e2.css.map",
+    "main.d9c48c6e.js.map": "/mianomersohail/push-garg.git/static/js/main.d9c48c6e.js.map",
+    "453.ed3810f9.chunk.js.map": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.708129e2.css",
+    "static/js/main.d9c48c6e.js"
+  ]
+}
