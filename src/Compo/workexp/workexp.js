@@ -42,7 +42,7 @@ export default function WorkExperience() {
                                     ref={dimensionRef}
                                 >
                                     <img className="exp-first-img exp-first-img-two" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Fdimension.png&w=32&q=75" alt="Dimension Logo" />
-                                    <p className="exp-p-p">Dimension</p>
+                                    <p className="exp-p-p">SoftPyramid</p>
                                 </li>
                                 <li
                                     className={`exp-flex ${selectedCompany === 'Emitrr' ? 'active' : ''}`}
@@ -50,7 +50,7 @@ export default function WorkExperience() {
                                     ref={emitrrRef}
                                 >
                                     <img className="exp-first-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Femitrr.jpeg&w=32&q=75" alt="Emitrr Logo" />
-                                    <p className="exp-p">Emitrr</p>
+                                    <p className="exp-p">Fiver</p>
                                 </li>
                                 <li
                                     className={`exp-flex ${selectedCompany === 'Trryst' ? 'active' : ''}`}
@@ -58,7 +58,7 @@ export default function WorkExperience() {
                                     ref={trrystRef}
                                 >
                                     <img className="exp-first-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Ftrryst.webp&w=32&q=75" alt="Trryst Logo" />
-                                    <p className="exp-p">TrrYst</p>
+                                    <p className="exp-p">Moonsys</p>
                                 </li>
                             </ul>
                         </div>
@@ -69,39 +69,42 @@ export default function WorkExperience() {
                         {selectedCompany === 'Dimension' && (
                             <>
                                 <div className='exp-con-span-main'>
-                                    <span className=''>Founding Software Engineer</span>
-                                    <span className='exp-con-span-two'>@Dimension</span>
+                                    <span className=''>Soft</span>
+                                    <span className='exp-con-span-two'>Pyramid</span>
                                 </div>
-                                <p className='exp-p-color'>Apr 2024 - Present</p>
-                                <p className='exp-p-color'>Dubai, UAE</p>
-                                <p className='exp-p-color'>Building Next-gen developer collaboration tool</p>
+                                <p className='exp-p-color'>8 Months</p>
+                                <p className='exp-p-color'>Office 1120، Al Hafeez Exective، 30 Firdous Mkt Rd Gulberg III, Lahore, Punjab 54000</p>
+                                <p className='exp-p-color'>React Js Developer</p>
                             </>
                         )}
                         {selectedCompany === 'Emitrr' && (
                             <>
                                 <div className='exp-con-span-main'>
-                                    <span className=''>Software Engineer</span>
-                                    <span className='exp-con-span-two'>@Emitrr</span>
+                                    <span className=''>FreeLancing</span>
+                                    <span className='exp-con-span-two'>@Fiver</span>
                                 </div>
-                                <p className='exp-p-color'>Mar 2023 - Apr 2024</p>
+                                <p className='exp-p-color'>2024-Present</p>
                                 <p className='exp-p-color'>Remote</p>
-                                <p className='exp-p-color'>Worked on SMS Automations</p>
-                                <p className='exp-p-color'>Worked on Hubspot and Mailchimp integrations</p>
-                                <p className='exp-p-color'>Built automated workflows from ground up</p>
+                                <p className='exp-p-color'>Front-End Expertise: HTML, CSS, and JavaScript with React js</p>
+                                <p className='exp-p-color'>Full-Stack Capability:Skilled in both front-end and back- end
+                                development, adept at creatingcohesive, end-to-end web solutions</p>
+                                <p className='exp-p-color'>Smart Contracts on Eth BlockChain</p>
                             </>
                         )}
                         {selectedCompany === 'Trryst' && (
                             <>
                                 <div className='exp-con-span-main'>
-                                    <span className=''>Software Engineer</span>
-                                    <span className='exp-con-span-two'>@Trryst</span>
+                                    <span className=''>Internship</span>
+                                    <span className='exp-con-span-two'>@Moon sys</span>
                                 </div>
-                                <p className='exp-p-color'>Jun 2021 - Mar 20234</p>
-                                <p className='exp-p-color'>Remote</p>
-                                <p className='exp-p-color'>London, UK</p>
-                                <p className='exp-p-color'>Built AI video calling and meeting infrastructure.</p>
-                                <p className='exp-p-color'>Worked on cloud file storage infrastructure and smart AI features</p>
-                                <p className='exp-p-color'>Built transcriptions and smart meeting actions from ground up</p>
+                                <p className='exp-p-color'>3 Months</p>
+                                <p className='exp-p-color'>On Site</p>
+                                <p className='exp-p-color'>HCC4+889, Fateh Garh Main Bazar Rd, Fateh Garh Fatehgarh, Lahore, Punjab</p>
+                                <p className='exp-p-color'>Collaborated with senior developers to implement responsive user
+                                interfaces, ensuring mobile-first design principles</p>
+                                <p className='exp-p-color'>Gained hands-on experience in version control with Git and
+                                deployment using cloud platforms like Heroku</p>
+                                <p className='exp-p-color'></p>
                             </>
                         )}
                     </div> 

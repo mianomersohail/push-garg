@@ -5,58 +5,71 @@ export default function Courses(){
         <div className='container offset-lg-1'>
             <div className='row'>
                 <div className='col-12 courses-main'>
-                    <h1 style={{fontWeight:'bold'}}>Courses</h1>
-                    <p style={{color:"#73737A"}}>Explore a selection of courses designed to help you enhance your skills.</p>
+                    <h1 style={{fontWeight:'bold'}}>Projects</h1>
+                    <p style={{color:"#73737A"}}>Explore a selection of Projects designed to help you enhance my skills.</p>
+                </div>
+                {/* Full Stack Hassan Video Editor */}
+                <div className="col-lg-3">
+                    <div className="course-box">
+                        <iframe 
+                          className="course-one-img" 
+                          src="https://www.youtube.com/embed/dZHxa2Lb29E?si=fgFMwxegdMgi39Pf" 
+                          title="Full Stack Hassan Video Editor"
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen>
+                        </iframe>
+                        <h5 className="course-h5">Full Stack Hassan Video Editor</h5>
+                        <p className="course-p-one">To create a professional and fully responsive FullStack website for a video editor, you'll use React for the frontend and Node.js with Express for the backend.</p>
+                    </div>
+                </div>
+                {/* Docker Mastery Course */}
+                <div className="col-lg-3">
+                    <div className="course-box">
+                        <iframe 
+                          className="course-one-img" 
+                          src="https://www.youtube.com/embed/7xYdOsPAPww?si=WqUU0iD9VSLZORnW" 
+                          title="Docker Mastery Course"
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen>
+                        </iframe>
+                        <h5 className="course-h5">PORTFOLIO WEBSITE</h5>
+                        <p className="course-p-one">"I built a cutting-edge portfolio website with the latest tools and technologies, following top coding best practices. The site is seamlessly connected to a Node.js backend."
+.</p>
+                    </div>
+                </div>
+                {/* Repeat for other courses */}
+                <div className="col-lg-3">
+                    <div className="course-box">
+                        <iframe 
+                          className="course-one-img" 
+                          src="https://www.youtube.com/embed/NAbmDaq7baE?si=zKDdr55xvalaIKhr" 
+                          title="Another Course"
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen>
+                        </iframe>
+                        <h5 className="course-h5">UK DOCTOR PROJECT</h5>
+                        <p className="course-p-one">"One of my regular clients from the UK on Fiverr entrusted me with a project that started as just an idea — no UI, nothing. I transformed their concept into a flawless, pixel-perfect design.</p>
+                    </div>
                 </div>
                 <div className="col-lg-3">
                     <div className="course-box">
-                        <img className="course-one-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Fcourses%2Ftwitter-clone.webp&w=1920&q=75"/>
-                        <h5 className="course-h5">Full Stack Twitter Clonse</h5>
-                        <p className="course-p-one">Create a FullStack Twitter Clone that allows user to crate and upload tweets follows other users,and like, and view their own profiles of others users</p>
-
-
+                        <iframe 
+                          className="course-one-img" 
+                          src="https://www.youtube.com/embed/12UP_HefB0U?si=5Esnxe0jQIAEbsH2" 
+                          title="Next Js 14"
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen>
+                        </iframe>
+                        <h5 className="course-h5">MY PAID COURSE JOIN PROCESS</h5>
+                        <p className="course-p-one">I've developed a dynamic website designed for seamless interaction, where you can easily explore and purchase my premium trading market and MERN stack courses.</p>
                     </div>
-                    
-
                 </div>
-                <div className="col-lg-3 ">
-                    <div className="course-box">
-                        <img className="course-one-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Fcourses%2Fdocker.webp&w=1920&q=75"/>
-                        <h5 className="course-h5">Docker Mastery Course</h5>
-                        <p className="course-p-one">In this Course you will learn everything you need to know about Docker,a powerfull tool for creating deploying,and managing containerized applications</p>
-
-
-                    </div>
-                    
-
-                </div>
-                <div className="col-lg-3 ">
-                    <div className="course-box">
-                        <img className="course-one-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Fcourses%2Fdocker.webp&w=1920&q=75"/>
-                        <h5 className="course-h5">Docker Mastery Course</h5>
-                        <p className="course-p-one">In this Course you will learn everything you need to know about Docker,a powerfull tool for creating deploying,and managing containerized applications</p>
-
-
-                    </div>
-                    
-
-                </div>
-                <div className="col-lg-3 ">
-                    <div className="course-box">
-                        <img className="course-one-img" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Fcourses%2Fnext-js.webp&w=1920&q=75"/>
-                        <h5 className="course-h5">Next Js 14</h5>
-                        <p className="course-p-one">welcome to "Mastering NextJs 14 Course" a comperhensive course design to elevate your skill in developing modern web applications using Next.Js version 14. </p>
-
-
-                    </div>
-                    
-
-                </div>
-                
             </div>
-
         </div>
-        
         </>
     )
 }
