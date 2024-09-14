@@ -31,9 +31,13 @@ export default function UserLogin(){
         }
         
         const Data=await Response.json()
-        if(Data.message=='Authorized'){
-            alert("Your are")
-            navigate('/paiduser')
+        console.log(Data)
+        if(Data.message=='Authorized' && Data.role=='Admin'){
+            navigate('../AdminPanel/AdminPanel')
+
+        }
+        if(Data.message=='Authorized' && Data.role=='User'){
+            navigate('/PaidUser')
 
         }
         if(Data.message=='Un-Auhorized'){
