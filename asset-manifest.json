@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mianomersohail/push-garg.git/static/css/main.820cacfa.css",
-    "main.js": "/mianomersohail/push-garg.git/static/js/main.ed24c640.js",
-    "static/js/453.ed3810f9.chunk.js": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js",
-    "index.html": "/mianomersohail/push-garg.git/index.html",
-    "main.820cacfa.css.map": "/mianomersohail/push-garg.git/static/css/main.820cacfa.css.map",
-    "main.ed24c640.js.map": "/mianomersohail/push-garg.git/static/js/main.ed24c640.js.map",
-    "453.ed3810f9.chunk.js.map": "/mianomersohail/push-garg.git/static/js/453.ed3810f9.chunk.js.map"
+    "main.css": "/mianomersohail/push-garg.git/my-app/static/css/main.a77b0370.css",
+    "main.js": "/mianomersohail/push-garg.git/my-app/static/js/main.cc7b255c.js",
+    "static/js/453.ed3810f9.chunk.js": "/mianomersohail/push-garg.git/my-app/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/mianomersohail/push-garg.git/my-app/index.html",
+    "main.a77b0370.css.map": "/mianomersohail/push-garg.git/my-app/static/css/main.a77b0370.css.map",
+    "main.cc7b255c.js.map": "/mianomersohail/push-garg.git/my-app/static/js/main.cc7b255c.js.map",
+    "453.ed3810f9.chunk.js.map": "/mianomersohail/push-garg.git/my-app/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.820cacfa.css",
-    "static/js/main.ed24c640.js"
+    "static/css/main.a77b0370.css",
+    "static/js/main.cc7b255c.js"
   ]
 }
