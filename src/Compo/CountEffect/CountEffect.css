@@ -1,0 +1,17 @@
+.count-box {
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .count-box h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    transition: all 0.3s ease-in-out;
+  }
+  .Count-main{
+    margin-top: 10rem;
+  }

@@ -7,6 +7,8 @@ import Trusted from '../trustedanimation/Trusted';
 import Footer from '../Footer/Footer';
 import BitcoinPrice from '../BitcoinPrice/Bitcoinprice';
 import TypingEffect from 'react-typing-effect';
+import FillingEffect from '../FillingEffect/FillingEffect';
+import CountEffect from '../CountEffect/CountEffect';
 export default function Home() {
   return (
     <>      <BitcoinPrice />
@@ -74,6 +76,8 @@ export default function Home() {
       </div>
 
       <WorkExperience />
+      <FillingEffect/>
+      <CountEffect/>
       <Courses />
       <Trusted />
       <Footer />
