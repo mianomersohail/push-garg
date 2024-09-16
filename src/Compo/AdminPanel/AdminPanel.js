@@ -1,8 +1,14 @@
-import './AdminPanel.css'
-export default function AdminPanel(){
-    return(
-        <>
-        <h1>Hello im Admin</h1>
-        </>
-    )
-}
+import React, { useState } from 'react';
+import AdminPanelNav from '../AdminPanelNav/AdminPanelNav';
+const Dashboard = () => {
+return(
+    <>
+    <AdminPanelNav/>
+    
+    </>
+)
+
+
+};
+
+export default Dashboard;

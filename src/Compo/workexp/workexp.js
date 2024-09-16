@@ -3,7 +3,7 @@ import './workexp.css';
 
 export default function WorkExperience() {
     // State to track the selected company
-    const [selectedCompany, setSelectedCompany] = useState('');
+    const [selectedCompany, setSelectedCompany] = useState('Dimension');
 
     // Refs for the list items
     const dimensionRef = useRef(null);

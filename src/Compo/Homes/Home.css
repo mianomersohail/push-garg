@@ -50,5 +50,7 @@ i{
     .home-p-one{
         text-align: justify;
     }
-    
+    .typing-home{
+        font-size: 25px !important;
+    }
 }

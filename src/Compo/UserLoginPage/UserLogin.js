@@ -33,10 +33,12 @@ export default function UserLogin(){
         const Data=await Response.json()
         console.log(Data)
         if(Data.message=='Authorized' && Data.role=='Admin'){
-            navigate('../AdminPanel/AdminPanel')
+            sessionStorage.setItem('token',Data.token)
+            navigate('/AdminPanel')
 
         }
         if(Data.message=='Authorized' && Data.role=='User'){
+            sessionStorage.setItem('token',Data.token)
             navigate('/PaidUser')
 
         }

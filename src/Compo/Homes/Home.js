@@ -17,17 +17,17 @@ export default function Home() {
         <div className='row'>
           <div className='col-lg-6 home-main'>
             <TypingEffect
-              text={['I\'m a ReactJS Developer', 'Nodejs+ExpressJs', 'Blockchain(solidity)']}
+              text={['I\'m a ReactJS Developer', 'NodeJs+ExpressJs', 'BLOCKCHAIN','FOREX TRADER']}
               speed={50}
               eraseDelay={1500}
               typingDelay={500}
               cursorColor='#06B6D4'
               displayTextRenderer={text => (
-                <h1 className='home-typing-animation'>
+                <h3 className='home-typing-animation'>
                   {text.split('').map((char, i) => (
-                    <span key={i} style={{ color: char === ' ' ? 'inherit' : '#06B6D4' }}>{char}</span>
+                    <span className='typing-home' key={i} style={{ color: char === ' ' ? 'inherit' : '#06B6D4' }}>{char}</span>
                   ))}
-                </h1>
+                </h3>
               )}
             />
             <p className='home-p-one'>

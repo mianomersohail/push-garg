@@ -14,19 +14,31 @@ export default function Navbar() {
     };
     const handleget = async () => {
         try {
+            const sessionData=sessionStorage.getItem('token')
+
             const Response = await fetch('http://localhost:3001/Login', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionData}`,  // Add session data in Authorization or a custom header
+                     
+
+                },
             })
             if (!Response) {
                 alert('Server-Not-Response')
                 return
             }
             const Data = await Response.json()
-            if (Data.message == 'Authenticate') {
-                SetAuthenticate(true)
+            console.log(Data)
+            console.log(Data.role)
+            if (Data.message == 'Authorized' && Data.role=="Admin") {
+                // SetAuthenticate(true)
+                navigate('/AdminPanel')
+            }
+            if (Data.message == 'Authorized' && Data.role=="User") {
+                // SetAuthenticate(true)
+                navigate('/PaidUser')
             }
             if(Data.message=='Plz-Login'){
              navigate('/userlogin')
