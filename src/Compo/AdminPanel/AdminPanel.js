@@ -1,22 +1,40 @@
-
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
 export default function PaidUser() {
-    
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const [mainMernPage, setMainMernPage] = useState(true);
+    const [isMern, setIsMern] = useState(false);
+    const [switchValue, setSwitchValue] = useState('');
+    const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state?.Data || {};
+
+    const changeSwitchValue = (event) => {
+        setSwitchValue(event.target.value);
+    };
+
+    const switchTo = () => {
+        if (switchValue === 'MERN STACK') {
+            setMainMernPage(false);
+            setIsMern(true);
+        }
+    };
+
+    // Use effect to navigate based on state
+    React.useEffect(() => {
+        if (!mainMernPage && isMern) {
+            navigate('/AdminPanelMernStack');
+        }
+    }, [mainMernPage, isMern, navigate]);
+
     // Function to toggle the hamburger menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-    // useEffect to change the image after every few seconds
-        return (
-        <>
-        
 
+    return (
+        <>
             <div className="container offset-lg-1">
                 <div className="row nav-row">
                     <div className="col-lg-4 nav-main">
@@ -33,7 +51,6 @@ export default function PaidUser() {
                         <div className="hamburger" onClick={toggleMenu}>
                             {isMenuOpen ? '✕' : '☰'}
                         </div>
-
                         {/* Nav Items */}
                         <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
                             <li><Link className="nav-link" to=""><i className="fas fa-envelope"></i></Link></li>
@@ -49,28 +66,29 @@ export default function PaidUser() {
                     <div className='col-lg-6 Paid-welcome'>
                         <h1 style={{color:'#4077B6'}}>Welcome {name || 'John'}</h1>
                         <p style={{color:'#958984'}}>
-                            Hi Admin Hope your Day was Good Plz with Great Experience Plz Select Below the 
-                            Section You want to Update for Users 
+                            Hi Admin, hope your day was good. Please select the section you want to update for users.
                         </p>
                         <div className='col-lg-6 floating-label'>
-                        <input type="text" list="suggestions" placeholder='choose your section' />
-                        <datalist id="suggestions">
-                            <option value="MERN STACK" />
-                            <option value="BLOCKCHAIN" />
-                            <option value="TRADING/SIGNALS" />
-                             <option value="Add/Remove User" />
-                            <option value="Update User/Admin/Password" />
-                            <option value="Add/Remove Admin" />
-                        </datalist>
-                        <button className='paid-btn-one'>Switch</button>
-
-
-                    </div> 
+                            <input
+                                type="text"
+                                value={switchValue}
+                                onChange={changeSwitchValue}
+                                list="suggestions"
+                                placeholder='Choose your section'
+                            />
+                            <datalist id="suggestions">
+                                <option value="MERN STACK" />
+                                <option value="BLOCKCHAIN" />
+                                <option value="TRADING/SIGNALS" />
+                                <option value="Add/Remove User" />
+                                <option value="Update User/Admin/Password" />
+                                <option value="Add/Remove Admin" />
+                            </datalist>
+                            <button onClick={switchTo} className='paid-btn-one'>Switch</button>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
-                            
         </>
     );
 }

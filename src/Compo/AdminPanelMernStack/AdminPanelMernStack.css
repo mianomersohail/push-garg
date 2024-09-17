@@ -1,0 +1,23 @@
+.Mern-form{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+.Mern-form label{
+    font-size: 32px;
+    
+}
+.Mern-form input{
+    width: 100%;
+    height: 32px;
+    border-radius: 6px;
+
+    
+}
+#mern-suggestion{
+    width: 30%;
+}

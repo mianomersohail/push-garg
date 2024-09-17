@@ -4,6 +4,7 @@ import Home from './Compo/Homes/Home';
 import UserLogin from './Compo/UserLoginPage/UserLogin';
 import PaidUser from './Compo/PaidUser/PaidUser';
 import AdminPanel from './Compo/AdminPanel/AdminPanel'
+import AdminPanelMernStack from './Compo/AdminPanelMernStack/AdminPanelMernStack';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/paiduser" element={<PaidUser />} />
           <Route path="/userlogin" element={<UserLogin/>} />
           <Route path="/AdminPanel" element={<AdminPanel/>} />
+          <Route path="/AdminPanelMernStack" element={<AdminPanelMernStack/>}/>
           </Routes>
         </Router>   
     
