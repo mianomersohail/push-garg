@@ -9,6 +9,7 @@ import BitcoinPrice from '../BitcoinPrice/Bitcoinprice';
 import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
+import Eth from '../Web3/MakeUserDeal/MakeUserDeal'
 export default function Home() {
   const cvdownload = async () => {
   try {
@@ -36,6 +37,7 @@ export default function Home() {
   return (
     <>      
       <Navbar />
+      <Eth/>
       <div className='container offset-lg-1'>
         <div className='row'>
           <div className='col-lg-6 home-main'>
