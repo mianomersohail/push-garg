@@ -6,7 +6,7 @@ export default function Courses(){
             <div className='row'>
                 <div className='col-11 courses-main '>
                     <h1 style={{fontWeight:'bold'}}>Projects</h1>
-                    <p style={{color:"#73737A"}}>Explore a selection of Projects designed to help you enhance my skills.</p>
+                    <p style={{color:"#73737A"}}>Explore a selection of Projects designed to help you to check my skills.</p>
                 </div>
                 {/* Full Stack Hassan Video Editor */}
                 <div className="col-lg-3">
@@ -117,7 +117,7 @@ export default function Courses(){
 </button>
                     </div>
                 </div>
-                <div className="col-lg-3 offset-lg-4 course-box-animation">
+                <div className="col-lg-3 offset-lg-4 course-box-animation ">
                 <div className="course-box ">
                         <iframe 
                           className="course-one-img" id='course-main-video' 

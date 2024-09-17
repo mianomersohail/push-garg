@@ -12,9 +12,9 @@ export default function PaidUser() {
 
     // Array of images for the slideshow
     const images = [
-        'https://c4.wallpaperflare.com/wallpaper/954/215/622/wl-bird-predator-eyes-wallpaper-preview.jpg',
-        'https://c4.wallpaperflare.com/wallpaper/410/920/842/wl-bird-flying-predator-wallpaper-preview.jpg',
-        'https://c4.wallpaperflare.com/wallpaper/511/184/893/emilia-clarke-wl-2017-wallpaper-preview.jpg'
+        'https://w0.peakpx.com/wallpaper/406/711/HD-wallpaper-code-programming-text-strings-multicolored.jpg',
+        'https://w0.peakpx.com/wallpaper/380/640/HD-wallpaper-forex-trading-vectors-stock-psd-chart-pattern.jpg',
+        'https://w0.peakpx.com/wallpaper/806/541/HD-wallpaper-technology-blockchain.jpg'
     ];
     useEffect(() => {
         const interval = setInterval(() => {

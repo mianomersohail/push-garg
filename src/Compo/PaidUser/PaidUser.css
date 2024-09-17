@@ -70,6 +70,12 @@
     outline: none; /* Remove default outline */
     box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5); /* Custom focus shadow */
 }
+.paid-user-img{
+    height: 79%;
+    overflow: hidden !important;
+    
+}
+
 
 @media screen and (max-width:768px) {
     .Paid-User-Main{
