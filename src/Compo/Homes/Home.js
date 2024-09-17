@@ -10,8 +10,31 @@ import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
 export default function Home() {
+  const cvdownload = async () => {
+  try {
+    const response = await fetch('http://localhost:3001/Cv', {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error('Server responded with an error');
+    }
+    // Proceed with downloading the file if successful
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'Umer_Sohail_CV.pdf');
+    document.body.appendChild(link);
+    link.click();
+    link.remove(); // Clean up
+  } catch (error) {
+    console.error('Error during CV download:', error);
+    alert('Server Issue: Try again later');
+  }
+};
   return (
-    <>      <BitcoinPrice />
+    <>      
       <Navbar />
       <div className='container offset-lg-1'>
         <div className='row'>
@@ -40,6 +63,7 @@ export default function Home() {
             </p>
             <p style={{ color: "#73737A" }}>~ Trading</p>
             <p className="home-p-one">Part Time Trading when I'm not working on my day job.</p>
+            <button onClick={cvdownload} className='cv-download'>MY CV download</button>
           </div>
           <div className="col-lg-4">
             <img
