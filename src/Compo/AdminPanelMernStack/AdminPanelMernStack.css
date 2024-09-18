@@ -1,23 +1,88 @@
-.Mern-form{
-    
+.Mern-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+}
 
-}
-.Mern-form label{
+.Mern-form label {
     font-size: 32px;
-    
 }
-.Mern-form input{
+
+.Mern-form input {
     width: 100%;
     height: 32px;
     border-radius: 6px;
+}
 
-    
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-#mern-suggestion{
-    width: 30%;
+
+.dropdown-button {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content div {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-button:hover + .dropdown-content,
+.dropdown-content.open {
+    display: block;
+}
+
+/* Add margin between button and dropdown */
+.dropdown-content {
+    margin-top: 10px;
+}
+
+/* For more decoration of the dropdown box */
+.dropdown-content {
+    border: 2px solid #06B6D4;
+    border-radius: 6px;
+    background-color: #fff;
+    color:black;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+

@@ -1,34 +1,40 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
+import './AdminPanel.css'
 export default function PaidUser() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mainMernPage, setMainMernPage] = useState(true);
     const [isMern, setIsMern] = useState(false);
     const [switchValue, setSwitchValue] = useState('');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown toggle
+
     const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state?.Data || {};
 
-    const changeSwitchValue = (event) => {
-        setSwitchValue(event.target.value);
+    const changeSwitchValue = (value) => {
+        setSwitchValue(value);
+        setIsDropdownOpen(false); // Close the dropdown when a value is selected
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown open/close
     };
 
     const switchTo = () => {
-        if (switchValue === 'MERN STACK') {
+        if (switchValue === 'Add/Remove') {
             setMainMernPage(false);
             setIsMern(true);
         }
     };
 
-    // Use effect to navigate based on state
     React.useEffect(() => {
         if (!mainMernPage && isMern) {
             navigate('/AdminPanelMernStack');
         }
     }, [mainMernPage, isMern, navigate]);
 
-    // Function to toggle the hamburger menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -61,6 +67,7 @@ export default function PaidUser() {
                     </div>
                 </div>
             </div>
+
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>
@@ -69,21 +76,27 @@ export default function PaidUser() {
                             Hi Admin, hope your day was good. Please select the section you want to update for users.
                         </p>
                         <div className='col-lg-6 floating-label'>
-                            <input
-                                type="text"
-                                value={switchValue}
-                                onChange={changeSwitchValue}
-                                list="suggestions"
-                                placeholder='Choose your section'
-                            />
-                            <datalist id="suggestions">
-                                <option value="MERN STACK" />
-                                <option value="BLOCKCHAIN" />
-                                <option value="TRADING/SIGNALS" />
-                                <option value="Add/Remove User" />
-                                <option value="Update User/Admin/Password" />
-                                <option value="Add/Remove Admin" />
-                            </datalist>
+                            {/* Custom Input Dropdown */}
+                            <div className="custom-dropdown">
+                                <input
+                                    type="text"
+                                    value={switchValue}
+                                    readOnly
+                                    onClick={toggleDropdown} // Toggle dropdown on click
+                                    placeholder='Choose your section'
+                                    className="dropdown-input"
+                                />
+                                {isDropdownOpen && (
+                                    <ul className="dropdown-options">
+                                        <li onClick={() => changeSwitchValue('Add/Remove')}>Add/Remove</li>
+                                        <li onClick={() => changeSwitchValue('BLOCKCHAIN')}>BLOCKCHAIN</li>
+                                        <li onClick={() => changeSwitchValue('TRADING/SIGNALS')}>TRADING/SIGNALS</li>
+                                        <li onClick={() => changeSwitchValue('Add/Remove User')}>Add/Remove User</li>
+                                        <li onClick={() => changeSwitchValue('Update User/Admin/Password')}>Update User/Admin/Password</li>
+                                        <li onClick={() => changeSwitchValue('Add/Remove Admin')}>Add/Remove Admin</li>
+                                    </ul>
+                                )}
+                            </div>
                             <button onClick={switchTo} className='paid-btn-one'>Switch</button>
                         </div>
                     </div>

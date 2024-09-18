@@ -1,0 +1,93 @@
+.ethsection-sol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centers the text in smaller screens */
+}
+
+.eth-blockchain-sec {
+    margin-left: 0.4rem;
+    color: #4077B6;
+}
+
+.eth-sec-web {
+    color: #4077B6;
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.eth-sec-webs {
+    font-size: 32px;
+    font-weight: bolder;
+    margin-left: 0.4rem;
+}
+
+.eth-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.eth-sec-box {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+    background: linear-gradient(145deg, #282828, #3a3a3a);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    margin-top: 1rem;
+    flex-wrap: wrap; /* Allows items to wrap to the next line in smaller screens */
+    overflow: hidden; /* Prevents content overflow */
+}
+
+.eth-sec-box div {
+    padding: 15px;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    min-width: 120px; /* Prevents the divs from being too small */
+}
+
+.eth-sec-box div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    background-color: #06b6d4;
+    color: #ffffff;
+}
+
+.eth-sec-custom {
+    margin-top: 3rem;
+}
+
+.Eth-Main {
+    margin-top: 6rem;
+    width: 100%;
+   
+    border-color: wheat;
+    padding: 20px;
+}
+
+/* Responsive layout adjustments */
+@media screen and (max-width: 768px) {
+    .eth-sec-box {
+        flex-direction: column;
+        align-items: center; /* Centers the items vertically */
+    }
+    
+    .eth-none {
+        display: none;
+    }
+    
+    .eth-sec-box div {
+        width: 100%; /* Make the divs full-width for smaller screens */
+        margin-bottom: 10px; /* Adds space between items */
+    }
+}

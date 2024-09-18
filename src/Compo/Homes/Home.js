@@ -10,6 +10,8 @@ import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
 import Eth from '../Web3/MakeUserDeal/MakeUserDeal'
+import EthSection from '../EthSection/EthSection';
+
 export default function Home() {
   const cvdownload = async () => {
   try {
@@ -105,6 +107,7 @@ export default function Home() {
       <FillingEffect/>
       <CountEffect/>
       <Courses />
+      <EthSection/>
       <Trusted />
       <Footer />
     </>
