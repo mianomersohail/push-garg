@@ -5,6 +5,7 @@ import UserLogin from './Compo/UserLoginPage/UserLogin';
 import PaidUser from './Compo/PaidUser/PaidUser';
 import AdminPanel from './Compo/AdminPanel/AdminPanel'
 import AdminPanelMernStack from './Compo/AdminPanelMernStack/AdminPanelMernStack';
+import Documentation from './Compo/SolDocs/SolDocs';
 
 function App() {
 
@@ -18,6 +19,8 @@ function App() {
           <Route path="/userlogin" element={<UserLogin/>} />
           <Route path="/AdminPanel" element={<AdminPanel/>} />
           <Route path="/AdminPanelMernStack" element={<AdminPanelMernStack/>}/>
+          <Route path="/Documentation" element={<Documentation/>} />
+
           </Routes>
         </Router>   
     

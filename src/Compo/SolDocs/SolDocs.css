@@ -1,0 +1,30 @@
+.documentation {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+.documentation h1 {
+    color:#06B6D4;
+  }
+  
+ .documentation h2 {
+    color: yellow;
+  }
+  
+.documentation  h3 {
+    color: #0056b3;
+  }
+  
+ .documentation ul, ol {
+    margin-left: 20px;
+  }
+  
+ .documentation code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 90%;
+  }
+  

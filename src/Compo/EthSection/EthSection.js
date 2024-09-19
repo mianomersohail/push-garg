@@ -20,7 +20,7 @@ export default function EthSection(){
                     </div>
                     <h3 style={{marginTop:"2rem"}}>Tools</h3>
                     <div className='eth-sec-box'>
-                        <div>Hardhat</div><div>Eth.js</div><div>Mcha Chai</div><div>Infura</div>
+                        <div>Hardhat</div><div>Eth.js</div><div>Mocha Chai</div><div>Infura</div>
 
                     </div>
                 </div>

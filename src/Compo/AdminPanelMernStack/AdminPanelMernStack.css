@@ -4,7 +4,12 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1), 
+                0 6px 20px rgba(255, 255, 255, 0.2), 
+                0 10px 30px rgba(255, 255, 255, 0.15);
+    background-color: #1a1a1a; /* Optional: to contrast with the black */
 }
+
 
 .Mern-form label {
     font-size: 32px;
@@ -86,3 +91,72 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.role-dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.role-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.role-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    color:black;
+    border: 1px solid #ccc;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(-10px);
+    z-index: 1;
+}
+
+.role-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.role-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.role-dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.role-dropdown-container:hover .role-dropdown {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.Admincolor{
+    color:#06B6D4;
+
+}
+@media screen and (max-width:768px) {
+    .Main-Admin{
+        padding:40px;
+    }
+    .Mern-form {
+        margin-top: 4rem;
+        padding:20px;
+    
+    }
+.Mern-form label {
+font-size: 25px;
+}
+.Mern-form input {
+    height: 42px;
+    width: 100%;
+
+    }
+    
+    
+}

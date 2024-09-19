@@ -65,7 +65,7 @@ export default function Navbar() {
 
                         {/* Nav Items */}
                         <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
-                            <li><Link className="nav-link" to="/about">About</Link></li>
+                            <li><Link className="nav-link" to="/Documentation">Documentation</Link></li>
                             <li className="nav-first-li-second">
                                 <Link className="nav-link" onClick={handleget} to="">
                                     Login
