@@ -1,188 +1,183 @@
-import React from 'react';
-import './SolDocs.css'; // Assuming you will add styles in this file
-import Nav from '../Nav/Nav'
-import Footer from '../Footer/Footer';
+import React, { useState } from 'react';
+import './SolDocs.css';
+import Navbar from '../Nav/Nav';
 
-const Documentation = () => {
+const SmartContractDoc = () => {
+  // Complete smart contract code
+  const contractCode = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.27;
+
+contract Dealing {
+    // State variables
+    mapping(address => uint256) internal Balance;
+    mapping(uint256 => Deals) public NewDeals;
+    uint256 public nextDealId;
+    mapping(address => uint256) public LockAmount;
+    
+    // Enum for Status Track
+    enum Status { Pending, DealAdd, DealClose }
+
+    // Struct for Adding New Deal
+    struct Deals {
+        uint256 Id;
+        uint256 Amount;
+        address User1;
+        address User2;
+        bool User1Agree;
+        bool User2Agree;
+        bool User1Done;
+        bool User2Done;
+        Status dealStatus;
+    }
+
+    // Functions
+
+    function Withdraw(uint256 Amount) public {
+        require(Balance[msg.sender] >= Amount, "Insufficient Balance");
+        Balance[msg.sender] -= Amount;
+        payable(msg.sender).transfer(Amount);
+    }
+
+    function Deposit() public payable {
+        require(msg.value > 0);
+        Balance[msg.sender] += msg.value;
+    }
+
+    receive() external payable {
+        require(msg.value > 0, "Invalid Deposit");
+        Balance[msg.sender] += msg.value;
+    }
+
+    function Balances() public view returns(uint256) {
+        return Balance[msg.sender];
+    }
+
+    function NewDeal(uint256 _Amount, address _User1, address _User2) public UserNotSame(_User1, _User2) {
+        uint256 dealId = nextDealId++;
+        NewDeals[dealId] = Deals({
+            Id: dealId,
+            Amount: _Amount,
+            User1: _User1,
+            User2: _User2,
+            User1Agree: false,
+            User2Agree: false,
+            User1Done: false,
+            User2Done: false,
+            dealStatus: Status.Pending
+        });
+    }
+
+    function User1Agree(uint256 _Id) public BalanceCheck(_Id) OnlyUser1(_Id) OnlyPending(_Id) {
+        require(NewDeals[_Id].User1Agree == false, "You Already Agreed");
+        NewDeals[_Id].User1Agree = true;
+        if (NewDeals[_Id].User1Agree && NewDeals[_Id].User2Agree) {
+            NewDeals[_Id].dealStatus = Status.DealAdd;
+            Balance[NewDeals[_Id].User1] -= NewDeals[_Id].Amount;
+            Balance[NewDeals[_Id].User2] -= NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User1] += NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User2] += NewDeals[_Id].Amount;
+        }
+    }
+
+    function User2Agree(uint256 _Id) public BalanceCheck(_Id) OnlyUser2(_Id) OnlyPending(_Id) {
+        require(NewDeals[_Id].User2Agree == false, "You Already Agreed");
+        NewDeals[_Id].User2Agree = true;
+        if (NewDeals[_Id].User1Agree && NewDeals[_Id].User2Agree) {
+            NewDeals[_Id].dealStatus = Status.DealAdd;
+        }
+    }
+
+    function User1Satisfy(uint256 _Id) public DealClosed(_Id) OnlyUser1(_Id) {
+        require(!NewDeals[_Id].User1Done, "Already Done");
+        NewDeals[_Id].User1Done = true;
+        if (NewDeals[_Id].User1Done && NewDeals[_Id].User2Done) {
+            NewDeals[_Id].dealStatus = Status.DealClose;
+            Balance[NewDeals[_Id].User1] += NewDeals[_Id].Amount;
+            Balance[NewDeals[_Id].User2] += NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User1] -= NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User2] -= NewDeals[_Id].Amount;
+        }
+    }
+
+    function User2Satisfy(uint256 _Id) public DealClosed(_Id) OnlyUser2(_Id) {
+        require(!NewDeals[_Id].User2Done, "Already Done");
+        NewDeals[_Id].User2Done = true;
+        if (NewDeals[_Id].User1Done && NewDeals[_Id].User2Done) {
+            NewDeals[_Id].dealStatus = Status.DealClose;
+            Balance[NewDeals[_Id].User1] += NewDeals[_Id].Amount;
+            Balance[NewDeals[_Id].User2] += NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User1] -= NewDeals[_Id].Amount;
+            LockAmount[NewDeals[_Id].User2] -= NewDeals[_Id].Amount;
+        }
+    }
+}
+  `;
+
+  // State to control the display of the contract code
+  const [showContract, setShowContract] = useState(false);
+
+  // Toggle the smart contract code display
+  const handleToggle = () => {
+    setShowContract(!showContract);
+  };
+
   return (
-      <>
-      <Nav/>
-    <div className="documentation">
-      <h1>Deal Smart Contract Documentation</h1>
+    
+    <div className="contract-doc">
+      <Navbar/>
+      <h1>Smart Contract Documentation</h1>
+      <p>This smart contract, named <strong>Dealing</strong>, is designed to manage and facilitate deals between two parties. Here’s a detailed overview:</p>
 
-      <section>
-        <h2>Overview</h2>
-        <p>
-          The <code>Deal</code> smart contract is designed to facilitate deals between buyers and sellers,
-          where both parties lock a specified amount of Ether as collateral. The contract manages deposits,
-          withdrawals, and deals, ensuring that both parties meet their obligations before completing a transaction.
-        </p>
-      </section>
+      <h2>Key Features:</h2>
+      <ul>
+        <li><strong>Create Deals:</strong> Initiate a new deal between two users with a specified amount.</li>
+        <li><strong>User Agreements:</strong> Both users must agree to the terms of the deal before it can proceed.</li>
+        <li><strong>Locked Funds:</strong> Funds are locked during the deal and are only released when both parties complete their actions.</li>
+        <li><strong>Fund Management:</strong> Users can deposit and withdraw funds to/from their balance.</li>
+      </ul>
 
-      <section>
-        <h2>Key Features</h2>
-        <ul>
-          <li><strong>Balance Management</strong>: Allows users to deposit and withdraw Ether.</li>
-          <li><strong>Deal Creation</strong>: Enables users to create new deals with specified collateral.</li>
-          <li><strong>Deal Agreement</strong>: Provides mechanisms for sellers and buyers to agree to and finalize deals.</li>
-          <li><strong>Lock Management</strong>: Tracks locked amounts and handles collateral release upon deal completion.</li>
-        </ul>
-      </section>
+      <h2>Functions:</h2>
+      <dl>
+        <dt><strong>Withdraw(uint256 Amount)</strong></dt>
+        <dd>Allows a user to withdraw a specified amount from their balance.</dd>
 
-      <section>
-        <h2>Contract Structure</h2>
+        <dt><strong>Deposit()</strong></dt>
+        <dd>Allows a user to deposit Ether into their account.</dd>
 
-        <h3>Mappings</h3>
-        <ul>
-          <li><code>Balance</code>: Tracks the Ether balance of each user.</li>
-          <li><code>LockedAmount</code>: Records the amount of Ether locked in ongoing deals for each user.</li>
-          <li><code>UsesAddresses</code>: Indicates whether a user is currently involved in an ongoing deal.</li>
-        </ul>
+        <dt><strong>Balances()</strong></dt>
+        <dd>Returns the balance of the caller.</dd>
 
-        <h3>Enum</h3>
-        <ul>
-          <li><code>Status</code>: Represents the current status of a deal:
-            <ul>
-              <li><code>DealAdd</code>: Deal has been created.</li>
-              <li><code>SellerAgree</code>: Seller has agreed to the deal.</li>
-              <li><code>SellerAgreeDeal</code>: Seller has agreed to continue the deal.</li>
-              <li><code>BuyerAgreeeDeal</code>: Buyer has agreed to the deal.</li>
-              <li><code>DealDone</code>: Deal is completed.</li>
-            </ul>
-          </li>
-        </ul>
+        <dt><strong>NewDeal(uint256 _Amount, address _User1, address _User2)</strong></dt>
+        <dd>Creates a new deal between two users with the specified amount. The deal starts in the "Pending" status.</dd>
 
-        <h3>Struct</h3>
-        <ul>
-          <li><code>NewDeal</code>: Defines a deal with the following properties:
-            <ul>
-              <li><code>Id</code>: Unique identifier of the deal.</li>
-              <li><code>LockAmount</code>: Amount of Ether locked in the deal.</li>
-              <li><code>Seller</code>: Address of the seller.</li>
-              <li><code>Buyer</code>: Address of the buyer.</li>
-              <li><code>status</code>: Current status of the deal.</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+        <dt><strong>User1Agree(uint256 _Id)</strong></dt>
+        <dd>Allows User1 to agree to the deal. If both users agree, the deal status changes to "DealAdd" and the funds are locked.</dd>
 
-      <section>
-        <h2>Functions</h2>
+        <dt><strong>User2Agree(uint256 _Id)</strong></dt>
+        <dd>Allows User2 to agree to the deal. If both users agree, the deal status changes to "DealAdd" and the funds are locked.</dd>
 
-        <h3><code>CheckBalance()</code></h3>
-        <p>
-          <strong>Description:</strong> Returns the Ether balance of the caller.<br />
-          <strong>Returns:</strong> <code>uint</code> - The balance of the caller.
-        </p>
+        <dt><strong>User1Satisfy(uint256 _Id)</strong></dt>
+        <dd>Allows User1 to mark their part of the deal as completed. If both users complete their actions, the deal status changes to "DealClose" and the funds are released.</dd>
 
-        <h3><code>receive() external payable</code></h3>
-        <p>
-          <strong>Description:</strong> Allows the contract to receive Ether. Updates the caller's balance.<br />
-          <strong>Requirements:</strong> <code>msg.value</code> must be greater than zero.
-        </p>
+        <dt><strong>User2Satisfy(uint256 _Id)</strong></dt>
+        <dd>Allows User2 to mark their part of the deal as completed. If both users complete their actions, the deal status changes to "DealClose" and the funds are released.</dd>
+      </dl>
 
-        <h3><code>Withdraw(uint _amount)</code></h3>
-        <p>
-          <strong>Description:</strong> Allows users to withdraw a specified amount of Ether from their balance.<br />
-          <strong>Parameters:</strong><br />
-          <code>_amount</code>: The amount of Ether to withdraw.<br />
-          <strong>Requirements:</strong><br />
-          - User must have sufficient balance.<br />
-          <strong>Effects:</strong><br />
-          - Updates the user's balance and transfers Ether to the caller.
-        </p>
+      <button onClick={handleToggle} className="show-contract-btn">
+        {showContract ? 'Hide Smart Contract' : 'Show Smart Contract'}
+      </button>
 
-        <h3><code>Deposit() public payable</code></h3>
-        <p>
-          <strong>Description:</strong> Allows users to deposit Ether into their balance.<br />
-          <strong>Requirements:</strong> <code>msg.value</code> must be greater than zero.<br />
-          <strong>Effects:</strong> Updates the user's balance.
-        </p>
-
-        <h3><code>AddNewDeal(address _Seller, uint _LockAmount)</code></h3>
-        <p>
-          <strong>Description:</strong> Creates a new deal with the specified seller and lock amount.<br />
-          <strong>Parameters:</strong><br />
-          <code>_Seller</code>: Address of the seller.<br />
-          <code>_LockAmount</code>: Amount of Ether to lock in the deal.<br />
-          <strong>Requirements:</strong><br />
-          - Lock amount must be greater than zero.<br />
-          - Caller must not be the same as the seller.<br />
-          - Both buyer and seller must have sufficient balance.
-        </p>
-
-        <h3><code>SellerAgree(uint _Id)</code></h3>
-        <p>
-          <strong>Description:</strong> Allows the seller to agree to the deal.<br />
-          <strong>Parameters:</strong><br />
-          <code>_Id</code>: The ID of the deal.<br />
-          <strong>Requirements:</strong><br />
-          - Deal must be in the <code>DealAdd</code> status.<br />
-          - Caller must be the seller of the deal.<br />
-          - Both parties must have sufficient balance.<br />
-          <strong>Effects:</strong><br />
-          - Updates the deal status and locks the specified amount.
-        </p>
-
-        <h3><code>SellerAgreeDeal(uint _Id)</code></h3>
-        <p>
-          <strong>Description:</strong> Allows the seller to agree to continue the deal.<br />
-          <strong>Parameters:</strong><br />
-          <code>_Id</code>: The ID of the deal.<br />
-          <strong>Requirements:</strong><br />
-          - Caller must be the seller of the deal.<br />
-          - Deal status must be <code>SellerAgree</code>.
-        </p>
-
-        <h3><code>BuyerAgree(uint _Id)</code></h3>
-        <p>
-          <strong>Description:</strong> Allows the buyer to agree to the deal and finalize it.<br />
-          <strong>Parameters:</strong><br />
-          <code>_Id</code>: The ID of the deal.<br />
-          <strong>Requirements:</strong><br />
-          - Deal status must be <code>SellerAgreeDeal</code>.<br />
-          - Caller must be the buyer of the deal.<br />
-          <strong>Effects:</strong><br />
-          - Finalizes the deal and releases the locked amounts to both parties.<br />
-          - Resets the <code>UsesAddresses</code> status for both parties.
-        </p>
-      </section>
-
-      <section>
-        <h2>Important Considerations</h2>
-        <ul>
-          <li><strong>Reentrancy</strong>: The <code>Withdraw</code> function uses <code>call</code> for transferring Ether to mitigate reentrancy attacks.</li>
-          <li><strong>Error Handling</strong>: The contract uses <code>require</code> statements to handle errors and ensure correct behavior.</li>
-          <li><strong>Testing</strong>: Thorough testing on a testnet is recommended before deploying on the mainnet.</li>
-          <li><strong>Security</strong>: Consider additional security measures and audits to ensure the contract's robustness.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Example Usage</h2>
-        
-        <h3>Creating a Deal</h3>
-        <ol>
-          <li>A user calls <code>AddNewDeal</code> with the address of the seller and the lock amount.</li>
-          <li>Both the buyer and the seller must have sufficient balance.</li>
-        </ol>
-
-        <h3>Agreeing to a Deal</h3>
-        <ol>
-          <li>The seller calls <code>SellerAgree</code> to agree to the deal.</li>
-          <li>The seller must have sufficient balance and the deal must be in the <code>DealAdd</code> status.</li>
-        </ol>
-
-        <h3>Finalizing a Deal</h3>
-        <ol>
-          <li>The buyer calls <code>BuyerAgree</code> to finalize the deal.</li>
-          <li>The deal status is updated to <code>DealDone</code>, and the locked amounts are released.</li>
-        </ol>
-      </section>
+      {showContract && (
+        <div>
+          <h2>Smart Contract Code:</h2>
+          <pre className="contract-code">
+            {contractCode}
+          </pre>
+        </div>
+      )}
     </div>
-    <Footer/>
-    </>
   );
 };
 
-export default Documentation;
+export default SmartContractDoc;
