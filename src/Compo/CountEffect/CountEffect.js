@@ -41,7 +41,7 @@ export default function CountEffect() {
   }, []);
 
   return (
-    <div className="container Count-main">
+    <div className="container Count-main ">
       <div className="row">
         <div className="col-lg-4 count-box">
           <div>

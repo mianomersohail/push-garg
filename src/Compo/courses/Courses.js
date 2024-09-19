@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 export default function Courses(){
     return(
         <>
-        <div className='container '>
+        <div className='container'>
             <div className='row'>
                 <div className='col-11 courses-main '>
                     <h1 style={{fontWeight:'bold'}}>Projects</h1>

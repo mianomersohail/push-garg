@@ -29,7 +29,7 @@ export default function FillingEffect() {
     }, []);
 
     return (
-        <div className="container Filling-main">
+        <div className="container Filling-main ">
             <div className="row">
                 <div className="col-lg-6">
                     <img className='Filling-img'

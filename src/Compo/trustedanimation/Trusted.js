@@ -2,7 +2,7 @@ import './Trusted.css'
 export default function Trusted(){
     return(
         <>
-        <div className="container">
+        <div className="container ">
             <div className="row">
                 <div className="col-12 trusted-main">
                     <h3 className="trusted-h3-one">Trusted by clients around the world</h3>

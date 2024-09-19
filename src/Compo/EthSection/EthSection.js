@@ -2,7 +2,7 @@ import './EthSection.css'
 export default function EthSection(){
     return(
         <>
-        <div className="Container Eth-Main">
+        <div className="Container Eth-Main ">
             <div className="row">
                 <div className="col-lg-12 ethsection-sol">
                     <span className='eth-sec-web'>WEB 3</span><span className='eth-sec-webs'>SOLUTIONS</span>

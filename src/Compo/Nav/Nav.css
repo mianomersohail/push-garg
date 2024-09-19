@@ -9,6 +9,7 @@
     border-radius: 10px;
     background-color: #27272A;
     color: white;
+    
 }
 
 .nav-flex {
@@ -56,6 +57,7 @@
         justify-content: space-between;
         padding: 10px 15px;
         margin-top: 0rem;
+        
     }
 
     .nav-first-li {
@@ -96,6 +98,13 @@
 }
 
 @media screen and (min-width:768px) {
+    .nav-main{
+        width: auto;
+    }
+    .nav-link{
+        position: relative;
+        top:0.3rem
+    }
     .nav-first-li-second {
         margin-left: 1rem;
     }

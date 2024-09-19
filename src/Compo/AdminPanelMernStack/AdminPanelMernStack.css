@@ -9,10 +9,12 @@
                 0 10px 30px rgba(255, 255, 255, 0.15);
     background-color: #1a1a1a; /* Optional: to contrast with the black */
 }
-
+.Mern-form h1{
+    font-size: 27px;
+}
 
 .Mern-form label {
-    font-size: 32px;
+    font-size: 20px;
 }
 
 .Mern-form input {
@@ -140,7 +142,10 @@
     color:#06B6D4;
 
 }
-@media screen and (max-width:768px) {
+.Mern-form{
+    padding: 50px;
+}
+@media screen and (max-width:1200px) {
     .Main-Admin{
         padding:40px;
     }
