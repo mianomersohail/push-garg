@@ -1,88 +1,75 @@
-.floating-label {
-    position: relative;
-    margin-bottom: 20px;
+.paid-user-img {
+    width: 100%;      /* Ensures the image takes the full width of its container */
+    height: auto;     /* Maintains the aspect ratio of the image */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
 }
 
-.floating-label input {
-    width: 100%;
-    padding: 10px 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.nav-flex {
+    display: flex;
+    align-items: center;
 }
 
-.floating-label label {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    color: #999;
-    font-size: 16px;
-    transition: all 0.2s ease-in-out;
+.nav-first-img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
 }
 
-.floating-label input:focus + label,
-.floating-label input:not(:placeholder-shown) + label {
-    top: -20px;
-    left: 10px;
-    font-size: 12px;
-    color: #06b6d4;
-}
-    .paid-user-img {
-    width: 100%;
-    height: auto;
-    transition: opacity 1s ease-in-out;
-    opacity: 0;
+.nav-bold {
+    font-weight: bold;
+    margin-left: 10px;
 }
 
-.paid-user-img.show {
-    opacity: 1;
+.hamburger {
+    cursor: pointer;
 }
 
+.nav-first-li {
+    list-style: none;
+    display: none;
+}
+
+.nav-first-li.open {
+    display: block;
+}
+
+.Paid-User-Main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.Paid-welcome h1 {
+    font-size: 2rem;
+}
 
 .paid-btn-one {
-    background-color: #06B6D4; /* Soft, modern blue */
-    color: #fff; /* White text for contrast */
+    padding: 10px 20px;
+    background-color: #4077B6;
+    color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    letter-spacing: 1px; /* Slight spacing between letters for elegance */
-    margin-top: 2rem;
 }
 
-.paid-btn-one:hover{
-    background-color: #0487A0; /* Darker blue on hover */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
-    transform: translateY(-3px); /* Slight lift on hover */
+.paid-btn-one:hover {
+    background-color: #305f94;
 }
 
-.paid-btn-one:active {
-    background-color: #03697C; /* Even darker blue for active state */
-    transform: translateY(2px); /* Pressed effect on click */
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2); /* Softer shadow on click */
-}
-
-.paid-btn-one:focus {
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5); /* Custom focus shadow */
-}
-.paid-user-img{
-    height: 79%;
-    overflow: hidden !important;
-    
-}
-
-
-@media screen and (max-width:768px) {
-    .Paid-User-Main{
-        display: flex;
-      flex-direction: column-reverse;
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .Paid-User-Main {
+        flex-direction: column;
     }
-    .Paid-welcome{
-        margin-top: 3rem;
+
+    .paid-user-img {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .floating-label {
+        width: 100%;
+        margin-top: 20px;
     }
 }

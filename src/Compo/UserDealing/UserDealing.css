@@ -63,3 +63,27 @@
     background-color: #218838; /* Darker green on hover */
 }
 
+@media screen and (max-width:768px) {
+    .Deal-Input{
+        flex-direction: column;
+        margin-top: 0rem;
+    }
+    .Deal-Input input{
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .Deal-Main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .Dealing-div{
+        width: 70vw;
+
+    }
+}
+
+.Deal-top{
+    margin-top: 1rem;
+}

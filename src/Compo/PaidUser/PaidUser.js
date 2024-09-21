@@ -14,9 +14,9 @@ export default function PaidUser() {
     const { name } = location.state?.Data || {};
     
     const images = [
-        'https://w0.peakpx.com/wallpaper/406/711/HD-wallpaper-code-programming-text-strings-multicolored.jpg',
-        'https://w0.peakpx.com/wallpaper/380/640/HD-wallpaper-forex-trading-vectors-stock-psd-chart-pattern.jpg',
-        'https://w0.peakpx.com/wallpaper/806/541/HD-wallpaper-technology-blockchain.jpg'
+        'https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg',
+        'https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=600',
+        'https://images.pexels.com/photos/2162442/pexels-photo-2162442.jpeg?auto=compress&cs=tinysrgb&w=600'
     ];
     
     useEffect(() => {

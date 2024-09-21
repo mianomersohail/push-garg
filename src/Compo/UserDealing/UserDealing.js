@@ -103,41 +103,40 @@ export default function UserDealing() {
 
     return (
         <>
-            <PaidUser />
-            <div className="container offset-lg-1">
-                <div className="row">
-                    <p>Balance:</p>
-                    <div className="col-lg-2">
+             <PaidUser />
+            <div className="container  offset-lg-1">
+                <div className="row Deal-Main">
+                    <div className="col-lg-2 Deal-Main">
                         <div>
                             <div onClick={updateBalance} className="Dealing-div Deal-blue">Balance</div>
                             <p>{balance}</p>
                         </div>
                     </div>
-                    <div className="col-lg-2">
+                    <div className="col-lg-2 Deal-Main">
                         <div>
                             <div onClick={checkid} className="Dealing-div Deal-blue">ID</div>
                             <p>{id}</p>
                         </div>
                     </div>
-                    <div className="col-lg-7">
-                        <div>
+                    <div className="col-lg-7 Deal-Main">
+                        <div> 
                             <div className="Dealing-div Deal-blue">Deal Status</div>
                             <p>{deals}</p>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6 Deal-Main"> 
                         <div className="Deal-Input">
-                            <div className="Dealing-div Deal-blue">Lock Amount</div>
-                            <div><input /></div>
+                            <div className="Dealing-div Deal-Main Deal-blue Deal-left">Lock Amount</div>
+                            <div><input placeholder="Enter Your Address"/></div>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6 Deal-Main">
                         <div className="Deal-Input">
-                            <div className="Dealing-div Deal-blue">DEAL STATUS</div>
-                            <div><input /></div>
+                            <div className="Dealing-div Deal-blue Deal-Main Deal-top">DEAL STATUS</div>
+                            <div><input placeholder="Enter Your Deal Id" /></div>
                         </div>
                     </div>
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 Deal-Main">
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
                             <div className={`new-deal-inputs ${showNewDealInputs ? 'open' : ''}`}>
