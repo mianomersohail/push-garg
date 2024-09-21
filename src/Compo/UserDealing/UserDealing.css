@@ -1,0 +1,64 @@
+.Dealing-div{
+    border:solid;
+    border-color: green;
+    padding:10px;
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+.Deal-blue{
+    background-color: #355F7D;
+    border-color: #355F7D;
+
+}
+.Deal-Orange{
+    background-color: #915C3B;
+    margin-top: 5rem;
+}
+.Deal-blue:hover{
+    background-color: #2e4555;
+    border-color: #2e4555;
+}
+.Deal-Input{
+    display: flex;
+    
+}
+.Deal-Input input{
+    height: 3rem;
+    border-radius: 8px;
+}
+.new-deal-inputs {
+    max-height: 0; /* Initially collapsed */
+    overflow: hidden; /* Hide overflow */
+    transition: max-height 0.5s ease-in-out; /* Smooth transition */
+    position: absolute; /* Position absolutely */
+    top: 100%; /* Aligns below the button */
+    left: 0; /* Aligns to the left */
+    width: 100%; /* Full width */
+    background: black; /* Background for visibility */
+    z-index: 10; /* Ensure it appears above other elements */
+}
+
+.new-deal-inputs.open {
+    max-height: 300px; /* Adjust this as needed */
+    margin-top: 10px; /* Space between New Deal and inputs */
+}
+
+.new-deal-inputs input {
+    margin-bottom: 10px; /* Space between input fields */
+}
+
+.transact-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Green background */
+    color: white;
+    cursor: pointer;
+}
+
+.transact-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

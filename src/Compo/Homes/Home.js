@@ -14,28 +14,30 @@ import EthSection from '../EthSection/EthSection';
 
 export default function Home() {
   const cvdownload = async () => {
-  try {
-    const response = await fetch('http://localhost:3001/Cv', {
-      method: "GET",
-    });
-
-    if (!response.ok) {
-      throw new Error('Server responded with an error');
+    try {
+      const response = await fetch('http://localhost:3001/Cv', {
+        method: "GET",
+      });
+  
+      // Check if the response status is OK (status code 200-299)
+      // if (!response.ok) {
+      //   throw new Error('Failed to fetch the CV');
+      // }
+  
+      // Proceed with downloading the file if successful
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Umer_Sohail_CV.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.remove(); // Clean up
+    } catch (error) {
+      console.error('Error during CV download:', error);
     }
-    // Proceed with downloading the file if successful
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'Umer_Sohail_CV.pdf');
-    document.body.appendChild(link);
-    link.click();
-    link.remove(); // Clean up
-  } catch (error) {
-    console.error('Error during CV download:', error);
-    alert('Server Issue: Try again later');
-  }
-};
+  };
+  
   return (
     <>      
       <Navbar />
