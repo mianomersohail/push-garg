@@ -6,7 +6,7 @@ export default function Footer(){
         <div className="container">
             <div className="row">
                 <div className="col-lg-12 footer-box">
-                    <img className="footer-img-one" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Favatar.png&w=64&q=75"/> <p className="footer-p">Mian Omer</p>
+                    <img className="footer-img-one" src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732147200&v=beta&t=4GurKMpZVPW3s-1I5A96GMwTSLJ6PJJf709QbuNgqh4"/> <p className="footer-p">Mian Omer</p>
 
                 </div>
                 <div className="col-lg-12 footer-box">

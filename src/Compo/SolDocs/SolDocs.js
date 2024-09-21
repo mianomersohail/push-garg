@@ -124,11 +124,12 @@ contract Dealing {
 
   return (
     
-    <div className="contract-doc">
+    <div className="container  contract-doc">
+      <div className='row'>
       <Navbar/>
+        <div className='col-lg-12 offset-lg-1'> 
       <h1>Smart Contract Documentation</h1>
       <p>This smart contract, named <strong>Dealing</strong>, is designed to manage and facilitate deals between two parties. Here’s a detailed overview:</p>
-
       <h2>Key Features:</h2>
       <ul>
         <li><strong>Create Deals:</strong> Initiate a new deal between two users with a specified amount.</li>
@@ -176,6 +177,8 @@ contract Dealing {
           </pre>
         </div>
       )}
+       </div>
+      </div>
     </div>
   );
 };
