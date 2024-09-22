@@ -14,9 +14,9 @@ export default function PaidUser() {
     const { name } = location.state?.Data || {};
     
     const images = [
-        'https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg',
-        'https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/2162442/pexels-photo-2162442.jpeg?auto=compress&cs=tinysrgb&w=600'
+        'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600',
+        'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600',
+        'https://images.pexels.com/photos/7567236/pexels-photo-7567236.jpeg?auto=compress&cs=tinysrgb&w=600'
     ];
     
     useEffect(() => {
@@ -46,6 +46,9 @@ export default function PaidUser() {
         }
         console.log('Selected Interest:', selectedValue);
     };
+    const messagechat=()=>{
+        navigate('/UserChat')
+    }
 
     // Effect to handle navigation to "/UserDealing"
     useEffect(() => {
@@ -73,7 +76,7 @@ export default function PaidUser() {
                                 {isMenuOpen ? '✕' : '☰'}
                             </div>
                             <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
-                                <li><i className="fas fa-envelope"></i></li>
+                                <li><i className="fas fa-envelope" onClick={messagechat}></i></li>
                                 <li className="nav-first-li-second" onClick={deletesession}>
                                     Sign Out
                                 </li>

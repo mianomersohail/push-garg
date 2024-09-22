@@ -8,7 +8,7 @@ import AdminPanelMernStack from './Compo/AdminPanelMernStack/AdminPanelMernStack
 import Documentation from './Compo/SolDocs/SolDocs';
 import UserDealing from './Compo/UserDealing/UserDealing';
 import TradingSignalAdmin from './Compo/TradingSignalAdmin/TradingSignalAdmin';
-
+import UserChat from './Compo/UserChat/UserChat'
 function App() {
 
   return (
@@ -24,6 +24,8 @@ function App() {
           <Route path="/Documentation" element={<Documentation/>} />
           <Route path="/UserDealing" element={<UserDealing/>} />
           <Route path="/TradingSignalAdmin" element={<TradingSignalAdmin/>} />
+          <Route path="/UserChat" element={<UserChat/>} />
+
 
 
           </Routes>

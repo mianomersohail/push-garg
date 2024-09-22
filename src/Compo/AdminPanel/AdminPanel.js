@@ -13,6 +13,12 @@ export default function PaidUser() {
     const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state?.Data || {};
+    
+    const deletesession = () => {
+        localStorage.removeItem('token');
+        navigate('/userlogin');
+    };
+    
 
     const changeSwitchValue = (value) => {
         setSwitchValue(value);
@@ -68,8 +74,8 @@ export default function PaidUser() {
                         {/* Nav Items */}
                         <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
                             <li><Link className="nav-link" to=""><i className="fas fa-envelope"></i></Link></li>
-                            <li className="nav-first-li-second">
-                                <Link className="nav-link" to="">Sign Out</Link>
+                            <li className="nav-first-li-second" onClick={deletesession}>
+                                SignOut
                             </li>
                         </ul>
                     </div>
