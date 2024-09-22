@@ -15,10 +15,15 @@ export default function UserDealing() {
     const [showNewDealInputs, setShowNewDealInputs] = useState(false);
     const [DealStatusReceive, setDealStatusReceive] = useState({});
     const [StatusValue, setStatusValue] = useState('');
+    const [CheckLockamount,setCheckLockamount]=useState('')
+    const [AmountReceived,setAmountReceived]=useState('')
 
     const handleNewDealClick = () => {
         setShowNewDealInputs(prev => !prev);
     };
+    const AmountUpdate=(event)=>{
+        setCheckLockamount(event.target.value)
+    }
 
     const UpdateDealAddress1 = (event) => {
         SetDealAddress1(event.target.value);
@@ -153,7 +158,39 @@ export default function UserDealing() {
             console.log(error.message);
         }
     };
-
+    const checklockamount = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/LockAmount', {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify({ Data: CheckLockamount })
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            console.log("Amount received from backend:", result.amount); // Log the amount
+    
+            // Check if result.amount is valid before proceeding
+            if (!result.amount || result.amount === '0' || isNaN(result.amount)) {
+                throw new Error("Invalid or zero amount received from backend");
+            }
+    
+            const amountInEthers = convertToEthers(result.amount); // Convert to ethers
+            setAmountReceived(amountInEthers); // Update state with the converted amount
+            console.log("Converted amount in ethers:", amountInEthers); 
+    
+        } catch (error) {
+            alert("Error: " + error.message);
+            console.log(error);
+        }
+    };
+    
+    
     return (
         <>
             <PaidUser />
@@ -179,9 +216,13 @@ export default function UserDealing() {
                     </div>
                     <div className="col-lg-3 Deal-Main">
                         <div className="Deal-Input">
+                            <p>o{AmountReceived}</p>
                             <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">Lock Amount</div>
                             <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-                                <input className="Deal-m-top" placeholder="Enter Amount" />
+                            
+                                <input className="Deal-m-top" value={CheckLockamount} onChange={AmountUpdate} placeholder="Enter Your Address" />
+                                <button className="paid-btn-one " onClick={checklockamount}>Check</button>
+                                
                             </div>
                         </div>
                     </div>
