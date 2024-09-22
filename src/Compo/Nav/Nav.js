@@ -31,8 +31,6 @@ export default function Navbar() {
                 SetAuthenticate(true);
                 navigate('/AdminPanel', { state: { Data } });
             } else if (Data.message === 'Authorized' && Data.role === 'User') {
-                
-
                 navigate('/PaidUser', { state: { Data } });
             } else if (Data.message === 'Plz-Login') {
                 navigate('/userlogin');
@@ -48,11 +46,11 @@ export default function Navbar() {
         return (
             <div className="container offset-lg-1">
                 <div className="row nav-row">
-                    <div className="col-lg-4 nav-main">
+                    <div className="col-lg-5 nav-main">
                         <div className="nav-flex">
                             <img
                                 className="nav-first-img"
-                                src="https://media.licdn.com/dms/image/v2/D5603AQF1dnwzZXNqeg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725296771590?e=1730937600&v=beta&t=8f1l8rnlNTWF40E8YD54NYPk_w9PdDD4PmAlNnRFVhs"
+                                src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732752000&v=beta&t=OKZ_z1ZLv_AIjc9CqeqXcTbHBEy6M9o2foOgHYbIMaY"
                                 alt="Profile"
                             />
                             <p className="nav-bold">Mian Omer</p>
@@ -65,9 +63,9 @@ export default function Navbar() {
 
                         {/* Nav Items */}
                         <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
-                            <li><Link className="nav-link" to="/Documentation">Docs</Link></li>
+                            <li><Link className="nav-linkss" to="/Documentation">Docs</Link></li>
                             <li className="nav-first-li-second">
-                                <Link className="nav-link" onClick={handleget} to="">
+                                <Link className="nav-linkss" onClick={handleget} to="/">
                                     Login
                                 </Link>
                             </li>
@@ -78,7 +76,5 @@ export default function Navbar() {
         );
     }
 
-    if (Authenticate === true) {
-        return <PaidUser />;
-    }
+
 }

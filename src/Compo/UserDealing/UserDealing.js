@@ -132,7 +132,7 @@ export default function UserDealing() {
                     </div>
                     <div className="col-lg-6 Deal-Main">
                         <div className="Deal-Input">
-                            <div className="Dealing-div Deal-blue Deal-Main Deal-top">DEAL STATUS</div>
+                            <div className="Dealing-div Deal-blue Deal-Main  ">DEAL STATUS</div>
                             <div><input placeholder="Enter Your Deal Id" /></div>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 .paid-user-img {
-    width: 100%;      /* Ensures the image takes the full width of its container */
-    height: auto;     /* Maintains the aspect ratio of the image */
-    object-fit: cover; /* Ensures the image covers the container without distortion */
+    width: 80%;      /* Ensures the image takes the full width of its container */
+    height: 100%;     /* Maintains the aspect ratio of the image */
+    object-fit: cover;
+   /* Ensures the image covers the container without distortion */
 }
 
 .nav-flex {
@@ -26,7 +27,7 @@
 
 .nav-first-li {
     list-style: none;
-    display: none;
+   
 }
 
 .nav-first-li.open {
@@ -64,7 +65,8 @@
     }
 
     .paid-user-img {
-        width: 100%;
+        width:90%;
+       
         margin-top: 20px;
     }
 
@@ -72,4 +74,11 @@
         width: 100%;
         margin-top: 20px;
     }
+}
+
+@media screen and (max-width:1200px) {
+   .paid-user-img{
+    display: none;
+   }
+    
 }

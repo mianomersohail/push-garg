@@ -15,7 +15,7 @@
 }
 .Deal-Orange{
     background-color: #915C3B;
-    margin-top: 5rem;
+  margin-top: 2rem;
 }
 .Deal-blue:hover{
     background-color: #2e4555;
@@ -28,6 +28,7 @@
 .Deal-Input input{
     height: 3rem;
     border-radius: 8px;
+  
 }
 .new-deal-inputs {
     max-height: 0; /* Initially collapsed */
@@ -63,7 +64,7 @@
     background-color: #218838; /* Darker green on hover */
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:900px){
     .Deal-Input{
         flex-direction: column;
         margin-top: 0rem;
@@ -86,4 +87,10 @@
 
 .Deal-top{
     margin-top: 1rem;
+}
+@media screen and (min-width:1200px) {
+    .Deal-Input input{
+        width: 200%;
+    }
+    
 }
