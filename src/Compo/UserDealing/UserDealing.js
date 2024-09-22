@@ -17,14 +17,14 @@ export default function UserDealing() {
     const [StatusValue, setStatusValue] = useState('');
     const [CheckLockamount,setCheckLockamount]=useState('')
     const [AmountReceived,setAmountReceived]=useState('')
-
+    const [User1,SetUsers1]=useState('')
+    const [MetaMask,SetMetaMask]=useState('')
     const handleNewDealClick = () => {
         setShowNewDealInputs(prev => !prev);
     };
     const AmountUpdate=(event)=>{
         setCheckLockamount(event.target.value)
     }
-
     const UpdateDealAddress1 = (event) => {
         SetDealAddress1(event.target.value);
     };
@@ -40,11 +40,48 @@ export default function UserDealing() {
     const StatusInputUpdate = (event) => {
         setStatusValue(event.target.value);
     };
+const SetUser1=(event)=>{
+    SetUsers1(event.target.value)
+      
 
+}
     const convertToEthers = (amount) => {
         const conversionRate = 2000; // Example conversion rate: 1 ETH = 2000 USD
         return (amount / conversionRate).toFixed(18); // Convert and format to 18 decimal places
     };
+
+    //connct req to for metamask
+    // Function to request MetaMask account access
+async function connectMetaMask() {
+    if (typeof window.ethereum !== 'undefined') {
+        try {
+            // Request account access from MetaMask
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const userAddress = accounts[0]; // Get the first account (user's wallet address)
+
+            console.log('User Wallet Address:', userAddress);
+            SetMetaMask(userAddress)
+
+            // Send userAddress to the backend
+            const response = await fetch('/api/user-agree', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Data: userAddress })
+            });
+
+            const responseData = await response.json();
+            console.log('Response from server:', responseData);
+
+        } catch (error) {
+            console.error('MetaMask Error:', error);
+        }
+    } else {
+        alert('MetaMask is not installed');
+    }
+}
+
+// Call this function when you want to prompt MetaMask (for example, on button click)
+connectMetaMask();
 
     const newdeal = async (event) => {
         event.preventDefault();
@@ -165,7 +202,7 @@ export default function UserDealing() {
                 headers: {
                     'Content-Type': "application/json"
                 },
-                body: JSON.stringify({ Data: CheckLockamount })
+                body: JSON.stringify({ Data: MetaMask })
             });
     
             if (!response.ok) {
@@ -190,7 +227,29 @@ export default function UserDealing() {
         }
     };
     
-    
+    const UseroneAgree=async()=>{
+        try{
+        const Response=await (fetch('http://localhost:3001/User1Agree',{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({Data:User1,Datas:MetaMask})
+        }))
+        if (!Response.ok) {
+            throw new Error(`HTTP error! Status: ${Response.status}`);
+        }
+        const result=await Response.json()
+        if(result.message=='Ok'){
+            alert('User save')
+        }
+        else{
+            alert('User Not Save')
+        }
+    }catch(error){
+        console.log(error)
+    }
+    }
     return (
         <>
             <PaidUser />
@@ -216,7 +275,7 @@ export default function UserDealing() {
                     </div>
                     <div className="col-lg-3 Deal-Main">
                         <div className="Deal-Input">
-                            <p>o{AmountReceived}</p>
+                            <p>{AmountReceived}</p>
                             <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">Lock Amount</div>
                             <div className={`input-container ${showLockInput ? 'open' : ''}`}>
                             
@@ -235,7 +294,7 @@ export default function UserDealing() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-3 offset-lg-2 ">
+                    <div className="col-lg-5 offset-lg-2 ">
                         <div className="Deal-status-receive">
                             <h5>DEAL ID: {DealStatusReceive.dealId}</h5>
                             <h5>DEAL Amount: {DealStatusReceive.amount} eth</h5>
@@ -248,6 +307,16 @@ export default function UserDealing() {
                             <h5>Current Status: {DealStatusReceive.currentStatus}</h5>
                         </div>
                     </div>
+                    <div className="Deal-Input col-lg-6">
+                           
+                            <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
+                            <div className={`input-container ${showLockInput ? 'open' : ''}`}>
+                            
+                                <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
+                                <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
+                                
+                            </div>
+                        </div>
                     <div className="col-lg-8 Deal-Main deal-or">
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
