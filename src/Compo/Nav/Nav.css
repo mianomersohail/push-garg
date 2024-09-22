@@ -118,3 +118,53 @@
         top: 0.2rem;
     }
 }
+/* Keyframes for moving left to right and right to left */
+@keyframes moveLeftToRight {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveRightToLeft {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Updated styles for larger screens (min-width: 768px) */
+@media screen and (min-width: 768px) {
+    .nav-main {
+        width: auto;
+        animation: moveLeftToRight 3s ease-in-out infinite alternate; /* Move left to right */
+    }
+
+    .nav-main:hover {
+        animation: moveRightToLeft 80s ease-in-out infinite alternate; /* Move right to left on hover */
+    }
+
+    .nav-linkss {
+        position: relative;
+        top: 0.3rem;
+    }
+
+    .nav-first-li-second {
+        margin-left: 1rem;
+    }
+
+    .nav-bold {
+        position: relative;
+        top: 0.2rem;
+    }
+}

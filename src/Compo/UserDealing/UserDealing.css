@@ -1,96 +1,193 @@
-.Dealing-div{
-    border:solid;
-    border-color: green;
-    padding:10px;
-    width: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
+/* Main styles for the deal sections */
+.container {
+    margin-top: 20px;
 }
-.Deal-blue{
-    background-color: #355F7D;
-    border-color: #355F7D;
 
+.Dealing-div {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    width:50% ;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease-in-out;
 }
-.Deal-Orange{
-    background-color: #915C3B;
-  margin-top: 2rem;
+
+.Dealing-div.Deal-Orange {
+    background-color: #C97539;
 }
-.Deal-blue:hover{
-    background-color: #2e4555;
-    border-color: #2e4555;
+.Dealing-div.Deal-Orange :hover{
+    background-color: #b06d3c;
 }
-.Deal-Input{
-    display: flex;
-    
+
+.Dealing-div:hover {
+    background-color: #6b97ca;
 }
-.Deal-Input input{
-    height: 3rem;
-    border-radius: 8px;
-  
+.Dealing-div.Deal-Orange :hover{
+    background-color: #b06d3c;
 }
+
+/* Input container for smooth transition */
+.input-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(-10px);
+    margin-top: 5px;
+}
+
+.input-container.open {
+    max-height: 100px; /* Adjust this based on the input field height */
+    transform: translateY(0);
+    padding-top: 5px;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* New Deal section styles */
 .new-deal-inputs {
-    max-height: 0; /* Initially collapsed */
-    overflow: hidden; /* Hide overflow */
-    transition: max-height 0.5s ease-in-out; /* Smooth transition */
-    position: absolute; /* Position absolutely */
-    top: 100%; /* Aligns below the button */
-    left: 0; /* Aligns to the left */
-    width: 100%; /* Full width */
-    background: black; /* Background for visibility */
-    z-index: 10; /* Ensure it appears above other elements */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(-10px);
 }
 
 .new-deal-inputs.open {
-    max-height: 300px; /* Adjust this as needed */
-    margin-top: 10px; /* Space between New Deal and inputs */
+    max-height: 200px; /* Adjust based on input field count */
+    transform: translateY(0);
+    padding-top: 10px;
 }
 
 .new-deal-inputs input {
-    margin-bottom: 10px; /* Space between input fields */
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
+.new-deal-inputs.open input {
+    opacity: 1;
+}
+
+/* Transact button style */
 .transact-button {
-    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #28a745; /* Green background */
-    color: white;
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .transact-button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
-@media screen and (max-width:900px){
-    .Deal-Input{
-        flex-direction: column;
-        margin-top: 0rem;
+/* Spinner style */
+.spinner {
+    color: #007BFF;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Deal sections */
+.Deal-Main {
+    margin-bottom: 15px;
+}
+
+.Deal-Main p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.Deal-Input {
+    position: relative;
+}
+
+.Deal-blue {
+    background-color: #4077B6;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.Deal-left {
+    text-align: left;
+}
+
+.Deal-m-top {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.deal-top {
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
     }
-    .Deal-Input input{
+
+    .Deal-Main {
+        margin-bottom: 20px;
+    }
+
+    .Dealing-div {
+        padding: 8px;
+    }
+
+    .Deal-blue {
+        padding: 8px;
+    }
+
+    .transact-button {
         width: 100%;
-        margin-top: 2rem;
-    }
-    .Deal-Main{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .Dealing-div{
-        width: 70vw;
-
+        margin-top: 15px;
+       
     }
 }
-
-.Deal-top{
-    margin-top: 1rem;
+.new-deal-inputs.open {
+    max-height: 300px; /* Increase this value to accommodate all content */
+    transform: translateY(0);
+    padding-top: 10px;
 }
-@media screen and (min-width:1200px) {
-    .Deal-Input input{
-        width: 200%;
-    }
-    
+
+.transact-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out;
+    display: block; /* Ensure it is displayed as a block element */
+    width: 100%; /* Make it take full width */
+}
+
+.transact-button:hover {
+    background-color: #218838;
+}
+.deal-or{
+    margin-top: 0.5rem;
 }

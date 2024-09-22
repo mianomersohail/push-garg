@@ -95,7 +95,7 @@ export default function PaidUser() {
                                 skills and portfolio soar to new heights!
                             </p>
                             <div className="col-lg-6 floating-label">
-                                <input ref={interestRef} type="text" list="suggestions" placeholder="Your Interest" />
+                                <input ref={interestRef} type="text" className='paid-user-input-any' list="suggestions" placeholder="Your Interest" />
                                 <datalist id="suggestions">
                                     <option value="MERN STACK" />
                                     <option value="BLOCKCHAIN" />

@@ -70,7 +70,7 @@ export default function Home() {
             <p className="home-p-one">Part Time Trading when I'm not working on my day job.</p>
             <button onClick={cvdownload} className='cv-download'>MY CV download</button>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 offset-lg-2">
             <img
               className="home-img-one"
               src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732147200&v=beta&t=4GurKMpZVPW3s-1I5A96GMwTSLJ6PJJf709QbuNgqh4"
