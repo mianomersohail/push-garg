@@ -41,8 +41,8 @@ export default function WorkExperience() {
                                     onClick={() => handleClick('Dimension', dimensionRef)}
                                     ref={dimensionRef}
                                 >
-                                    <img className="exp-first-img exp-first-img-two" src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Fdimension.png&w=32&q=75" alt="Dimension Logo" />
-                                    <p className="exp-p-p">SoftPyramid</p>
+                                    <img className="exp-first-img " src="https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Flogos%2Fdimension.png&w=32&q=75" alt="Dimension Logo" />
+                                    <p className="exp-p">SoftPyramid</p>
                                 </li>
                                 <li
                                     className={`exp-flex ${selectedCompany === 'Emitrr' ? 'active' : ''}`}

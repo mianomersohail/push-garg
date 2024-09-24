@@ -9,10 +9,14 @@ import Documentation from './Compo/SolDocs/SolDocs';
 import UserDealing from './Compo/UserDealing/UserDealing';
 import TradingSignalAdmin from './Compo/TradingSignalAdmin/TradingSignalAdmin';
 import UserChat from './Compo/UserChat/UserChat'
+import count from './Compo/contex/Context'
+
 function App() {
+  
 
   return (
     <>
+    <count.Provider value={"Heloo my name is umer sohail"}>
    <Router >       
           <Routes>
             
@@ -30,6 +34,7 @@ function App() {
 
           </Routes>
         </Router>   
+        </count.Provider>
     
     </>
   );

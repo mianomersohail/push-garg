@@ -75,4 +75,11 @@ i{
   .cv-download:active {
     transform: scale(0.98); /* Slight press-down effect */
   }
+  @media screen and (max-width:768px) {
+    .home-main{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+  }
   

@@ -36,7 +36,10 @@
 }
 .Filling-main{
     margin-top: 2rem;
- 
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .filling-box-two{
@@ -44,13 +47,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 0rem;
 }
 .Filling-img{
+    border: solid;
+    display: none;
 
 }
  @media screen and (max-width:768px) {
     .Filling-img{
         width: 90%;
+        
     }
     .filling-box-two{
         margin-top: 3rem;

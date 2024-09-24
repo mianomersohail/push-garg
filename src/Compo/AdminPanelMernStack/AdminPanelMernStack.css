@@ -22,6 +22,12 @@
     height: 32px;
     border-radius: 6px;
 }
+@media screen and (max-width:768px) {
+    .Mern-form input{
+        height: 15px;
+    }
+    
+}
 
 .dropdown {
     position: relative;
@@ -165,3 +171,18 @@ font-size: 25px;
     
     
 }
+
+.Main-Admin{
+    padding: 100px;
+}
+@media screen and (max-width:600px) {
+    .Main-Admin{
+        padding:30px;
+    }
+    .Mern-form input{
+        height: 36px;
+        border-radius: 5px;
+    }
+    
+}
+

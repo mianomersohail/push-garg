@@ -31,13 +31,13 @@ export default function FillingEffect() {
     return (
         <div className="container Filling-main ">
             <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-2 offset-lg-1">
                     <img className='Filling-img'
                         src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732752000&v=beta&t=OKZ_z1ZLv_AIjc9CqeqXcTbHBEy6M9o2foOgHYbIMaY"
                         alt="Profile"
                     />
                 </div>
-                <div className="col-lg-6 filling-box-two" ref={skillRef}>
+                <div className="col-lg-6  filling-box-two" ref={skillRef}>
                     <div className="skill">
                         <span className="label">React JS Developer</span>
                         <div className={`progress-bar ${visible ? 'filled' : ''}`} style={{ width: visible ? '80%' : '0%' }}>

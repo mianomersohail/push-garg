@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PaidUser.css';
 
+import Dealing from '../UserDealing/UserDealing'
+import UserDealing from '../UserDealing/UserDealing';
 export default function PaidUser() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [PaidUser, SetPaidUser] = useState(true);
@@ -117,6 +119,7 @@ export default function PaidUser() {
                         </div>
                     </div>
                 </div>
+                <UserDealing/>
             </>
         );
     }

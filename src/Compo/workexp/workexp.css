@@ -30,33 +30,33 @@
 /* Existing styles for your list */
 .exp-flex {
     display: flex;
-    justify-content: center;
+    width: 130px;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 79px;
+    padding: 4px 8px;
     border-radius: 0.4rem;
     margin-top: 1rem;
+    cursor: pointer;
    
 }
 
 .exp-first-img {
     height: 1rem;
+    padding-right: 10px;
+    
 }
 
 .exp-p {
-    position: relative;
-    left: 1rem;
-    top: 0.4rem;
+    margin-bottom: 0px;
 }
 
 .exp-flex-two {
     display: flex;
-    justify-content: end;
 }
 
 .exp-p-p {
     position: relative;
     top: 0.4rem;
-    left:1rem
 }
 
 .exp-first-img-two {

@@ -6,7 +6,7 @@
   color: #e0e0e0; /* Light gray text */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  list-style:none;
+  list-style:none !important;
 }
 
 .contract-doc h1,
@@ -28,6 +28,7 @@
 
 .contract-doc li {
   margin-bottom: 8px;
+  list-style: none;
 }
 
 .show-contract-btn {

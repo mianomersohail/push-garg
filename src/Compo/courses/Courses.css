@@ -1,5 +1,13 @@
 .courses-main{
     margin-top: 8rem;
+  
+}
+.Courses{
+  
+  display: flex;
+  justify-content: space-evenly;
+  padding:0 100px 0 100px;
+
 }
 
 .course-one-img{
@@ -83,4 +91,10 @@
   .course-link{
     text-decoration: none;
     color:white;
+  }
+  @media screen and (max-width:768px) {
+    .Courses{
+      padding: 0px;
+      flex-direction: column;
+    }
   }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
 
+
+
 export default function UserDealing() {
     const [balance, setBalance] = useState('');
     const [deals, setDeals] = useState('');
@@ -85,13 +87,12 @@ connectMetaMask();
 
     const newdeal = async (event) => {
         event.preventDefault();
-        const convertedAmount = convertToEthers(DealAmount); // Convert DealAmount to ethers
+        // const convertedAmount = convertToEthers(DealAmount); // Convert DealAmount to ethers 
         const Data = {
-            DealAmount: convertedAmount,
+            DealAmount,
             DealAddress1,
             DealAddress2
         };
-
         setLoading(true);
 
         try {
@@ -105,13 +106,15 @@ connectMetaMask();
 
             const Result = await response.json();
             setLoading(false);
-
+if(Result){
+    alert('Deal Added Successfully. Check Console for transaction hash');
+                console.log(Result);
+}
             if (Result.errormessage) {
                 alert(Result.errormessage);
-            } else {
-                alert('Deal Added Successfully. Check Console for transaction hash');
-                console.log(Result);
             }
+                
+            
         } catch (error) {
             setLoading(false);
             console.log(error.message);
@@ -142,10 +145,11 @@ connectMetaMask();
     const updateBalance = async () => {
         try {
             const response = await fetch('http://localhost:3001/EthBalanceCheck', {
-                method: "GET",
+                method: "POST",
                 headers: {
                     'Content-Type': "application/json"
-                }
+                },
+                body:JSON.stringify(MetaMask)
             });
 
             const result = await response.json();
@@ -236,16 +240,12 @@ connectMetaMask();
             },
             body:JSON.stringify({Data:User1,Datas:MetaMask})
         }))
-        if (!Response.ok) {
+        if (!Response) {
             throw new Error(`HTTP error! Status: ${Response.status}`);
         }
         const result=await Response.json()
-        if(result.message=='Ok'){
-            alert('User save')
-        }
-        else{
-            alert('User Not Save')
-        }
+        console.log(result)
+       alert(result.errormessage)
     }catch(error){
         console.log(error)
     }
@@ -321,7 +321,7 @@ connectMetaMask();
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
                             <div className={`new-deal-inputs ${showNewDealInputs ? 'open' : ''}`}>
-                                <div><input value={DealAmount} type="number" onChange={UpdateDealAmount} placeholder="Amount (in USD)" /></div>
+                                <div><input value={DealAmount} type="Number" onChange={UpdateDealAmount} placeholder="Amount (in USD)" /></div>
                                 <div><input value={DealAddress1} onChange={UpdateDealAddress1} placeholder="User1 Address" /></div>
                                 <div><input value={DealAddress2} onChange={UpdateDealAddress2} placeholder="User2 Address" /></div>
                                 <button onClick={newdeal} className="transact-button">

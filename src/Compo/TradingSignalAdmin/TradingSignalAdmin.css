@@ -7,10 +7,29 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+padding-top: 30px;
+padding-bottom: 30px;
 
 }
 .signal-box input{
-    border-radius: 10px;
+    border-radius: 5px;
     justify-content: space-around;
 
+}
+.signal-main{
+    justify-content: space-between;
+    padding: 40px;
+}
+.signal-top{
+    margin-top: 5rem;
+}
+.signal-img{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+}
+.signal-label-bold{
+    font-size: 32px;
+    position: relative;
+    top:0.4rem;
 }
