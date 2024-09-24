@@ -1,5 +1,5 @@
-import { useState,createContext } from "react";
+import { createContext } from "react";
 
-  const count=createContext()
-  export default count;
+const count=createContext(0)
 
+export default count;

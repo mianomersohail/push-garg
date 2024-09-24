@@ -41,6 +41,7 @@ export default function Home() {
   return (
     <>      
       <Navbar />
+      
       <div className='container offset-lg-1'>
         <div className='row'>
           <div className='col-lg-6 home-main'>

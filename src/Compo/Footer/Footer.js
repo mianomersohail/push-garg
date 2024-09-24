@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import {  useContext } from "react"
 import count from '../contex/Context'
 export default function Footer(){
-    const couns=useContext(count)
     return(
         <>
+        
         <div className="container">
             <div className="rowz">
                 <div className="col-lg-12 footer-box">
