@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './AdminPanelMernStack.css';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPanelMernStack() {
     const [addusererror, setaddusererror] = useState('');
@@ -12,7 +12,7 @@ export default function AdminPanelMernStack() {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [removeinput, setremoveinput] = useState('');
     const [RemoveErrorMessage, SetRemoveErrorMessage] = useState('');
-    const [role, setRole] = useState(''); // State to hold the selected role
+    const [role, setRole] = useState('');
     const navigate = useNavigate();
 
     const handleRoleSelect = (selectedRole) => setRole(selectedRole);
@@ -43,7 +43,7 @@ export default function AdminPanelMernStack() {
                 body: JSON.stringify({ email: removeinput })
             });
 
-            if (!Response.ok) {
+            if (!Response) {
                 SetRemoveErrorMessage('Server Not Responding');
                 return;
             }
@@ -147,7 +147,7 @@ export default function AdminPanelMernStack() {
                                     onMouseEnter={() => setShowSuggestions(true)}
                                     onMouseLeave={() => setShowSuggestions(false)}
                                 >
-                                    <button className="dropdown-button">
+                                    <button type="button" className="dropdown-button">
                                         {adduservalue || 'Choose Section'}
                                     </button>
                                     <div className={`dropdown-content ${showSuggestions ? 'open' : ''}`}>
@@ -166,7 +166,7 @@ export default function AdminPanelMernStack() {
 
                             <div><label>Password</label></div>
                             <div><input value={adduserpassword} onChange={updateuserpassword} type='password' placeholder='Enter User Password' /></div>
-                            <button onClick={addnewuser} className='paid-btn-one'>Add</button>
+                            <button type="button" onClick={addnewuser} className='paid-btn-one'>Add</button>
                         </form>
                     </div>
                     <div className='col-lg-4'>
@@ -175,7 +175,7 @@ export default function AdminPanelMernStack() {
                             <div><h1>REMOVE USER</h1></div>
                             <div><label>Email</label></div>
                             <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <button onClick={RemoveUser} className='paid-btn-one'>Remove</button>
+                            <button type="button" onClick={RemoveUser} className='paid-btn-one'>Remove</button>
                         </form>
                     </div>
                     <div className='col-lg-4'>
@@ -208,7 +208,7 @@ export default function AdminPanelMernStack() {
                                 </ul>
                             </div>
 
-                            <button onClick={updateUser} className='paid-btn-one'>Update</button>
+                            <button type="button" onClick={updateUser} className='paid-btn-one'>Update</button>
                         </form>
                     </div>
                 </div>

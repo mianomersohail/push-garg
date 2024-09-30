@@ -9,20 +9,11 @@ import Documentation from './Compo/SolDocs/SolDocs';
 import UserDealing from './Compo/UserDealing/UserDealing';
 import TradingSignalAdmin from './Compo/TradingSignalAdmin/TradingSignalAdmin';
 import UserChat from './Compo/UserChat/UserChat'
-import count from './Compo/contex/Context';
 function App() {
-  let apple='Fruit';
-
-
   return (
     <>
-
-  <count.Provider value={apple}>
-
-  
-   <Router >       
+     <Router >       
           <Routes>
-            
           <Route path="*" element={<Home/>} />
           <Route path="/paiduser" element={<PaidUser />} />
           <Route path="/userlogin" element={<UserLogin/>} />
@@ -32,12 +23,9 @@ function App() {
           <Route path="/UserDealing" element={<UserDealing/>} />
           <Route path="/TradingSignalAdmin" element={<TradingSignalAdmin/>} />
           <Route path="/UserChat" element={<UserChat/>} />
-
-
-
           </Routes>
         </Router>   
-        </count.Provider>
+     
         </>
     
 

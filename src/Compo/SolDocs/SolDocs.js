@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './SolDocs.css';
-import Navbar from '../Nav/Nav';
-
+import Navbar from '../Nav/NavList';
 const SmartContractDoc = () => {
   // Complete smart contract code
   const contractCode = `
@@ -122,7 +121,7 @@ contract Dealing {
   return (
     <div className="container  contract-doc">
       <div className='row'>
-      <Navbar/>
+      <Navbar navlinameone={'Home'} linkone={'/home'}/>
         <div className='col-lg-12 offset-lg-0'> 
       <h1>Smart Contract Documentation</h1>
       <p>This smart contract, named <strong>Dealing</strong>, is designed to manage and facilitate deals between two parties. Here’s a detailed overview:</p>

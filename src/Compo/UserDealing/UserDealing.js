@@ -54,36 +54,36 @@ const SetUser1=(event)=>{
 
     //connct req to for metamask
     // Function to request MetaMask account access
-async function connectMetaMask() {
-    if (typeof window.ethereum !== 'undefined') {
-        try {
+// async function connectMetaMask() {
+//     if (typeof window.ethereum !== 'undefined') {
+//         try {
             // Request account access from MetaMask
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const userAddress = accounts[0]; // Get the first account (user's wallet address)
+//             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+//             const userAddress = accounts[0]; // Get the first account (user's wallet address)
 
-            console.log('User Wallet Address:', userAddress);
-            SetMetaMask(userAddress)
+//             console.log('User Wallet Address:', userAddress);
+//             SetMetaMask(userAddress)
 
-            // Send userAddress to the backend
-            const response = await fetch('/api/user-agree', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ Data: userAddress })
-            });
+//             // Send userAddress to the backend
+//             const response = await fetch('/api/user-agree', {
+//                 method: 'POST',
+//                 headers: { 'Content-Type': 'application/json' },
+//                 body: JSON.stringify({ Data: userAddress })
+//             });
 
-            const responseData = await response.json();
-            console.log('Response from server:', responseData);
+//             const responseData = await response.json();
+//             console.log('Response from server:', responseData);
 
-        } catch (error) {
-            console.error('MetaMask Error:', error);
-        }
-    } else {
-        alert('MetaMask is not installed');
-    }
-}
+//         } catch (error) {
+//             console.error('MetaMask Error:', error);
+//         }
+//     } else {
+//         alert('MetaMask is not installed');
+//     }
+// }
 
 // Call this function when you want to prompt MetaMask (for example, on button click)
-connectMetaMask();
+// connectMetaMask();
 
     const newdeal = async (event) => {
         event.preventDefault();

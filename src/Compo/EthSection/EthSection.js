@@ -1,4 +1,5 @@
 import './EthSection.css'
+import { motion } from 'framer-motion'
 export default function EthSection(){
     return(
         <>
@@ -19,10 +20,10 @@ export default function EthSection(){
 
                     </div>
                     <h3 style={{marginTop:"2rem"}}>Tools</h3>
-                    <div className='eth-sec-box'>
+                    <motion.div initial={{opacity:0,x:200}} animate={{opacity:1,x:0}} transition={{delay:1}} className='eth-sec-box'>
                         <div>Hardhat</div><div>Eth.js</div><div>Mocha Chai</div><div>Infura</div>
 
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>

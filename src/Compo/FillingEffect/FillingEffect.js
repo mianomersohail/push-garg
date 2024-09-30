@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './FillingEffect.css';
+import { motion } from 'framer-motion'
 
 export default function FillingEffect() {
     const [visible, setVisible] = useState(false);
@@ -70,6 +71,8 @@ export default function FillingEffect() {
                     </div>
                 </div>
             </div>
+            
         </div>
+    
     );
 }

@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 import './AdminPanel.css'
+import Navbar from '../Nav/NavList'
 export default function PaidUser() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mainMernPage, setMainMernPage] = useState(true);
     const [isMern, setIsMern] = useState(false);
     const [switchValue, setSwitchValue] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown toggle
     const [Trading,SetTrading]=useState('')
-
     const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state?.Data || {};
@@ -49,39 +48,11 @@ export default function PaidUser() {
         }
     }, [mainMernPage, isMern, navigate,Trading]);
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+
 
     return (
         <>
-            <div className="container offset-lg-1">
-                <div className="row nav-row">
-                    <div className="col-lg-4 nav-main">
-                        <div className="nav-flex">
-                            <img
-                                className="nav-first-img"
-                                src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732752000&v=beta&t=OKZ_z1ZLv_AIjc9CqeqXcTbHBEy6M9o2foOgHYbIMaY"
-                                alt="Profile"
-                            />
-                            <p className="nav-bold">{name || 'WELCOME'}</p>
-                        </div>
-
-                        {/* Hamburger Icon */}
-                        <div className="hamburger" onClick={toggleMenu}>
-                            {isMenuOpen ? '✕' : '☰'}
-                        </div>
-                        {/* Nav Items */}
-                        <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
-                            <li><Link className="nav-link" to=""><i className="fas fa-envelope"></i></Link></li>
-                            <li className="nav-first-li-second" onClick={deletesession}>
-                                SignOut
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        <Navbar name={name} navlinameone={'SignOut'} linkone={'Deletesession'}/>            
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>
