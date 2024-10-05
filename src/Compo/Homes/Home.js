@@ -1,68 +1,61 @@
+// Home.js
 import './Home.css';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useHttp from '../FetchHook/FetchPost';
+import { useEffect } from 'react';
+import useApi from '../FetchHook/FetchPost';
 import Navbar from '../Nav/NavList';
 import WorkExperience from '../workexp/workexp';
 import Courses from '../courses/Courses';
 import Trusted from '../trustedanimation/Trusted';
 import Footer from '../Footer/Footer';
-import BitcoinPrice from '../BitcoinPrice/Bitcoinprice';
 import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
 import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
-
+import { useNavigate } from 'react-router-dom';
 const LinkData = Links;
-
 export default function Home() {
-  const navigation=useNavigate()
-  const { loading, error, sendRequest } = useHttp();
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseData = await sendRequest('http://localhost:3001/NavLogin');
-        setData(responseData);
-      } catch (err) {
-        console.error(err);
-      }
+  const navigation = useNavigate();
+  const { loading, error, data, get } = useApi('http://localhost:3001');
+  const navlogin = async () => {
+    const token=localStorage.getItem('token')
+    const headers = {
+      Authorization: `Bearer ${token}`, 
     };
-    fetchData();
-  }, [sendRequest]);
-
-  const getReq = async () => {
     try {
-      const responseData = await sendRequest('http://localhost:3001/NavLogin', 'GET');
-      console.log('invalid',responseData);
-      if(responseData=='Invalid Token'){
-        navigation("/userlogin")
-      } // Handle the response data as needed
-      // You can update your state or perform other actions based on the response
-      setData(responseData); // Example: update state with the response data
+      const result = await get('/NavLogin', headers); 
+      console.log(result.message); 
+      if (result.message == 'No token provided' || result.message == 'Invalid or expired token') {
+        navigation('/userlogin');
+        console.log('Navigating to User Login');
+      }
+      console.log(result.user.role)
+      if(result.user.role=='User'){
+        navigation('/paiduser')
+      }
+      if(result.user.role=='Admin'){
+        navigation('/AdminPanel')
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const navlogin = () => {
-    // Your navigation logic here if needed
-  };
+  useEffect(() => {
+  }, []);
 
   return (
     <>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      <Navbar 
-        name={'Mian Omer'} 
-        navlinameone={'Docs'} 
-        navlinametwo={'Login'} 
-        onClick={getReq} 
-        linkone={'/Documentation'}  
+      <Navbar
+        name={'Mian Omer'}
+        navlinameone={'Docs'}
+        navlinametwo={'Login'}
+        linkone={'/Documentation'}
+        onClick={navlogin}
       />
+      {loading && <div className="loading">Loading...</div>}
+      {error && <div className="error">Error: {error.message}</div>}
       <div className='container offset-lg-1'>
         <div className='row'>
           <div className='col-lg-6 home-main'>
@@ -81,36 +74,20 @@ export default function Home() {
               )}
             />
             <p className='home-p-one'>
-              I’m Muhammad Umer Sohail. Over a 3+ years experience in trading markets,
-              working in Lahore, I have played an essential role in developing and improving a
-              wide range of digital products and services across different industries and
-              business models and Ecommerce platforms where I have found my biggest
-              passion. Paying close attention to user feedback, spotting user behavior patterns,
-              and iterating from there has always been my motto.
+              I’m Muhammad Umer Sohail. Over 3+ years experience in trading markets, working in Lahore, I have played an essential role in developing and improving a wide range of digital products and services...
             </p>
             <p style={{ color: "#73737A" }}>~ Trading</p>
             <p className="home-p-one">Part Time Trading when I'm not working on my day job.</p>
             <button className='cv-download'>MY CV download</button>
           </div>
           <div className="col-lg-4 offset-lg-1">
-            <img
-              className="home-img-one"
-              src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727442009142?e=1732752000&v=beta&t=02QmQeS0WM_hDBtm39AduhoW4cZFru3e4d-4CQeqsdc"
-              alt="Profile"
-            />
+            <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727442009189?e=1733356800&v=beta&t=ik-mEXDtm2bAI_kbluGVvOR9Fmo_eG_FwGWytS_ceTM" alt="Profile" />
             <div>
-              <div>
-                <ul className='home-first-ul'>
-                  {LinkData.map((item, index) => (
-                    <HomeList
-                      key={index}
-                      HomeFirstLink={item.HomeFirstLink}
-                      i1={item.i1}
-                      to1={item.to1}
-                    />
-                  ))}
-                </ul>
-              </div>
+              <ul className='home-first-ul'>
+                {LinkData.map((item, index) => (
+                  <HomeList key={index} HomeFirstLink={item.HomeFirstLink} i1={item.i1} to1={item.to1} />
+                ))}
+              </ul>
             </div>
           </div>
         </div>

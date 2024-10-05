@@ -1,12 +1,13 @@
 .contract-doc {
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #121212; /* Black background */
   color: #e0e0e0; /* Light gray text */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  list-style:none !important;
+  max-width: 800px; /* Limit the width */
+  overflow: hidden; /* Prevent overflow */
 }
 
 .contract-doc h1,
@@ -39,6 +40,11 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease; /* Smooth background change */
+}
+
+.show-contract-btn:hover {
+  background-color: #04a4b7; /* Darker shade on hover */
 }
 
 .contract-code {
@@ -48,4 +54,34 @@
   border-radius: 5px;
   overflow-x: auto;
   white-space: pre-wrap;
+  margin-top: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .contract-doc {
+    margin: 10px; /* Reduce margin on smaller screens */
+    padding: 15px; /* Reduce padding */
+  }
+
+  .contract-doc h1 {
+    font-size: 24px; /* Adjust heading size */
+  }
+
+  .contract-doc h2 {
+    font-size: 20px; /* Adjust subheading size */
+  }
+
+  .contract-doc p,
+  .contract-doc dl,
+  .contract-doc dd,
+  .contract-doc ul,
+  .contract-doc li {
+    font-size: 14px; /* Smaller text for smaller devices */
+  }
+
+  .show-contract-btn {
+    font-size: 14px; /* Smaller button text */
+    padding: 8px 16px; /* Smaller padding */
+  }
 }

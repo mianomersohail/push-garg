@@ -1,57 +1,38 @@
-import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+// hooks/useApi.js
+import { useState } from 'react';
+import axios from 'axios';
 
-const useHttp = () => {
-  const navigation = useNavigate();
+const useApi = (baseURL) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
-  const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+  const request = async (method, url, body = null, headers = {}) => {
     setLoading(true);
     setError(null);
-
     try {
-      if (body) {
-        body = JSON.stringify(body);
-        headers['Content-Type'] = 'application/json';
-      }
-
-      const response = await fetch(url, {
+      const response = await axios({
         method,
-        body,
-        headers,
+        url: `${baseURL}${url}`,
+        data: body,
+        headers, // Include headers here
       });
-
-      const data = await response.json();
-      console.log(data.message,'th')
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Request failed!');
-      }
-
-      // Handle redirection based on the received data
-      if (data.message=='Invalid Token') {
-        navigation('/userlogin');
-      } else if (data.role === 'Admin') {
-        navigation('/AdminPanel'); // Fixed typo: changed AdminPan; to AdminPan
-      } else if (data.role == 'User') {
-        navigation('./userlogin');
-      }
-
-      setLoading(false);
-      return data;
+      setData(response.data);
+      return response.data; // Return the response data for further processing if needed
     } catch (err) {
+      setError(err);
+      throw err; // Rethrow the error for handling outside
+    } finally {
       setLoading(false);
-      setError(err.message || 'Something went wrong!');
-      throw err; // Re-throwing the error for further handling
     }
-  }, [navigation]); // Added navigation to dependency array
-
-  return {
-    loading,
-    error,
-    sendRequest,
   };
+
+  const get = (url, headers) => request('GET', url, null, headers); // Pass headers to get method
+  const post = (url, body) => request('POST', url, body);
+  const put = (url, body) => request('PUT', url, body);
+  const del = (url) => request('DELETE', url);
+
+  return { loading, error, data, get, post, put, del };
 };
 
-export default useHttp;
+export default useApi;

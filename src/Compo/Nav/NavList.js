@@ -5,8 +5,7 @@ export default function Navbar({name,onClick,navlinameone,navlinametwo,errormess
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
     const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+        setIsMenuOpen(!isMenuOpen)}
         return (
             <div className="container offset-lg-1">
                 <div className="row nav-row">
@@ -20,12 +19,10 @@ export default function Navbar({name,onClick,navlinameone,navlinametwo,errormess
                             />
                             <p className="nav-bold">{name}</p>
                         </div>
-
                         {/* Hamburger Icon */}
                         <div className="hamburger" onClick={toggleMenu}>
                             {isMenuOpen ? '✕' : '☰'}
                         </div>
-
                         {/* Nav Items */}
                         <ul className={`nav-first-li ${isMenuOpen ? 'open' : ''}`}>
                             <li><Link className="nav-linkss" to={linkone}>{navlinameone}</Link></li>

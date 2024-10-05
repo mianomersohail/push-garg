@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './SolDocs.css';
 import Navbar from '../Nav/NavList';
+
 const SmartContractDoc = () => {
-  // Complete smart contract code
   const contractCode = `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.27;
@@ -112,17 +112,16 @@ contract Dealing {
     }
 }
   `;
-  // State to control the display of the contract code
+
   const [showContract, setShowContract] = useState(false);
-  // Toggle the smart contract code display
+
   const handleToggle = () => {
     setShowContract(!showContract);
   };
+
   return (
-    <div className="container  contract-doc">
-      <div className='row'>
+    <div className="container contract-doc">
       <Navbar navlinameone={'Home'} linkone={'/home'}/>
-        <div className='col-lg-12 offset-lg-0'> 
       <h1>Smart Contract Documentation</h1>
       <p>This smart contract, named <strong>Dealing</strong>, is designed to manage and facilitate deals between two parties. Here’s a detailed overview:</p>
       <h2>Key Features:</h2>
@@ -130,47 +129,14 @@ contract Dealing {
         <li><strong>Create Deals:</strong> Initiate a new deal between two users with a specified amount.</li>
         <li><strong>User Agreements:</strong> Both users must agree to the terms of the deal before it can proceed.</li>
         <li><strong>Locked Funds:</strong> Funds are locked during the deal and are only released when both parties complete their actions.</li>
-        <li><strong>Fund Management:</strong> Users can deposit and withdraw funds to/from their balance.</li>
+        <li><strong>Fund Management:</strong> Users can deposit and withdraw funds to/from the contract.</li>
       </ul>
-      <h2>Functions:</h2>
-      <dl>
-        <dt><strong>Withdraw(uint256 Amount)</strong></dt>
-        <dd>Allows a user to withdraw a specified amount from their balance.</dd>
-        <dt><strong>Deposit()</strong></dt>
-        <dd>Allows a user to deposit Ether into their account.</dd>
-        <dt><strong>Balances()</strong></dt>
-        <dd>Returns the balance of the caller.</dd>
-
-        <dt><strong>NewDeal(uint256 _Amount, address _User1, address _User2)</strong></dt>
-        <dd>Creates a new deal between two users with the specified amount. The deal starts in the "Pending" status.</dd>
-
-        <dt><strong>User1Agree(uint256 _Id)</strong></dt>
-        <dd>Allows User1 to agree to the deal. If both users agree, the deal status changes to "DealAdd" and the funds are locked.</dd>
-
-        <dt><strong>User2Agree(uint256 _Id)</strong></dt>
-        <dd>Allows User2 to agree to the deal. If both users agree, the deal status changes to "DealAdd" and the funds are locked.</dd>
-
-        <dt><strong>User1Satisfy(uint256 _Id)</strong></dt>
-        <dd>Allows User1 to mark their part of the deal as completed. If both users complete their actions, the deal status changes to "DealClose" and the funds are released.</dd>
-
-        <dt><strong>User2Satisfy(uint256 _Id)</strong></dt>
-        <dd>Allows User2 to mark their part of the deal as completed. If both users complete their actions, the deal status changes to "DealClose" and the funds are released.</dd>
-      </dl>
-
-      <button onClick={handleToggle} className="show-contract-btn">
-        {showContract ? 'Hide Smart Contract' : 'Show Smart Contract'}
+      <button className="show-contract-btn" onClick={handleToggle}>
+        {showContract ? 'Hide Contract Code' : 'Show Contract Code'}
       </button>
-
       {showContract && (
-        <div>
-          <h2>Smart Contract Code:</h2>
-          <pre className="contract-code">
-            {contractCode}
-          </pre>
-        </div>
+        <pre className="contract-code">{contractCode}</pre>
       )}
-       </div>
-      </div>
     </div>
   );
 };

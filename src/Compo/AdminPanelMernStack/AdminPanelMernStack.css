@@ -101,7 +101,7 @@
 
 .role-dropdown-container {
     position: relative;
-    width: 100%;
+    width: 23%;
 }
 
 .role-input {
@@ -186,3 +186,10 @@ font-size: 25px;
     
 }
 
+.mern-btn-top-m{
+    margin-top: 3.8rem;
+
+}
+.paid-btn-tops{
+    margin-top: 1rem;
+}
