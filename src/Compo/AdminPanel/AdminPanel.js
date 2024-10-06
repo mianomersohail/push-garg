@@ -5,7 +5,7 @@ import './AdminPanel.css';
 import Navbar from '../Nav/NavList';
 export default function PaidUser() {
     const [switchValue, setSwitchValue] = useState('');
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown toggle
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
     const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state?.Data || {}; 
@@ -13,7 +13,7 @@ export default function PaidUser() {
     const signout = () => {
         localStorage.removeItem('token');
         setTimeout(() => {
-            navigate('/userlogin'); // Adding a slight delay to check if it triggers
+            navigate('/userlogin');
         }, 200); 
     };
     
@@ -34,7 +34,7 @@ export default function PaidUser() {
 
         }
 
-    };//
+    };
     
 
     return (

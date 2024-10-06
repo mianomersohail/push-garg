@@ -1,6 +1,5 @@
-// Home.js
 import './Home.css';
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useApi from '../FetchHook/FetchPost';
 import Navbar from '../Nav/NavList';
 import WorkExperience from '../workexp/workexp';
@@ -14,8 +13,11 @@ import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
 import { useNavigate } from 'react-router-dom';
+import count from '../../contex/context';
 const LinkData = Links;
 export default function Home() {
+  const {usename,setusename}=useContext(count)
+ const [username,setusername]=useState()
   const navigation = useNavigate();
   const { loading, error, data, get } = useApi('http://localhost:3001');
   const navlogin = async () => {
@@ -24,15 +26,29 @@ export default function Home() {
       Authorization: `Bearer ${token}`, 
     };
     try {
-      const result = await get('/NavLogin', headers); 
-      console.log(result.message); 
+      const result = await get('/NavLogin', headers);  
       if (result.message == 'No token provided' || result.message == 'Invalid or expired token') {
         navigation('/userlogin');
-        console.log('Navigating to User Login');
-      }
-      console.log(result.user.role)
+            }
+      console.log(result.user.username)
       if(result.user.role=='User'){
+        const checkuser=localStorage.getItem('username')
+        if(checkuser){
+          setusername(result.user.username)
+        setusename(result.user.username)
         navigation('/paiduser')
+          
+        }
+        else {
+          localStorage.setItem('username',result.user.username)
+          setusername(result.user.username)
+        setusename(result.user.username)
+        navigation('/paiduser')
+        }
+        // setusername(result.user.username)
+        // setusename(result.user.username)
+        // navigation('/paiduser')
+        // navigation('/paiduser',{ state: { Data: { username:result.user.username } } })
       }
       if(result.user.role=='Admin'){
         navigation('/AdminPanel')

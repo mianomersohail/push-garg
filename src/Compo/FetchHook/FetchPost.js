@@ -1,4 +1,3 @@
-// hooks/useApi.js
 import { useState } from 'react';
 import axios from 'axios';
 const useApi = (baseURL) => {
@@ -13,18 +12,18 @@ const useApi = (baseURL) => {
         method,
         url: `${baseURL}${url}`,
         data: body,
-        headers, // Include headers here
+        headers, 
       });
       setData(response.data);
-      return response.data; // Return the response data for further processing if needed
+      return response.data; 
     } catch (err) {
       setError(err);
-      throw err; // Rethrow the error for handling outside
+      throw err; 
     } finally {
       setLoading(false);
     }
   };
-  const get = (url, headers) => request('GET', url, null, headers); // Pass headers to get method
+  const get = (url, headers) => request('GET', url, null, headers); 
   const post = (url, body) => request('POST', url, body);
   const put = (url, body) => request('PUT', url, body);
   const del = (url) => request('DELETE', url);

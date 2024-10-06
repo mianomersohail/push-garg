@@ -1,4 +1,4 @@
-/* Main styles for the deal sections */
+
 .container {
     margin-top: 20px;
 }
@@ -29,7 +29,7 @@
     background-color: #b06d3c;
 }
 
-/* Input container for smooth transition */
+
 .input-container {
     max-height: 0;
     overflow: hidden;
@@ -39,7 +39,7 @@
 }
 
 .input-container.open {
-    max-height: 100px; /* Adjust this based on the input field height */
+    max-height: 100px; 
     transform: translateY(0);
     padding-top: 5px;
 }
@@ -52,7 +52,7 @@
     border: 1px solid #ccc;
 }
 
-/* New Deal section styles */
+
 .new-deal-inputs {
     max-height: 0;
     overflow: hidden;
@@ -61,7 +61,7 @@
 }
 
 .new-deal-inputs.open {
-    max-height: 200px; /* Adjust based on input field count */
+    max-height: 200px; 
     transform: translateY(0);
     padding-top: 10px;
 }
@@ -96,14 +96,14 @@
     background-color: #218838;
 }
 
-/* Spinner style */
+
 .spinner {
     color: #007BFF;
     font-size: 14px;
     margin-top: 10px;
 }
 
-/* Deal sections */
+
 .Deal-Main {
     margin-bottom: 15px;
 }
@@ -167,7 +167,7 @@
     }
 }
 .new-deal-inputs.open {
-    max-height: 300px; /* Increase this value to accommodate all content */
+    max-height: 300px; 
     transform: translateY(0);
     padding-top: 10px;
 }
@@ -181,8 +181,8 @@
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease-in-out;
-    display: block; /* Ensure it is displayed as a block element */
-    width: 100%; /* Make it take full width */
+    display: block; 
+    width: 100%; 
 }
 
 .transact-button:hover {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PaidUser.css';
 import UserDealing from '../UserDealing/UserDealing';
@@ -9,7 +9,7 @@ export default function PaidUser() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const location = useLocation();
     const navigate = useNavigate();
-    const { name } = location.state?.Data || {};
+    // const { username } = location.state?.Data || {};
     const images = [
         'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600',
         'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -25,9 +25,10 @@ export default function PaidUser() {
     }, [images.length]);
     const signout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
         setTimeout(() => {
-            navigate('/userlogin'); // Adding a slight delay to check if it triggers
-        }, 200); 
+            navigate('/userlogin');
+        }, 200);
     };
     const interestRef = useRef();
     const switchTo = () => {
@@ -48,14 +49,16 @@ export default function PaidUser() {
             return () => clearTimeout(timeout);
         }
     }, [isDealing, navigate]);
+    // name={username || 'welcome'}
+    const username = localStorage.getItem('username')
     if (paidUser) {
         return (
             <>
-                <Navbar name={name || 'json'} navlinameone={'Messagse'} navlinametwo={'Sign Out'} onClick={signout} />
+                <Navbar name={username || 'welcome'} navlinameone={<i class="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} navlinametwo={'Sign Out'} onClick={signout} />
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
                         <div className="col-lg-6 Paid-welcome">
-                            <h1 style={{ color: '#4077B6' }}>Welcome {name || 'John'}</h1>
+                            <h1 style={{ color: '#4077B6' }}>Welcome {username || ' USER'}</h1>
                             <p style={{ color: '#958984' }}>
                                 Join us on a journey where you'll not only master the MERN stack
                                 but also gain insights that can transform your investment strategy.

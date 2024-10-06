@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
-
-
-
 export default function UserDealing() {
     const [balance, setBalance] = useState('');
     const [deals, setDeals] = useState('');
@@ -17,14 +14,14 @@ export default function UserDealing() {
     const [showNewDealInputs, setShowNewDealInputs] = useState(false);
     const [DealStatusReceive, setDealStatusReceive] = useState({});
     const [StatusValue, setStatusValue] = useState('');
-    const [CheckLockamount,setCheckLockamount]=useState('')
-    const [AmountReceived,setAmountReceived]=useState('')
-    const [User1,SetUsers1]=useState('')
-    const [MetaMask,SetMetaMask]=useState('')
+    const [CheckLockamount, setCheckLockamount] = useState('')
+    const [AmountReceived, setAmountReceived] = useState('')
+    const [User1, SetUsers1] = useState('')
+    const [MetaMask, SetMetaMask] = useState('')
     const handleNewDealClick = () => {
         setShowNewDealInputs(prev => !prev);
     };
-    const AmountUpdate=(event)=>{
+    const AmountUpdate = (event) => {
         setCheckLockamount(event.target.value)
     }
     const UpdateDealAddress1 = (event) => {
@@ -42,48 +39,45 @@ export default function UserDealing() {
     const StatusInputUpdate = (event) => {
         setStatusValue(event.target.value);
     };
-const SetUser1=(event)=>{
-    SetUsers1(event.target.value)
-      
+    const SetUser1 = (event) => {
+        SetUsers1(event.target.value)
 
-}
+
+    }
     const convertToEthers = (amount) => {
         const conversionRate = 2000; // Example conversion rate: 1 ETH = 2000 USD
         return (amount / conversionRate).toFixed(18); // Convert and format to 18 decimal places
     };
 
-    //connct req to for metamask
-    // Function to request MetaMask account access
-// async function connectMetaMask() {
-//     if (typeof window.ethereum !== 'undefined') {
-//         try {
-            // Request account access from MetaMask
-//             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-//             const userAddress = accounts[0]; // Get the first account (user's wallet address)
+   
+    async function connectMetaMask() {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const userAddress = accounts[0]; // Get the first account (user's wallet address)
 
-//             console.log('User Wallet Address:', userAddress);
-//             SetMetaMask(userAddress)
+                console.log('User Wallet Address:', userAddress);
+                SetMetaMask(userAddress)
 
-//             // Send userAddress to the backend
-//             const response = await fetch('/api/user-agree', {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({ Data: userAddress })
-//             });
+                // Send userAddress to the backend
+                const response = await fetch('/api/user-agree', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Data: userAddress })
+                });
 
-//             const responseData = await response.json();
-//             console.log('Response from server:', responseData);
+                const responseData = await response.json();
+                console.log('Response from server:', responseData);
 
-//         } catch (error) {
-//             console.error('MetaMask Error:', error);
-//         }
-//     } else {
-//         alert('MetaMask is not installed');
-//     }
-// }
+            } catch (error) {
+                console.error('MetaMask Error:', error);
+            }
+        } else {
+            alert('MetaMask is not installed');
+        }
+    }
 
-// Call this function when you want to prompt MetaMask (for example, on button click)
-// connectMetaMask();
+    connectMetaMask();
 
     const newdeal = async (event) => {
         event.preventDefault();
@@ -106,15 +100,15 @@ const SetUser1=(event)=>{
 
             const Result = await response.json();
             setLoading(false);
-if(Result){
-    alert('Deal Added Successfully. Check Console for transaction hash');
+            if (Result) {
+                alert('Deal Added Successfully. Check Console for transaction hash');
                 console.log(Result);
-}
+            }
             if (Result.errormessage) {
                 alert(Result.errormessage);
             }
-                
-            
+
+
         } catch (error) {
             setLoading(false);
             console.log(error.message);
@@ -149,7 +143,7 @@ if(Result){
                 headers: {
                     'Content-Type': "application/json"
                 },
-                body:JSON.stringify(MetaMask)
+                body: JSON.stringify(MetaMask)
             });
 
             const result = await response.json();
@@ -208,47 +202,47 @@ if(Result){
                 },
                 body: JSON.stringify({ Data: MetaMask })
             });
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-    
+
             const result = await response.json();
             console.log("Amount received from backend:", result.amount); // Log the amount
-    
+
             // Check if result.amount is valid before proceeding
             if (!result.amount || result.amount === '0' || isNaN(result.amount)) {
                 throw new Error("Invalid or zero amount received from backend");
             }
-    
+
             const amountInEthers = convertToEthers(result.amount); // Convert to ethers
             setAmountReceived(amountInEthers); // Update state with the converted amount
-            console.log("Converted amount in ethers:", amountInEthers); 
-    
+            console.log("Converted amount in ethers:", amountInEthers);
+
         } catch (error) {
             alert("Error: " + error.message);
             console.log(error);
         }
     };
-    
-    const UseroneAgree=async()=>{
-        try{
-        const Response=await (fetch('http://localhost:3001/User1Agree',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({Data:User1,Datas:MetaMask})
-        }))
-        if (!Response) {
-            throw new Error(`HTTP error! Status: ${Response.status}`);
+
+    const UseroneAgree = async () => {
+        try {
+            const Response = await (fetch('http://localhost:3001/User1Agree', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Data: User1, Datas: MetaMask })
+            }))
+            if (!Response) {
+                throw new Error(`HTTP error! Status: ${Response.status}`);
+            }
+            const result = await Response.json()
+            console.log(result)
+            alert(result.errormessage)
+        } catch (error) {
+            console.log(error)
         }
-        const result=await Response.json()
-        console.log(result)
-       alert(result.errormessage)
-    }catch(error){
-        console.log(error)
-    }
     }
     return (
         <>
@@ -278,10 +272,10 @@ if(Result){
                             <p>{AmountReceived}</p>
                             <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">Lock Amount</div>
                             <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-                            
+
                                 <input className="Deal-m-top" value={CheckLockamount} onChange={AmountUpdate} placeholder="Enter Your Address" />
                                 <button className="paid-btn-one " onClick={checklockamount}>Check</button>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -308,15 +302,15 @@ if(Result){
                         </div>
                     </div>
                     <div className="Deal-Input col-lg-6">
-                           
-                            <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
-                            <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-                            
-                                <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
-                                <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
-                                
-                            </div>
+
+                        <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
+                        <div className={`input-container ${showLockInput ? 'open' : ''}`}>
+
+                            <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
+                            <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
+
                         </div>
+                    </div>
                     <div className="col-lg-8 Deal-Main deal-or">
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>

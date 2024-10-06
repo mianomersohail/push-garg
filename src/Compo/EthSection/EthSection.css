@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center; /* Centers the text in smaller screens */
+    text-align: center; 
 }
 
 .eth-blockchain-sec {
@@ -38,9 +38,9 @@
     border-radius: 20px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
     margin-top: 1rem;
-    flex-wrap: wrap; /* Allows items to wrap to the next line in smaller screens */
-    overflow: hidden; /* Prevents content overflow */
-}
+    flex-wrap: wrap; 
+    overflow: hidden;
+} 
 
 .eth-sec-box div {
     padding: 15px;
@@ -53,7 +53,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    min-width: 120px; /* Prevents the divs from being too small */
+    min-width: 120px; 
 }
 
 .eth-sec-box div:hover {
@@ -75,11 +75,11 @@
     padding: 20px;
 }
 
-/* Responsive layout adjustments */
+
 @media screen and (max-width: 768px) {
     .eth-sec-box {
         flex-direction: column;
-        align-items: center; /* Centers the items vertically */
+        align-items: center; 
     }
     
     .eth-none {
@@ -87,7 +87,7 @@
     }
     
     .eth-sec-box div {
-        width: 100%; /* Make the divs full-width for smaller screens */
-        margin-bottom: 10px; /* Adds space between items */
+        width: 100%; 
+        margin-bottom: 10px; 
     }
 }

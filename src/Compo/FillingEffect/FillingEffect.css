@@ -31,7 +31,7 @@
     padding-right: 10px;
     line-height: 40px;
     white-space: nowrap;
-    transition: width 1.5s ease; /* Smooth fill effect */
+    transition: width 1.5s ease;
     border-radius: 8px;
 }
 .Filling-main{

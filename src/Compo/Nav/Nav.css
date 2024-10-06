@@ -1,4 +1,3 @@
-/* Default styles for larger screens */
 .nav-main {
     display: flex;
     align-items: center;
@@ -17,7 +16,7 @@
 }
 
 .nav-first-li {
-    display: flex; /* Make visible on larger screens */
+    display: flex;
     margin-top: 3px;
     list-style: none;
 
@@ -47,11 +46,11 @@
 }
 
 .hamburger {
-    display: none; /* Hide hamburger by default for larger screens */
+    display: none; 
     cursor: pointer;
 }
 
-/* Styles for smaller screens (max-width: 768px) */
+
 @media (max-width: 768px) {
     .nav-main {
         display: flex;
@@ -62,7 +61,7 @@
     }
 
     .nav-first-li {
-        display: none; /* Hide nav items on small screens */
+        display: none; 
         position: absolute;
         top: 60px;
         right: 10px;
@@ -83,7 +82,7 @@
     }
 
     .hamburger {
-        display: block; /* Show hamburger on small screens */
+        display: block; 
         cursor: pointer;
         font-size: 24px;
         position: relative;
@@ -98,7 +97,6 @@
     }
 }
 
-/* Additional styles for larger screens (min-width: 768px) */
 @media screen and (min-width: 768px) {
     .nav-main {
         width: auto;
@@ -118,7 +116,6 @@
         top: 0.2rem;
     }
 }
-/* Keyframes for moving left to right and right to left */
 @keyframes moveLeftToRight {
     0% {
         transform: translateX(0);
@@ -143,15 +140,14 @@
     }
 }
 
-/* Updated styles for larger screens (min-width: 768px) */
 @media screen and (min-width: 768px) {
     .nav-main {
         width: auto;
-        animation: moveLeftToRight 3s ease-in-out infinite alternate; /* Move left to right */
+        animation: moveLeftToRight 3s ease-in-out infinite alternate; 
     }
 
     .nav-main:hover {
-        animation: moveRightToLeft 80s ease-in-out infinite alternate; /* Move right to left on hover */
+        animation: moveRightToLeft 80s ease-in-out infinite alternate; 
     }
 
     .nav-linkss {

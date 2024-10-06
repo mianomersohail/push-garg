@@ -1,8 +1,8 @@
 .paid-user-img {
-    width: 80%;      /* Ensures the image takes the full width of its container */
-    height: 100%;     /* Maintains the aspect ratio of the image */
+    width: 80%;      
+    height: 100%; 
     object-fit: cover;
-   /* Ensures the image covers the container without distortion */
+
 }
 
 .nav-flex {
@@ -58,7 +58,6 @@
     background-color: #305f94;
 }
 
-/* Responsive styles */
 @media screen and (max-width: 768px) {
     .Paid-User-Main {
         flex-direction: column;

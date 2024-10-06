@@ -24,20 +24,20 @@
     padding: 0.75rem;
     border-radius: 5px;
     margin-top: 1rem;
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
+    background-color: #4CAF50; 
+    color: white; 
     font-size: 1rem;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 .login-page-form button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #45a049; 
+    transform: translateY(-2px); 
 }
 
 .login-page-form button:active {
-    transform: translateY(0); /* Button returns to original position on click */
+    transform: translateY(0); 
 }
 .login-page-img {
     
@@ -66,8 +66,8 @@
 }
 
 .spinner {
-    border: 8px solid #f3f3f3; /* Light gray */
-    border-top: 8px solid #4077B6; /* Blue or any color you want */
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #4077B6; 
     border-radius: 50%;
     width: 60px;
     height: 60px;

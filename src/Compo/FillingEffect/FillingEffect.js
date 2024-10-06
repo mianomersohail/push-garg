@@ -11,8 +11,8 @@ export default function FillingEffect() {
             (entries) => {
                 const entry = entries[0];
                 if (entry.isIntersecting) {
-                    setVisible(true); // Trigger effect when visible
-                    observer.disconnect(); // Stop observing after effect starts
+                    setVisible(true);
+                    observer.disconnect(); 
                 }
             },
             { threshold: 0.1 }

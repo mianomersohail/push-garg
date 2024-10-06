@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('')
+    const [username,setusername]=useState('')
     const [adduserpassword, setadduserpassword] = useState('');
     const [removeinput, setremoveinput] = useState('');
     const [Updateuser, setupdateuser] = useState('')
@@ -27,7 +28,7 @@ export default function AdminPanelMernStack() {
             Authorization: `Bearer ${token}`,
         };
         try {
-            const result = await post('/NewUser', { adduseremail, adduserpassword }, headers);
+            const result = await post('/NewUser', { adduseremail, adduserpassword ,username}, headers);
             if (result.message == 'User-Save-Successfully') {
                 updatestatus(result.message)
             }
@@ -82,7 +83,9 @@ export default function AdminPanelMernStack() {
                             <div><input value={adduseremail} onChange={updateadduseremail} type='email' placeholder='Enter User Email' /></div>
                             <div><label>Password</label></div>
                             <div><input value={adduserpassword} onChange={updateuserpassword} type='password' placeholder='Enter User Password' /></div>
-                            <button type="button" onClick={AddUser} className='paid-btn-one paid-btn-tops'>Submit</button>
+                            <div><label>User Name</label></div>
+                            <div><input placeholder='Enter User Name'value={username} onChange={(event)=>{setusername(event.target.value)}}/></div>
+                            <button type="button" onClick={AddUser}  className='paid-btn-one paid-btn-tops'>Submit</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>

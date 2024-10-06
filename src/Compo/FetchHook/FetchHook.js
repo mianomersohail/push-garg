@@ -12,9 +12,8 @@ export default async function UseFetch(uri) {
   });
 
   if (!response) {
-    // Handle HTTP errors
-    const errorText = await response.text(); // Readth e response as text
-    console.error('Error:', errorText); // Log the error for debugging
+    const errorText = await response.text(); 
+    console.error('Error:', errorText); 
     return { error: 'Error fetching data' };
   }
 
@@ -34,5 +33,5 @@ export default async function UseFetch(uri) {
   } else {
       navigate('/userlogin')
   }
-  return data; // Return the data
+  return data; 
 }

@@ -2,17 +2,17 @@
   margin: 20px auto;
   padding: 20px;
   font-family: Arial, sans-serif;
-  background-color: #121212; /* Black background */
-  color: #e0e0e0; /* Light gray text */
+  background-color: #121212; 
+  color: #e0e0e0; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  max-width: 800px; /* Limit the width */
-  overflow: hidden; /* Prevent overflow */
+  max-width: 800px; 
+  overflow: hidden; 
 }
 
 .contract-doc h1,
 .contract-doc h2 {
-  color: #ffffff; /* White headings */
+  color: #ffffff; 
 }
 
 .contract-doc p,
@@ -34,22 +34,22 @@
 
 .show-contract-btn {
   padding: 10px 20px;
-  background-color: #06b6d4; /* Bright blue button */
+  background-color: #06b6d4; 
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease; /* Smooth background change */
+  transition: background-color 0.3s ease;
 }
 
 .show-contract-btn:hover {
-  background-color: #04a4b7; /* Darker shade on hover */
+  background-color: #04a4b7; 
 }
 
 .contract-code {
-  background-color: #2e2e2e; /* Dark code background */
-  color: #dcdcdc; /* Light code text */
+  background-color: #2e2e2e; 
+  color: #dcdcdc; 
   padding: 15px;
   border-radius: 5px;
   overflow-x: auto;
@@ -60,16 +60,16 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .contract-doc {
-    margin: 10px; /* Reduce margin on smaller screens */
-    padding: 15px; /* Reduce padding */
+    margin: 10px; 
+    padding: 15px; 
   }
 
   .contract-doc h1 {
-    font-size: 24px; /* Adjust heading size */
+    font-size: 24px; 
   }
 
   .contract-doc h2 {
-    font-size: 20px; /* Adjust subheading size */
+    font-size: 20px; 
   }
 
   .contract-doc p,
@@ -77,11 +77,11 @@
   .contract-doc dd,
   .contract-doc ul,
   .contract-doc li {
-    font-size: 14px; /* Smaller text for smaller devices */
+    font-size: 14px; 
   }
 
   .show-contract-btn {
-    font-size: 14px; /* Smaller button text */
-    padding: 8px 16px; /* Smaller padding */
+    font-size: 14px; 
+    padding: 8px 16px; 
   }
 }

@@ -1,31 +1,38 @@
 import './LoginPage.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Navbar from '../Nav/NavList';
 import Footer from '../Footer/Footer';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from 'react-router-dom';
+import count from '../../contex/context';
 export default function UserLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
-  // Handle form submission
+  const [username,setusername]=useState('')
+
   const navigation = useNavigate();
-  const { loading, error, data, post } = useApi('http://localhost:3001'); // Replace with your base URL
+  const { loading, error, data, post } = useApi('http://localhost:3001'); 
+  const {usename,setusename}=useContext(count)
   const submitLoginForm = async (event) => {
     event.preventDefault()
     const token = localStorage.getItem('token')
     const headers = {
-      Authorization: `Bearer ${token}`, // Replace with your actual token
+      Authorization: `Bearer ${token}`, 
     };
     try {
-      const result = await post('/Login', { email, password }, headers); // Pass headers to get method
+      const result = await post('/Login', { email, password }, headers); 
       console.log(result)
       if (result.token) {
         localStorage.setItem('token', result.token)
       }
-      // Check the response for errors and navigate if needed
+     
       if (result.role == 'User') {
-        navigation('/paiduser');
+        console.log(result)
+        localStorage.setItem('username',result.username)
+        setusename(result.username)
+        setusername(result.username)
+        navigation('/paiduser')
       }
       if (result.role == 'Admin') {
         navigation('/AdminPanel');
@@ -34,9 +41,6 @@ export default function UserLogin() {
       console.error(err);
     }
   };
-  useEffect(() => {
-    // This is where you can put any logic you want to run on component mount
-  }, []);
   return (
     <>
       <Navbar name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
