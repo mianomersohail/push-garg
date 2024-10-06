@@ -23,9 +23,11 @@ export default function PaidUser() {
         }, 3000);
         return () => clearInterval(interval);
     }, [images.length]);
-    const deleteSession = () => {
+    const signout = () => {
         localStorage.removeItem('token');
-        navigate('/userlogin');
+        setTimeout(() => {
+            navigate('/userlogin'); // Adding a slight delay to check if it triggers
+        }, 200); 
     };
     const interestRef = useRef();
     const switchTo = () => {
@@ -49,7 +51,7 @@ export default function PaidUser() {
     if (paidUser) {
         return (
             <>
-                <Navbar name={name || 'json'} navlinameone={'Messagse'} navlinametwo={'Sign Out'} />
+                <Navbar name={name || 'json'} navlinameone={'Messagse'} navlinametwo={'Sign Out'} onClick={signout} />
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
                         <div className="col-lg-6 Paid-welcome">

@@ -54,7 +54,12 @@ export default function Home() {
         linkone={'/Documentation'}
         onClick={navlogin}
       />
-      {loading && <div className="loading">Loading...</div>}
+      {loading && (
+                <div className="spinner-container">
+                  <div className="spinner"></div>
+                  <p>Loading...</p>
+                </div>
+              )}
       {error && <div className="error">Error: {error.message}</div>}
       <div className='container offset-lg-1'>
         <div className='row'>

@@ -1,44 +1,81 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './AdminPanelMernStack.css';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from "react-router-dom";
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
-    const [status,updatestatus]=useState('')
+    const [status, updatestatus] = useState('')
     const [adduserpassword, setadduserpassword] = useState('');
     const [removeinput, setremoveinput] = useState('');
+    const [Updateuser, setupdateuser] = useState('')
     const [RemoveErrorMessage, SetRemoveErrorMessage] = useState('');
     const [role, setRole] = useState('');
     const navigation = useNavigate();
+    const [oldemail, setoldemail] = useState()
+    const [oldpassword, setoldpassword] = useState()
+    const [newemail, setnewemail] = useState()
+    const [newpassword, setnewpassword] = useState()
     const handleRoleSelect = (selectedRole) => setRole(selectedRole);
     const updateadduseremail = (event) => setadduseremail(event.target.value);
     const updateuserpassword = (event) => setadduserpassword(event.target.value);
     const updateremoveinput = (event) => setremoveinput(event.target.value);
-    const { loading, error, data, post } = useApi('http://localhost:3001'); 
-  const AddUser = async () =>{
-    const token=localStorage.getItem('token')
-    const headers = {
-      Authorization: `Bearer ${token}`, 
+    const { loading, error, data, post, del, put } = useApi('http://localhost:3001');
+    const AddUser = async () => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        try {
+            const result = await post('/NewUser', { adduseremail, adduserpassword }, headers);
+            if (result.message == 'User-Save-Successfully') {
+                updatestatus(result.message)
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
-    try {
-      const result = await post('/NewUser',{adduseremail,adduserpassword}, headers);
-      if(result.message=='User-Save-Successfully'){
-        updatestatus(result.message)
-      }
-    } catch (err) {
-      console.error(err);
+    const removeuser = async () => {
+        const token = localStorage.getItem('token');
+        const headers = {
+            Authorization: `Bearer ${token}`
+        };
+        try {
+            const result = await del('/NewUser', { removeinput }, headers)
+            RemoveErrorMessage(result.message)
+        } catch (error) {
+            console.log(error)
+        }
     }
-  };
+    const UpdateUser = async () => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`
+        };
+        try {
+            const result = await put('/NewUser', { oldemail, newemail, oldpassword, newpassword, role }, headers)
+            setupdateuser('User Update ')
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
             <AdminPanel />
             <div className='container'>
                 <div className='row Main-Admin'>
+                    <h1>
+                    {loading && (
+                <div className="spinner-container">
+                  <div className="spinner"></div>
+                  <p>Loading...</p>
+                </div>
+              )}
+                        {error && <div className="error">Error: {error.message}</div>}
+
+                    </h1>
                     <div className='col-lg-6'>
                         <form className='Mern-form'>
-                        {loading && <div className="loading">Loading...</div>}
-                        {error && <div className="error">Error: {error.message}</div>}
                             <div><h1 className='Admincolor'>NEW USER</h1></div>
                             {status}
                             <div><label>Email</label></div>
@@ -54,20 +91,21 @@ export default function AdminPanelMernStack() {
                             <div><h1>REMOVE USER</h1></div>
                             <div><label>Email</label></div>
                             <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <button type="button" onClick={'removeuser'} className='paid-btn-one mern-btn-top-m'>Remove</button>
+                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m'>Remove</button>
                         </form>
                     </div>
                     <div className='col-lg-12'>
                         <form className='Mern-form Mern-Form-two'>
+                            <h1>{Updateuser}</h1>
                             <div><h1 className='Admincolor'>Update USER</h1></div>
                             <div><label>User Old Email</label></div>
-                            <div><input type="email" placeholder='Enter User Old Email' /></div>
+                            <div><input value={oldemail} onChange={(event) => { setoldemail(event.target.value) }} type="email" placeholder='Enter User Old Email' /></div>
                             <div><label>User New Email</label></div>
-                            <div><input type="email" placeholder='Enter User New Email' /></div>
+                            <div><input value={newemail} onChange={(event) => { setnewemail(event.target.value) }} type="email" placeholder='Enter User New Email' /></div>
                             <div><label>User Old Password</label></div>
-                            <div><input type="password" placeholder='Enter User Old Password' /></div>
+                            <div><input value={oldpassword} onChange={(event) => { setoldpassword(event.target.value) }} type="password" placeholder='Enter User Old Password' /></div>
                             <div><label>User NEW Password</label></div>
-                            <div><input placeholder='NEW PASSWORD' /></div>
+                            <div><input value={newpassword} onChange={(event) => { setnewpassword(event.target.value) }} placeholder='NEW PASSWORD' /></div>
                             <div><label>User Role</label></div>
                             <div className='role-dropdown-container'>
                                 <input
@@ -81,7 +119,7 @@ export default function AdminPanelMernStack() {
                                     <li onClick={() => handleRoleSelect('User')}>User</li>
                                 </ul>
                             </div>
-                            <button type="button" onClick={'updateuser'} className='paid-btn-one paid-btn-tops'>Update</button>
+                            <button type="button" onClick={UpdateUser} className='paid-btn-one paid-btn-tops'>Update</button>
                         </form>
                     </div>
                 </div>

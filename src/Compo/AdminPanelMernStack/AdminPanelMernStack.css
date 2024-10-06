@@ -193,3 +193,20 @@ font-size: 25px;
 .paid-btn-tops{
     margin-top: 1rem;
 }
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:red;
+}.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:red;
+}
+@media screen and (max-width:768px) {
+    .role-dropdown-container {
+        width: 100%;
+    }
+    
+}

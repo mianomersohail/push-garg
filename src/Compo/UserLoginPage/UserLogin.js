@@ -76,7 +76,12 @@ export default function UserLogin() {
                 />
               </div>
               <div><button type="submit">Login</button></div>
-              {loading && <p>Loading...</p>}
+              {loading && (
+                <div className="spinner-container">
+                  <div className="spinner"></div>
+                  <p>Loading...</p>
+                </div>
+              )}
               {error && <p>Error: {error.message}</p>}
             </form>
           </div>

@@ -1,12 +1,10 @@
 // hooks/useApi.js
 import { useState } from 'react';
 import axios from 'axios';
-
 const useApi = (baseURL) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-
   const request = async (method, url, body = null, headers = {}) => {
     setLoading(true);
     setError(null);
@@ -26,13 +24,10 @@ const useApi = (baseURL) => {
       setLoading(false);
     }
   };
-
   const get = (url, headers) => request('GET', url, null, headers); // Pass headers to get method
   const post = (url, body) => request('POST', url, body);
   const put = (url, body) => request('PUT', url, body);
   const del = (url) => request('DELETE', url);
-
   return { loading, error, data, get, post, put, del };
 };
-
 export default useApi;

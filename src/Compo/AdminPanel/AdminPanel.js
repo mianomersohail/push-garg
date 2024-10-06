@@ -1,21 +1,22 @@
-import { useState } from 'react';
-import {useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import React from 'react';
-import './AdminPanel.css'
-import Navbar from '../Nav/NavList'
+import './AdminPanel.css';
+import Navbar from '../Nav/NavList';
 export default function PaidUser() {
-    const [mainMernPage, setMainMernPage] = useState(true);
-    const [isMern, setIsMern] = useState(false);
     const [switchValue, setSwitchValue] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown toggle
-    const [Trading, SetTrading] = useState('')
     const navigate = useNavigate();
     const location = useLocation();
-    const { name } = location.state?.Data || {};
-    const deletesession = () => {
+    const { name } = location.state?.Data || {}; 
+       
+    const signout = () => {
         localStorage.removeItem('token');
-        navigate('/userlogin');
+        setTimeout(() => {
+            navigate('/userlogin'); // Adding a slight delay to check if it triggers
+        }, 200); 
     };
+    
     const changeSwitchValue = (value) => {
         setSwitchValue(value);
         setIsDropdownOpen(false);
@@ -23,27 +24,22 @@ export default function PaidUser() {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+
     const switchTo = () => {
         if (switchValue === 'Add/Remove') {
-            setMainMernPage(false);
-            setIsMern(true);
-        }
-        if (switchValue === 'TRADING/SIGNALS') {
-            setMainMernPage(false)
-            SetTrading(true)
-        }
-    };
-    React.useEffect(() => {
-        if (!mainMernPage && isMern) {
             navigate('/AdminPanelMernStack');
+        } else if (switchValue === 'TRADING/SIGNALS') {
+            navigate('/TradingSignalAdmin');
+        } else if (switchValue === 'BLOCKCHAIN') {
+
         }
-        if (!mainMernPage && Trading) {
-            navigate('/TradingSignalAdmin')
-        }
-    }, [mainMernPage, isMern, navigate, Trading]);
+
+    };//
+    
+
     return (
         <>
-            <Navbar name={name || 'Umer'} navlinameone={'SignOut'} linkone={'Deletesession'} navlinametwo={'Chat'} />
+            <Navbar name={name || 'Umer'} navlinameone={'Chat'} linkone={'Deletesession'} navlinametwo={'SignOut'} onClick={signout} />
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>
@@ -57,15 +53,15 @@ export default function PaidUser() {
                                     type="text"
                                     value={switchValue}
                                     readOnly
-                                    onClick={toggleDropdown} 
+                                    onClick={toggleDropdown}
                                     placeholder='Choose your section'
                                     className="dropdown-input"
                                 />
                                 {isDropdownOpen && (
                                     <ul className="dropdown-options">
-                                        <li onClick={() => changeSwitchValue('Add/Remove')}>Add User</li>
+                                        <li onClick={() => changeSwitchValue('Add/Remove')}>New User</li>
                                         <li onClick={() => changeSwitchValue('BLOCKCHAIN')}>BlockChain</li>
-                                        <li onClick={() => changeSwitchValue('TRADING/SIGNALS')}>Tradin Signals</li>
+                                        <li onClick={() => changeSwitchValue('TRADING/SIGNALS')}>Trading Signals</li>
                                         <li onClick={() => changeSwitchValue('Update User/Admin/Password')}></li>
                                         <li onClick={() => changeSwitchValue('Add/Remove Admin')}></li>
                                     </ul>
