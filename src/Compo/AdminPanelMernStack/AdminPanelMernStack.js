@@ -3,7 +3,6 @@ import AdminPanel from '../AdminPanel/AdminPanel';
 import './AdminPanelMernStack.css';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from "react-router-dom";
-
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('');
@@ -19,7 +18,6 @@ export default function AdminPanelMernStack() {
     const [oldpassword, setoldpassword] = useState();
     const [newemail, setnewemail] = useState();
     const [newpassword, setnewpassword] = useState();
-
     const handleRoleSelect = (selectedRole) => setRole(selectedRole);
     const updateadduseremail = (event) => setadduseremail(event.target.value);
     const updateuserpassword = (event) => setadduserpassword(event.target.value);

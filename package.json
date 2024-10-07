@@ -14,6 +14,7 @@
     "axios": "^1.7.7",
     "babel-runtime": "^6.26.0",
     "big-integer": "^1.6.52",
+    "ethers": "^6.13.3",
     "framer-motion": "^11.9.0",
     "react": "^18.3.1",
     "react-router-dom": "^6.26.1",

@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import useApi from '../FetchHook/FetchPost';
+import { ethers } from 'ethers';
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
 export default function UserDealing() {
@@ -8,7 +10,6 @@ export default function UserDealing() {
     const [DealAddress1, SetDealAddress1] = useState('');
     const [DealAddress2, SetDealAddress2] = useState('');
     const [id, setId] = useState('');
-    const [loading, setLoading] = useState(false);
     const [showLockInput, setShowLockInput] = useState(false);
     const [showStatusInput, setShowStatusInput] = useState(false);
     const [showNewDealInputs, setShowNewDealInputs] = useState(false);
@@ -31,7 +32,6 @@ export default function UserDealing() {
     const UpdateDealAddress2 = (event) => {
         SetDealAddress2(event.target.value);
     };
-
     const UpdateDealAmount = (event) => {
         SetDealAmount(event.target.value);
     };
@@ -41,34 +41,25 @@ export default function UserDealing() {
     };
     const SetUser1 = (event) => {
         SetUsers1(event.target.value)
-
-
     }
     const convertToEthers = (amount) => {
-        const conversionRate = 2000; // Example conversion rate: 1 ETH = 2000 USD
-        return (amount / conversionRate).toFixed(18); // Convert and format to 18 decimal places
+        const conversionRate = 2000;
+        return (amount / conversionRate).toFixed(18);
     };
-
-   
     async function connectMetaMask() {
         if (typeof window.ethereum !== 'undefined') {
             try {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                const userAddress = accounts[0]; // Get the first account (user's wallet address)
-
+                const userAddress = accounts[0];
                 console.log('User Wallet Address:', userAddress);
                 SetMetaMask(userAddress)
-
-                // Send userAddress to the backend
                 const response = await fetch('/api/user-agree', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ Data: userAddress })
                 });
-
                 const responseData = await response.json();
                 console.log('Response from server:', responseData);
-
             } catch (error) {
                 console.error('MetaMask Error:', error);
             }
@@ -76,84 +67,54 @@ export default function UserDealing() {
             alert('MetaMask is not installed');
         }
     }
-
     connectMetaMask();
-
+    const { loading, error, post, data, get } = useApi('http://localhost:3001');
     const newdeal = async (event) => {
         event.preventDefault();
-        // const convertedAmount = convertToEthers(DealAmount); // Convert DealAmount to ethers 
-        const Data = {
-            DealAmount,
-            DealAddress1,
-            DealAddress2
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`,
         };
-        setLoading(true);
-
         try {
-            const response = await fetch('http://localhost:3001/NewDeal', {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify(Data)
-            });
-
-            const Result = await response.json();
-            setLoading(false);
-            if (Result) {
-                alert('Deal Added Successfully. Check Console for transaction hash');
-                console.log(Result);
+            const result = await post('/NewDeal', { DealAmount, DealAddress1, DealAddress2 }, headers);
+            console.log(result)
+            if (result.message == 'DealAdd') {
+                alert('Deal Add Successfully')
             }
-            if (Result.errormessage) {
-                alert(Result.errormessage);
-            }
-
-
         } catch (error) {
-            setLoading(false);
             console.log(error.message);
+            alert(error.message)
         }
     };
-
     const checkid = async () => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
         try {
-            const response = await fetch('http://localhost:3001/DEALS', {
-                method: "GET",
-                headers: { "Content-Type": 'application/json' }
-            });
-
-            const Result = await response.text();
-            console.log(Result);
-
-            if (Result) {
-                setId(Result);
-            } else {
-                alert("ERROR. PLEASE TRY AGAIN");
-            }
+            const result = await get('/DEALS', headers);
+            console.log(result)
+            setId(`ID: ${result.Id}`)
         } catch (error) {
-            alert(error.message);
-            console.log(error);
+            console.log(error.message);
+            alert(error.message)
         }
     };
-
     const updateBalance = async () => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
         try {
-            const response = await fetch('http://localhost:3001/EthBalanceCheck', {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify(MetaMask)
-            });
-
-            const result = await response.json();
-            const formattedBalance = Number(result).toFixed(18);
-            setBalance(`${formattedBalance} ETH`);
+            const result = await post('/EthBalanceCheck', { MetaMask }, headers)
+            const Eth = result.tx.toString()
+            setBalance(Eth)
+            console.log(result)
         } catch (error) {
-            alert("Server not responding");
+            console.log(error.message);
+            alert(error.message)
         }
     };
-
     const handleLockInputClick = () => {
         setShowLockInput(prev => !prev);
     };
@@ -161,7 +122,6 @@ export default function UserDealing() {
     const handleStatusInputClick = () => {
         setShowStatusInput(prev => !prev);
     };
-
     const UserDealStatus = async () => {
         try {
             const response = await fetch('http://localhost:3001/Status', {
@@ -171,7 +131,6 @@ export default function UserDealing() {
                 },
                 body: JSON.stringify({ Data: StatusValue })
             });
-
             const Result = await response.text(); // Change to text to handle the incoming string
             const parsedResult = Result.split(','); // Split the string into an array
             if (parsedResult.length > 0) {
@@ -189,7 +148,6 @@ export default function UserDealing() {
                 });
             }
         } catch (error) {
-            setLoading(false);
             console.log(error.message);
         }
     };
@@ -247,27 +205,29 @@ export default function UserDealing() {
     return (
         <>
             <PaidUser />
+            {loading && (
+                <div className="spinner-container">
+                    <div className="spinner"></div>
+                    <p>Loading...</p>
+                </div>
+            )}
+            {error && <div className="error">Error: {error.message}</div>}
             <div className="container offset-lg-1">
                 <div className="row Deal-Main">
-                    <div className="col-lg-2 Deal-Main">
+                    <div className="col-lg-12 Deal-Main">
                         <div>
                             <div onClick={updateBalance} className="Dealing-div Deal-blue">Balance</div>
                             <p>{balance}</p>
                         </div>
                     </div>
-                    <div className="col-lg-2 Deal-Main">
+                    <div className="col-lg-12 Deal-Main">
                         <div>
                             <div onClick={checkid} className="Dealing-div Deal-blue">ID</div>
-                            <p>{id}</p>
+                            <p className='ethidcheck'>{id}</p>
                         </div>
                     </div>
-                    <div className="col-lg-3 Deal-Main">
-                        <div>
-                            <div className="Dealing-div Deal-blue">Deal Status</div>
-                            <p>{deals}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 Deal-Main">
+
+                    <div className="col-lg-12 Deal-Main">
                         <div className="Deal-Input">
                             <p>{AmountReceived}</p>
                             <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">Lock Amount</div>
@@ -279,7 +239,7 @@ export default function UserDealing() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-3 Deal-Main">
+                    <div className="col-lg-12 Deal-Main">
                         <div className="Deal-Input">
                             <div onClick={handleStatusInputClick} className="Dealing-div Deal-blue Deal-left deal-top">DEAL STATUS</div>
                             <div className={`input-container ${showStatusInput ? 'open' : ''}`}>
@@ -288,7 +248,7 @@ export default function UserDealing() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 offset-lg-2 ">
+                    {/* <div className="col-lg-12 ">
                         <div className="Deal-status-receive">
                             <h5>DEAL ID: {DealStatusReceive.dealId}</h5>
                             <h5>DEAL Amount: {DealStatusReceive.amount} eth</h5>
@@ -300,18 +260,15 @@ export default function UserDealing() {
                             <h5>User2 Done: {DealStatusReceive.user2Done ? 'Yes' : 'No'}</h5>
                             <h5>Current Status: {DealStatusReceive.currentStatus}</h5>
                         </div>
-                    </div>
-                    <div className="Deal-Input col-lg-6">
-
+                    </div> */}
+                    <div className="Deal-Input col-lg-12">
                         <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
                         <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-
                             <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
                             <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
-
                         </div>
                     </div>
-                    <div className="col-lg-8 Deal-Main deal-or">
+                    <div className="col-lg-12 Deal-Main deal-or">
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
                             <div className={`new-deal-inputs ${showNewDealInputs ? 'open' : ''}`}>
@@ -319,9 +276,8 @@ export default function UserDealing() {
                                 <div><input value={DealAddress1} onChange={UpdateDealAddress1} placeholder="User1 Address" /></div>
                                 <div><input value={DealAddress2} onChange={UpdateDealAddress2} placeholder="User2 Address" /></div>
                                 <button onClick={newdeal} className="transact-button">
-                                    {loading ? 'Processing...' : 'Transact'}
+                                    Submit
                                 </button>
-                                {loading && <div className="spinner">Loading...</div>}
                             </div>
                         </div>
                     </div>
