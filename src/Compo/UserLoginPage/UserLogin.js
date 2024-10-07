@@ -23,6 +23,7 @@ export default function UserLogin() {
     try {
       const result = await post('/Login', { email, password }, headers); 
       console.log(result)
+      localStorage.setItem('image',result.image)
       if (result.token) {
         localStorage.setItem('token', result.token)
       }
@@ -43,7 +44,7 @@ export default function UserLogin() {
   };
   return (
     <>
-      <Navbar name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
+      <Navbar imgsrc={'https://media.istockphoto.com/id/2043823329/photo/internet-network-cybersecurity-concept-data-privacy-protection-from-malicious-attacks-digital.webp?a=1&b=1&s=612x612&w=0&k=20&c=FD1lPgS6zHyR5RBUAQ84G-QnHpycZBfbzrfqDlaTlUk='} name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
       <div className="container Login-Page-Main">
         <div className="row">
           <div className="col-lg-6">

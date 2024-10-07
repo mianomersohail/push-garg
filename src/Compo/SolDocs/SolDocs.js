@@ -121,7 +121,7 @@ contract Dealing {
 
   return (
     <div className="container contract-doc">
-      <Navbar navlinameone={'Home'} linkone={'/home'}/>
+      <Navbar imgsrc={'https://c0.wallpaperflare.com/preview/124/110/387/block-blockchain-business-chain.jpg'} navlinameone={'Home'} linkone={'/home'}/>
       <h1>Smart Contract Documentation</h1>
       <p>This smart contract, named <strong>Dealing</strong>, is designed to manage and facilitate deals between two parties. Here’s a detailed overview:</p>
       <h2>Key Features:</h2>

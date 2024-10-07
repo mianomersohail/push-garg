@@ -20,6 +20,26 @@ export default function Home() {
  const [username,setusername]=useState()
   const navigation = useNavigate();
   const { loading, error, data, get } = useApi('http://localhost:3001');
+  const cvdownload = async () => {
+    try {
+      const result = await get('/Cv', { headers: { 'Content-Type': 'application/pdf' } });
+      
+      // To trigger download, you can use the following line:
+      const blob = new Blob([result], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Umer_Sohail_CV.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
+  
   const navlogin = async () => {
     const token=localStorage.getItem('token')
     const headers = {
@@ -64,6 +84,7 @@ export default function Home() {
   return (
     <>
       <Navbar
+      imgsrc={'https://scontent.flhe13-1.fna.fbcdn.net/v/t39.30808-6/459027788_1072056664437719_8316151749102847835_n.jpg?stp=dst-jpg_p526x296&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aysIkzLj4BoQ7kNvgEcvpis&_nc_ht=scontent.flhe13-1.fna&_nc_gid=AmYmmFpoNCu-ZmVfQ7k3vAM&oh=00_AYCS0MCnfgjWT2aoZuLQ2piJumlfbAb7uOn7fkic7G3uXQ&oe=67092A53'}
         name={'Mian Omer'}
         navlinameone={'Docs'}
         navlinametwo={'Login'}
@@ -99,7 +120,7 @@ export default function Home() {
             </p>
             <p style={{ color: "#73737A" }}>~ Trading</p>
             <p className="home-p-one">Part Time Trading when I'm not working on my day job.</p>
-            <button className='cv-download'>MY CV download</button>
+            <button className='cv-download' onClick={cvdownload}>MY CV download</button>
           </div>
           <div className="col-lg-4 offset-lg-1">
             <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727442009189?e=1733356800&v=beta&t=ik-mEXDtm2bAI_kbluGVvOR9Fmo_eG_FwGWytS_ceTM" alt="Profile" />

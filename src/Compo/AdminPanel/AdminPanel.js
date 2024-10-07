@@ -12,6 +12,7 @@ export default function PaidUser() {
        
     const signout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('image')
         setTimeout(() => {
             navigate('/userlogin');
         }, 200); 
@@ -27,6 +28,7 @@ export default function PaidUser() {
 
     const switchTo = () => {
         if (switchValue === 'Add/Remove') {
+            
             navigate('/AdminPanelMernStack');
         } else if (switchValue === 'TRADING/SIGNALS') {
             navigate('/TradingSignalAdmin');
@@ -35,11 +37,13 @@ export default function PaidUser() {
         }
 
     };
+   const img='https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727442009142?e=1733961600&v=beta&t=U9gYfE2pVodsQPOVlQiCbaYV8JFS17xo6aQBlcP69Lo'
+   console.log(img)
     
-
     return (
         <>
-            <Navbar name={name || 'Umer'} navlinameone={'Chat'} linkone={'Deletesession'} navlinametwo={'SignOut'} onClick={signout} />
+        
+            <Navbar imgsrc={img} name={name || 'Umer'} navlinameone={<i class="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} linkone={'Deletesession'} navlinametwo={'SignOut'} onClick={signout} />
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>

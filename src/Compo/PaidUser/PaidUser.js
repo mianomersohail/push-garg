@@ -10,22 +10,12 @@ export default function PaidUser() {
     const location = useLocation();
     const navigate = useNavigate();
     // const { username } = location.state?.Data || {};
-    const images = [
-        'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/7567236/pexels-photo-7567236.jpeg?auto=compress&cs=tinysrgb&w=600'
-    ];
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) =>
-                prevIndex === images.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [images.length]);
+   
+   
     const signout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        localStorage.removeItem('image')
         setTimeout(() => {
             navigate('/userlogin');
         }, 200);
@@ -51,10 +41,15 @@ export default function PaidUser() {
     }, [isDealing, navigate]);
     // name={username || 'welcome'}
     const username = localStorage.getItem('username')
+    
+    const baseURL = 'http://localhost:3001/'; // Replace with your actual base URL
+    const imgPath = localStorage.getItem('image')
+    const imgURL = `${baseURL}${imgPath}`;
+            
     if (paidUser) {
         return (
             <>
-                <Navbar name={username || 'welcome'} navlinameone={<i class="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} navlinametwo={'Sign Out'} onClick={signout} />
+                <Navbar imgsrc={imgURL} alt="User" name={username || 'welcome'} navlinameone={<i class="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} navlinametwo={'Sign Out'} onClick={signout} />
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
                         <div className="col-lg-6 Paid-welcome">
@@ -78,13 +73,7 @@ export default function PaidUser() {
                                 <button onClick={switchTo} className="paid-btn-one">Switch</button>
                             </div>
                         </div>
-                        <div className="col-lg-5">
-                            <img
-                                className="paid-user-img"
-                                src={images[currentImageIndex]}
-                                alt="Slideshow"
-                            />
-                        </div>
+                       
                     </div>
                 </div>
                 {isDealing && <UserDealing />}
