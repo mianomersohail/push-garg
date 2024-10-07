@@ -24,9 +24,9 @@ const useApi = (baseURL) => {
     }
   };
   const get = (url, headers) => request('GET', url, null, headers); 
-  const post = (url, body) => request('POST', url, body);
-  const put = (url, body) => request('PUT', url, body);
-  const del = (url) => request('DELETE', url);
+  const post = (url, headers,body) => request('POST', url,headers, body);
+  const put = (url,headers, body) => request('PUT', url, headers,body);
+  const del = (url,headers,body) => request('DELETE', url,headers,body);
   return { loading, error, data, get, post, put, del };
 };
 export default useApi;

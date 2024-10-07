@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('')
-    const [username,setusername]=useState('')
+    const [username, setusername] = useState('')
     const [adduserpassword, setadduserpassword] = useState('');
-    const [removeinput, setremoveinput] = useState('');
+    const [removeinput, setremoveinput] = useState();
     const [Updateuser, setupdateuser] = useState('')
     const [RemoveErrorMessage, SetRemoveErrorMessage] = useState('');
     const [role, setRole] = useState('');
@@ -28,24 +28,36 @@ export default function AdminPanelMernStack() {
             Authorization: `Bearer ${token}`,
         };
         try {
-            const result = await post('/NewUser', { adduseremail, adduserpassword ,username}, headers);
+            const result = await post('/NewUser', { adduseremail, adduserpassword, username }, headers);
+            if (result.message == 'You are logged out. No token provided.' || result.error == 'You are logged out. Invalid token.') {
+                navigation('/userlogin')
+
+            }
             if (result.message == 'User-Save-Successfully') {
                 updatestatus(result.message)
             }
         } catch (err) {
             console.error(err);
+            alert(err.message)
         }
     };
     const removeuser = async () => {
         const token = localStorage.getItem('token');
+        console.log(removeinput)
         const headers = {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
         };
         try {
-            const result = await del('/NewUser', { removeinput }, headers)
-            RemoveErrorMessage(result.message)
+            const result = await del('/NewUser', JSON.stringify({ removeinput }), headers)
+            if (result.message == 'You are logged out. No token provided.' || result.error == 'You are logged out. Invalid token.') {
+                navigation('/userlogin')
+
+            }
+            SetRemoveErrorMessage(result.message)
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
+            alert(error.message)
         }
     }
     const UpdateUser = async () => {
@@ -55,9 +67,13 @@ export default function AdminPanelMernStack() {
         };
         try {
             const result = await put('/NewUser', { oldemail, newemail, oldpassword, newpassword, role }, headers)
+            if (result.message == 'You are logged out. No token provided.' || result.error == 'You are logged out. Invalid token.') {
+                navigation('/userlogin')
+            }
             setupdateuser('User Update ')
         } catch (error) {
-            console.log(error)
+            alert(error.message)
+            console.log(error.message)
         }
     }
     return (
@@ -66,12 +82,12 @@ export default function AdminPanelMernStack() {
             <div className='container'>
                 <div className='row Main-Admin'>
                     <h1>
-                    {loading && (
-                <div className="spinner-container">
-                  <div className="spinner"></div>
-                  <p>Loading...</p>
-                </div>
-              )}
+                        {loading && (
+                            <div className="spinner-container">
+                                <div className="spinner"></div>
+                                <p>Loading...</p>
+                            </div>
+                        )}
                         {error && <div className="error">Error: {error.message}</div>}
 
                     </h1>
@@ -84,8 +100,8 @@ export default function AdminPanelMernStack() {
                             <div><label>Password</label></div>
                             <div><input value={adduserpassword} onChange={updateuserpassword} type='password' placeholder='Enter User Password' /></div>
                             <div><label>User Name</label></div>
-                            <div><input placeholder='Enter User Name'value={username} onChange={(event)=>{setusername(event.target.value)}}/></div>
-                            <button type="button" onClick={AddUser}  className='paid-btn-one paid-btn-tops'>Submit</button>
+                            <div><input placeholder='Enter User Name' value={username} onChange={(event) => { setusername(event.target.value) }} /></div>
+                            <button type="button" onClick={AddUser} className='paid-btn-one paid-btn-tops'>Submit</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>
