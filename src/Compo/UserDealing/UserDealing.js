@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import useApi from '../FetchHook/FetchPost';
-import { ethers } from 'ethers';
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
 export default function UserDealing() {
@@ -118,90 +117,102 @@ export default function UserDealing() {
     const handleLockInputClick = () => {
         setShowLockInput(prev => !prev);
     };
-
     const handleStatusInputClick = () => {
         setShowStatusInput(prev => !prev);
     };
     const UserDealStatus = async () => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
         try {
-            const response = await fetch('http://localhost:3001/Status', {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify({ Data: StatusValue })
-            });
+            const response = await post('/Status', { Data: StatusValue }, headers);
+            console.log(response)
             const Result = await response.text(); // Change to text to handle the incoming string
-            const parsedResult = Result.split(','); // Split the string into an array
-            if (parsedResult.length > 0) {
-                // Update state with structured data
-                setDealStatusReceive({
-                    dealId: parsedResult[0],
-                    amount: parsedResult[1],
-                    user1: parsedResult[2],
-                    user2: parsedResult[3],
-                    user1Agree: parsedResult[4] === 'true',
-                    user2Agree: parsedResult[5] === 'true',
-                    user1Done: parsedResult[6] === 'true',
-                    user2Done: parsedResult[7] === 'true',
-                    currentStatus: parsedResult[8]
-                });
-            }
+                    const parsedResult = Result.split(','); // Split the string into an array
+                    if (parsedResult.length > 0) {
+                        // Update state with structured data
+                        setDealStatusReceive({
+                            dealId: parsedResult[0],
+                            amount: parsedResult[1],
+                            user1: parsedResult[2],
+                            user2: parsedResult[3],
+                            user1Agree: parsedResult[4] === 'true',
+                            user2Agree: parsedResult[5] === 'true',
+                            user1Done: parsedResult[6] === 'true',
+                            user2Done: parsedResult[7] === 'true',
+                            currentStatus: parsedResult[8]
+                        });
+                    }
         } catch (error) {
             console.log(error.message);
-        }
-    };
-    const checklockamount = async () => {
-        try {
-            const response = await fetch('http://localhost:3001/LockAmount', {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify({ Data: MetaMask })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            console.log("Amount received from backend:", result.amount); // Log the amount
-
-            // Check if result.amount is valid before proceeding
-            if (!result.amount || result.amount === '0' || isNaN(result.amount)) {
-                throw new Error("Invalid or zero amount received from backend");
-            }
-
-            const amountInEthers = convertToEthers(result.amount); // Convert to ethers
-            setAmountReceived(amountInEthers); // Update state with the converted amount
-            console.log("Converted amount in ethers:", amountInEthers);
-
-        } catch (error) {
-            alert("Error: " + error.message);
-            console.log(error);
+            alert(error.message)
         }
     };
 
-    const UseroneAgree = async () => {
-        try {
-            const Response = await (fetch('http://localhost:3001/User1Agree', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ Data: User1, Datas: MetaMask })
-            }))
-            if (!Response) {
-                throw new Error(`HTTP error! Status: ${Response.status}`);
-            }
-            const result = await Response.json()
-            console.log(result)
-            alert(result.errormessage)
-        } catch (error) {
-            console.log(error)
-        }
+
+// const UserDealStatus = async () => {
+//     try {
+//         const response = await fetch('http://localhost:3001/Status', {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': "application/json"
+//             },
+//             body: JSON.stringify({ Data: StatusValue })
+//         });
+//         const Result = await response.text(); // Change to text to handle the incoming string
+//         const parsedResult = Result.split(','); // Split the string into an array
+//         if (parsedResult.length > 0) {
+//             // Update state with structured data
+//             setDealStatusReceive({
+//                 dealId: parsedResult[0],
+//                 amount: parsedResult[1],
+//                 user1: parsedResult[2],
+//                 user2: parsedResult[3],
+//                 user1Agree: parsedResult[4] === 'true',
+//                 user2Agree: parsedResult[5] === 'true',
+//                 user1Done: parsedResult[6] === 'true',
+//                 user2Done: parsedResult[7] === 'true',
+//                 currentStatus: parsedResult[8]
+//             });
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// };
+const checklockamount = async () => {
+    const token = localStorage.getItem('token')
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+    try {
+        const result = await post('/LockAmount', { Data: MetaMask, CheckLockamount: CheckLockamount }, headers)
+        console.log(result)
+        setAmountReceived(result)
+    } catch (error) {
+        console.log(error.message);
+        alert(error.message)
     }
+};
+const UseroneAgree = async () => {
+    try {
+        const Response = await (fetch('http://localhost:3001/User1Agree', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ Data: User1, Datas: MetaMask })
+        }))
+        if (!Response) {
+            throw new Error(`HTTP error! Status: ${Response.status}`);
+        }
+        const result = await Response.json()
+        console.log(result)
+        alert(result.errormessage)
+    } catch (error) {
+        console.log(error)
+    }
+}
     return (
         <>
             <PaidUser />
@@ -239,35 +250,7 @@ export default function UserDealing() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-12 Deal-Main">
-                        <div className="Deal-Input">
-                            <div onClick={handleStatusInputClick} className="Dealing-div Deal-blue Deal-left deal-top">DEAL STATUS</div>
-                            <div className={`input-container ${showStatusInput ? 'open' : ''}`}>
-                                <input className="Deal-m-top" value={StatusValue} onChange={StatusInputUpdate} placeholder="Enter Your Deal Id" />
-                                <button className="paid-btn-one" onClick={UserDealStatus}>Check</button>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div className="col-lg-12 ">
-                        <div className="Deal-status-receive">
-                            <h5>DEAL ID: {DealStatusReceive.dealId}</h5>
-                            <h5>DEAL Amount: {DealStatusReceive.amount} eth</h5>
-                            <h5>DEAL User1: {DealStatusReceive.user1}</h5>
-                            <h5>DEAL User2: {DealStatusReceive.user2}</h5>
-                            <h5>User1 Agree: {DealStatusReceive.user1Agree ? 'Yes' : 'No'}</h5>
-                            <h5>User2 Agree: {DealStatusReceive.user2Agree ? 'Yes' : 'No'}</h5>
-                            <h5>User1 Done: {DealStatusReceive.user1Done ? 'Yes' : 'No'}</h5>
-                            <h5>User2 Done: {DealStatusReceive.user2Done ? 'Yes' : 'No'}</h5>
-                            <h5>Current Status: {DealStatusReceive.currentStatus}</h5>
-                        </div>
-                    </div> */}
-                    <div className="Deal-Input col-lg-12">
-                        <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
-                        <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-                            <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
-                            <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
-                        </div>
-                    </div>
+
                     <div className="col-lg-12 Deal-Main deal-or">
                         <div className="Deal-Input" style={{ position: 'relative' }}>
                             <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
@@ -279,6 +262,35 @@ export default function UserDealing() {
                                     Submit
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-12 Deal-Main">
+                        <div className="Deal-Input">
+                            <div onClick={handleStatusInputClick} className="Dealing-div Deal-blue Deal-left deal-top">DEAL STATUS</div>
+                            <div className={`input-container ${showStatusInput ? 'open' : ''}`}>
+                                <input className="Deal-m-top" value={StatusValue} onChange={StatusInputUpdate} placeholder="Enter Your Deal Id" />
+                                <button className="paid-btn-one" onClick={UserDealStatus}>Check</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-12 ">
+                        <div className="Deal-status-receive">
+                            <h5>DEAL ID: {DealStatusReceive.dealId}</h5>
+                            <h5>DEAL Amount: {DealStatusReceive.amount} eth</h5>
+                            <h5>DEAL User1: {DealStatusReceive.user1}</h5>
+                            <h5>DEAL User2: {DealStatusReceive.user2}</h5>
+                            <h5>User1 Agree: {DealStatusReceive.user1Agree ? 'Yes' : 'No'}</h5>
+                            <h5>User2 Agree: {DealStatusReceive.user2Agree ? 'Yes' : 'No'}</h5>
+                            <h5>User1 Done: {DealStatusReceive.user1Done ? 'Yes' : 'No'}</h5>
+                            <h5>User2 Done: {DealStatusReceive.user2Done ? 'Yes' : 'No'}</h5>
+                            <h5>Current Status: {DealStatusReceive.currentStatus}</h5>
+                        </div>
+                    </div>
+                    <div className="Deal-Input col-lg-12">
+                        <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
+                        <div className={`input-container ${showLockInput ? 'open' : ''}`}>
+                            <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
+                            <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
                         </div>
                     </div>
                 </div>

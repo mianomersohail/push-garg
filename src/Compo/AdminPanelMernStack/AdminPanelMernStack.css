@@ -150,6 +150,8 @@
 }
 .Mern-form{
     padding: 50px;
+    border: solid;
+    border-color: #06B6D4;
 }
 @media screen and (max-width:1200px) {
     .Main-Admin{
@@ -175,6 +177,7 @@ font-size: 25px;
 .Main-Admin{
     padding: 100px;
 }
+
 @media screen and (max-width:600px) {
     .Main-Admin{
         padding:30px;
@@ -187,7 +190,11 @@ font-size: 25px;
 }
 
 .mern-btn-top-m{
-    margin-top: 3.8rem;
+    margin-top: 3.5rem;
+
+}
+.mern-btn-top-m-two{
+    margin-top: 11.6rem;
 
 }
 .paid-btn-tops{

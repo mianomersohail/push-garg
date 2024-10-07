@@ -113,10 +113,10 @@ export default function AdminPanelMernStack() {
                             <div><input placeholder='Enter User Name' value={username} onChange={(event) => { setusername(event.target.value) }} /></div>
                             <div><label>Upload Image</label></div>
                             <div>
-                                <input 
-                                    type="file" 
-                                    accept="image/*" 
-                                    onChange={(event) => setSelectedImage(event.target.files[0])} 
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(event) => setSelectedImage(event.target.files[0])}
                                 />
                             </div>
                             <button type="button" onClick={AddUser} className='paid-btn-one paid-btn-tops'>Submit</button>
@@ -128,7 +128,7 @@ export default function AdminPanelMernStack() {
                             <div><h1>REMOVE USER</h1></div>
                             <div><label>Email</label></div>
                             <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m'>Remove</button>
+                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
                         </form>
                     </div>
                     <div className='col-lg-12'>

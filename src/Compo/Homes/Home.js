@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <>
       <Navbar
-      imgsrc={'https://scontent.flhe13-1.fna.fbcdn.net/v/t39.30808-6/459027788_1072056664437719_8316151749102847835_n.jpg?stp=dst-jpg_p526x296&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aysIkzLj4BoQ7kNvgEcvpis&_nc_ht=scontent.flhe13-1.fna&_nc_gid=AmYmmFpoNCu-ZmVfQ7k3vAM&oh=00_AYCS0MCnfgjWT2aoZuLQ2piJumlfbAb7uOn7fkic7G3uXQ&oe=67092A53'}
+      imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4'}
         name={'Mian Omer'}
         navlinameone={'Docs'}
         navlinametwo={'Login'}
@@ -123,7 +123,7 @@ export default function Home() {
             <button className='cv-download' onClick={cvdownload}>MY CV download</button>
           </div>
           <div className="col-lg-4 offset-lg-1">
-            <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727442009189?e=1733356800&v=beta&t=ik-mEXDtm2bAI_kbluGVvOR9Fmo_eG_FwGWytS_ceTM" alt="Profile" />
+            <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5622AQG0tF4iC4n2cw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1728340315513?e=1730937600&v=beta&t=jKmVwqZOBhRus1n9QUjJ-HorhfY_r-6--euL7MS2V8o" alt="Profile" />
             <div>
               <ul className='home-first-ul'>
                 {LinkData.map((item, index) => (

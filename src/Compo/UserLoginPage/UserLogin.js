@@ -44,13 +44,13 @@ export default function UserLogin() {
   };
   return (
     <>
-      <Navbar imgsrc={'https://media.istockphoto.com/id/2043823329/photo/internet-network-cybersecurity-concept-data-privacy-protection-from-malicious-attacks-digital.webp?a=1&b=1&s=612x612&w=0&k=20&c=FD1lPgS6zHyR5RBUAQ84G-QnHpycZBfbzrfqDlaTlUk='} name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
+      <Navbar imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGtLVATlqQ3VA/feedshare-shrink_800/feedshare-shrink_800/0/1728340545336?e=1730937600&v=beta&t=jQdyuxozIrhfU9xPT9h7-e4DjpE8FwEz00yqzB_ln78'} name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
       <div className="container Login-Page-Main">
         <div className="row">
           <div className="col-lg-6">
             <img
               className="login-page-img"
-              src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727442009142?e=1732752000&v=beta&t=02QmQeS0WM_hDBtm39AduhoW4cZFru3e4d-4CQeqsdc"
+              src="https://media.licdn.com/dms/image/v2/D5622AQGtLVATlqQ3VA/feedshare-shrink_800/feedshare-shrink_800/0/1728340545336?e=1730937600&v=beta&t=jQdyuxozIrhfU9xPT9h7-e4DjpE8FwEz00yqzB_ln78"
               alt="Login"
             />
           </div>
