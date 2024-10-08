@@ -90,6 +90,7 @@ export default function Home() {
         navlinametwo={'Login'}
         linkone={'/Documentation'}
         onClick={navlogin}
+        showNotifications ={false}
       />
       {loading && (
         <div className="spinner-container">
@@ -98,7 +99,7 @@ export default function Home() {
         </div>
       )}
       {error && <div className="error">Error: {error.message}</div>}
-      <div className='container offset-lg-1'>
+      <div className='container offset-lg-1 offset-xxl-3' >
         <div className='row'>
           <div className='col-lg-6 home-main'>
             <TypingEffect

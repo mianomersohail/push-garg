@@ -43,7 +43,7 @@ export default function PaidUser() {
     return (
         <>
         
-            <Navbar imgsrc={img} name={name || 'Umer'} navlinameone={<i class="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} linkone={'Deletesession'} navlinametwo={'SignOut'} onClick={signout} />
+            <Navbar imgsrc={img} name={name || 'Umer'} navlinameone={'Home'} linkone={'*'} navlinametwo={'SignOut'} onClick={signout} />
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>

@@ -25,7 +25,7 @@ export default function WorkExperience() {
 
     return (
         <>
-            <div className="container offset-lg-1 ">
+            <div className="container offset-lg-1 offset-xxl-3 ">
                 <div className="row">
                     <div className="col-lg-12">
                         <h1 style={{ fontSize: '30px', fontWeight: 700, fontFamily: "ui-sans-serif, system-ui, -apple-system" }}>

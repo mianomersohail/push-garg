@@ -6,7 +6,7 @@
   
   display: flex;
   justify-content: space-evenly;
-  padding:0 100px 0 100px;
+  padding:0 170px 0 100px;
 
 }
 
@@ -97,4 +97,14 @@
       padding: 0px;
       flex-direction: column;
     }
+  }
+  @media screen and (max-width:768px) {
+    .Courses{
+  
+      display: flex;
+      justify-content: space-evenly;
+      padding:0 30px 0 30px;
+    
+    }
+    
   }

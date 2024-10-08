@@ -18,7 +18,7 @@ const CourseItems = [
   },
   {
     MainNav: "UK DOCTOR PROJEC",
-    Mainp: "One of my client from the UK entrusted me with a project that started as just an idea no UI,nothing.I transformed their concept into a flawless,pixelperfect design",
+    Mainp: "One of my client from the UK entrusted me with a project that started as just an idea no UI,nothing.I transformed their concept into pixelperfect",
     src: "https://www.youtube.com/embed/NAbmDaq7baE?si=zKDdr55xvalaIKhr",
     toone: "",
     totwo: ""

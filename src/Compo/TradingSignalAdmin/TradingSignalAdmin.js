@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './TradingSignalAdmin.css';
 import useApi from '../FetchHook/FetchPost';
-
+import {io} from 'socket.io-client'
+const socket=io('http://localhost:3001')
 export default function TradingList({ assetname, assetimgsrc }) {
     const [file, setFile] = useState();
     const [MainHeading, setMainHeading] = useState('');
@@ -35,6 +36,11 @@ export default function TradingList({ assetname, assetimgsrc }) {
             const result = await post('/TradeSignal', formData, headers);
             console.log(result);
             setSuccessMessage('Upload successful!'); 
+            //send server a notification of successfull uploaded
+            socket.emit('SignalUploaded')
+            socket.on('NewSignal Uploaded', () => {
+                console.log("New signal uploaded successfully");
+            });
             setMainHeading('');
             setMainDescription('');
             setFile(null);
