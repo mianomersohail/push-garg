@@ -16,14 +16,14 @@ import { useNavigate } from 'react-router-dom';
 import count from '../../contex/context';
 const LinkData = Links;
 export default function Home() {
-  const {usename,setusename}=useContext(count)
- const [username,setusername]=useState()
+  const { usename, setusename } = useContext(count)
+  const [username, setusername] = useState()
   const navigation = useNavigate();
-  const { loading, error, data, get } = useApi('http://localhost:3001');
+  const { loading, error, data, post, get } = useApi('http://localhost:3001');
   const cvdownload = async () => {
     try {
       const result = await get('/Cv', { headers: { 'Content-Type': 'application/pdf' } });
-      
+
       // To trigger download, you can use the following line:
       const blob = new Blob([result], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
@@ -33,44 +33,44 @@ export default function Home() {
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
-      
+
     } catch (error) {
       alert(error.message);
       console.log(error);
     }
   };
-  
+
   const navlogin = async () => {
-    const token=localStorage.getItem('token')
+    const token = localStorage.getItem('token')
     const headers = {
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     };
     try {
-      const result = await get('/NavLogin', headers);  
+      const result = await post('/NavLogin', {}, headers);
+      console.log(result)
       if (result.message == 'No token provided' || result.message == 'Invalid or expired token') {
         navigation('/userlogin');
-            }
-      console.log(result.user.username)
-      if(result.user.role=='User'){
-        const checkuser=localStorage.getItem('username')
-        if(checkuser){
+      }
+      if (result.user.role == 'User') {
+        const checkuser = localStorage.getItem('username')
+        if (checkuser) {
           setusername(result.user.username)
-        setusename(result.user.username)
-        navigation('/paiduser')
-          
+          setusename(result.user.username)
+          navigation('/paiduser')
+
         }
         else {
-          localStorage.setItem('username',result.user.username)
+          localStorage.setItem('username', result.user.username)
           setusername(result.user.username)
-        setusename(result.user.username)
-        navigation('/paiduser')
+          setusename(result.user.username)
+          navigation('/paiduser')
         }
         // setusername(result.user.username)
         // setusename(result.user.username)
         // navigation('/paiduser')
         // navigation('/paiduser',{ state: { Data: { username:result.user.username } } })
       }
-      if(result.user.role=='Admin'){
+      if (result.user.role == 'Admin') {
         navigation('/AdminPanel')
       }
     } catch (err) {
@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <>
       <Navbar
-      imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4'}
+        imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4'}
         name={'Mian Omer'}
         navlinameone={'Docs'}
         navlinametwo={'Login'}
@@ -92,11 +92,11 @@ export default function Home() {
         onClick={navlogin}
       />
       {loading && (
-                <div className="spinner-container">
-                  <div className="spinner"></div>
-                  <p>Loading...</p>
-                </div>
-              )}
+        <div className="spinner-container">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      )}
       {error && <div className="error">Error: {error.message}</div>}
       <div className='container offset-lg-1'>
         <div className='row'>

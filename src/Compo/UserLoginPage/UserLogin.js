@@ -22,14 +22,12 @@ export default function UserLogin() {
     };
     try {
       const result = await post('/Login', { email, password }, headers); 
-      console.log(result)
       localStorage.setItem('image',result.image)
       if (result.token) {
         localStorage.setItem('token', result.token)
       }
      
       if (result.role == 'User') {
-        console.log(result)
         localStorage.setItem('username',result.username)
         setusename(result.username)
         setusername(result.username)
