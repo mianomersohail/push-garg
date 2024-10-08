@@ -22,14 +22,12 @@ export default function PaidUser() {
         if (selectedValue === 'DEALING') {
             setIsDealing(true);
         }
-        if(selectedValue==='TRADING/SIGNALS'){
+        if (selectedValue === 'TRADING/SIGNALS') {
             navigate('/FrontEndTrading')
         }
         console.log('Selected Interest:', selectedValue);
     };
-    const messageChat = () => {
-        navigate('/UserChat');
-    }
+
     useEffect(() => {
         if (isDealing) {
             const timeout = setTimeout(() => {
@@ -40,11 +38,11 @@ export default function PaidUser() {
     }, [isDealing, navigate]);
     // name={username || 'welcome'}
     const username = localStorage.getItem('username')
-    
-    const baseURL = 'http://localhost:3001/'; 
+
+    const baseURL = 'http://localhost:3001/';
     const imgPath = localStorage.getItem('image')
     const imgURL = `${baseURL}${imgPath}`;
-            
+
     if (paidUser) {
         return (
             <>
@@ -72,7 +70,7 @@ export default function PaidUser() {
                                 <button onClick={switchTo} className="paid-btn-one">Switch</button>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
                 {isDealing && <UserDealing />}
