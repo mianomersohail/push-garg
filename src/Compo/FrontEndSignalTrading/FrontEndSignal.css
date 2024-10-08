@@ -1,0 +1,47 @@
+.FrontSignal-box{
+    padding: 20px 20px 0 20px;
+}
+.FrontSignal-box img{
+    width: 100%;
+}
+
+.FrontSignal-latest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    background: linear-gradient(90deg, #ff0080, #ff8c00, #00ff8c, #008cff, #ff00ff); /* Vibrant gradient colors */
+    background-size: 300%; /* Adjust for animation speed */
+    background-position: 0% 50%; /* Start position of the gradient */
+    color: transparent; /* Make text transparent to show the background */
+    -webkit-background-clip: text; /* Safari */
+    background-clip: text; /* Chrome, Firefox */
+    animation: moveGradient 4s linear infinite; /* Animation properties */
+    filter: brightness(1.2); /* Brightness filter for added effect */
+}
+
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50%; /* Starting position */
+    }
+    100% {
+        background-position: 100% 50%; /* Ending position */
+    }
+}
+
+@keyframes glitter {
+    0% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.FrontSignal-latest {
+    animation: moveGradient 4s linear infinite, glitter 1.5s ease-in-out infinite; /* Combine animations */
+}

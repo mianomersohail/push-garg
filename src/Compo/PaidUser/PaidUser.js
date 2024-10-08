@@ -6,12 +6,8 @@ import Navbar from '../Nav/NavList';
 export default function PaidUser() {
     const [paidUser, setPaidUser] = useState(true);
     const [isDealing, setIsDealing] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const location = useLocation();
     const navigate = useNavigate();
-    // const { username } = location.state?.Data || {};
-   
-   
     const signout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
@@ -25,6 +21,9 @@ export default function PaidUser() {
         const selectedValue = interestRef.current.value;
         if (selectedValue === 'DEALING') {
             setIsDealing(true);
+        }
+        if(selectedValue==='TRADING/SIGNALS'){
+            navigate('/FrontEndTrading')
         }
         console.log('Selected Interest:', selectedValue);
     };
@@ -42,7 +41,7 @@ export default function PaidUser() {
     // name={username || 'welcome'}
     const username = localStorage.getItem('username')
     
-    const baseURL = 'http://localhost:3001/'; // Replace with your actual base URL
+    const baseURL = 'http://localhost:3001/'; 
     const imgPath = localStorage.getItem('image')
     const imgURL = `${baseURL}${imgPath}`;
             

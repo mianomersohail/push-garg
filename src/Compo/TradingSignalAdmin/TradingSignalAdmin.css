@@ -1,38 +1,12 @@
-.signal-box{
-    /* box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1), 
-    0 6px 20px rgba(255, 255, 255, 0.2), 
-    0 10px 30px rgba(255, 255, 255, 0.15); */
-background-color: #1a1a1a; 
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding-top: 30px;
-padding-bottom: 30px;
-border: solid;
-border-color: #06B6D4;
-border-radius: 30%;
 
+.AdminSignalbox input{
+    width: 100%;
+    height: 4rem;
+    font-size: 28px;
 }
-.signal-box input{
-    border-radius: 5px;
-    justify-content: space-around;
-
-}
-.signal-main{
-    justify-content: space-between;
-    padding: 40px;
-}
-.signal-top{
-    margin-top: 5rem;
-}
-.signal-img{
-    height: 2rem;
-    width: 2rem;
-    border-radius: 100%;
-}
-.signal-label-bold{
-    font-size: 32px;
-    position: relative;
-    top:0.4rem;
+@media screen and (max-width) {
+    .AdminSignalbox input{
+        font-size: 16px;
+    }
+    
 }

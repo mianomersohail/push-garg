@@ -11,7 +11,9 @@ import AdminPanelMernStack from './Compo/AdminPanelMernStack/AdminPanelMernStack
 import Documentation from './Compo/SolDocs/SolDocs';
 import UserDealing from './Compo/UserDealing/UserDealing';
 import TradingSignalAdmin from './Compo/TradingSignalAdmin/TradingSignalAdmin';
-import UserChat from './Compo/UserChat/UserChat'
+import UserChat from './Compo/UserChat/UserChat';
+import TradingFrontEnd from './Compo/FrontEndSignalTrading/FrontEndTradingSignal'
+import FrontEndSignal from './Compo/FrontEndSignalTrading/FrontEndTradingSignal';
 
 function App() {
   const [usename,setusename]=useState()
@@ -29,6 +31,8 @@ function App() {
           <Route path="/UserDealing" element={<UserDealing/>} />
           <Route path="/TradingSignalAdmin" element={<TradingSignalAdmin/>} />
           <Route path="/UserChat" element={<UserChat/>} />
+          <Route path="/FrontEndTrading" element={<FrontEndSignal/>} />
+
           </Routes>
         </Router>   
         </count.Provider>

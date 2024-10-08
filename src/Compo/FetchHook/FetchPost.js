@@ -23,7 +23,7 @@ const useApi = (baseURL) => {
       setLoading(false);
     }
   };
-  const get = (url, headers) => request('GET', url, null, headers); 
+  const get = (url,body, headers) => request('GET', url, body, headers); 
   const post = (url, headers,body) => request('POST', url,headers, body);
   const put = (url,headers, body) => request('PUT', url, headers,body);
   const del = (url,headers,body) => request('DELETE', url,headers,body);
