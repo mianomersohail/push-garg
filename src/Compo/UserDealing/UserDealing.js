@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
+import { Fade, ScaleFade, Slide, SlideFade, Collapse ,useDisclosure,Button,Box} from '@chakra-ui/react'
+
 import useApi from '../FetchHook/FetchPost';
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
 import Footer from '../Footer/Footer'
 export default function UserDealing() {
+    const { isOpen, onToggle } = useDisclosure()
+
     const [balance, setBalance] = useState('');
     const [deals, setDeals] = useState('');
     const [DealAmount, SetDealAmount] = useState('');
@@ -218,6 +222,7 @@ const UseroneAgree = async () => {
     return (
         <>
             <PaidUser />
+          
             {loading && (
                 <div className="spinner-container">
                     <div className="spinner"></div>
@@ -226,7 +231,33 @@ const UseroneAgree = async () => {
             )}
             {error && <div className="error">Error: {error.message}</div>}
             <div className="container offset-lg-1">
+                <div className="row">
+                    <div className="col-lg-2">
+                    <Button onClick={onToggle} className="paid-btn-one paidwarnbtn" >WARNING</Button>
+      <Slide  direction='bottom' in={isOpen}  style={{ zIndex: 10 ,backgroundColor:"#319795",color:"white"}}>
+        <Box
+          p='40px'
+          color='white'
+          mt='4'
+          bg='teal.500'
+          rounded='md'
+          shadow='md'
+        >
+         <p>Smart contract are immutable any mistake or irregular function may lead to some 
+            vulnerbility in the smart contract which may leaid to your extreme lose so plz call function only on the required
+            time and for example if you are seller call function sellerreceive after you receive and satisfyseller only if you are
+            satisfy from the delivey 
+            BEST OF LUCL
+         </p>
+        </Box>
+      </Slide>
+
+                    </div>
+                </div>
+            </div>
+            <div className="container offset-lg-1">
                 <div className="row Deal-Main">
+               
                     <div className="col-lg-12 Deal-Main">
                         <div>
                             <div onClick={updateBalance} className="Dealing-div Deal-blue">Balance</div>

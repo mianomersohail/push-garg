@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <>
-      <div className="footer-container">
-        <div className="footer-row">
-          <div className="col-lg-12 footer-box">
+      <div className="footer-container offset-lg-1">
+        <div className=" footer-row">
+          <div className="col-lg-12  footer-box">
             <img
               className="footer-img"
               src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727442009142?e=1732752000&v=beta&t=02QmQeS0WM_hDBtm39AduhoW4cZFru3e4d-4CQeqsdc"

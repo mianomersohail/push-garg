@@ -13,11 +13,13 @@ import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
 import { useNavigate } from 'react-router-dom';
-import count from '../../contex/context';
 import Chat from '../UserChat/UserChat'
+import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 const LinkData = Links;
 export default function Home() {
-  const { usename, setusename } = useContext(count)
+
+  const { showToast } = useCustomToast(); // Use the custom toast hook
+
   const [username, setusername] = useState()
   const navigation = useNavigate();
   const { loading, error, data, post, get } = useApi('http://localhost:3001');
@@ -36,7 +38,8 @@ export default function Home() {
       link.parentNode.removeChild(link);
 
     } catch (error) {
-      alert(error.message);
+      showToast('error', 'Cv Not found.');
+
       console.log(error);
     }
   };
@@ -56,14 +59,12 @@ export default function Home() {
         const checkuser = localStorage.getItem('username')
         if (checkuser) {
           setusername(result.user.username)
-          setusename(result.user.username)
           navigation('/paiduser')
 
         }
         else {
           localStorage.setItem('username', result.user.username)
           setusername(result.user.username)
-          setusename(result.user.username)
           navigation('/paiduser')
         }
         // setusername(result.user.username)
@@ -76,6 +77,8 @@ export default function Home() {
       }
     } catch (err) {
       console.error(err);
+      showToast( 'error','No Token Found');
+
     }
   };
 
@@ -99,14 +102,14 @@ export default function Home() {
           <p>Loading...</p>
         </div>
       )}
-      {error && <div className="error">Error: {error.message}</div>}
       <div className='container offset-lg-1 offset-xxl-3' >
         <div className='row'>
           <div className='col-lg-6 home-main'>
             <TypingEffect
-              text={['I\'m a ReactJS Developer', 'NodeJs+ExpressJs', 'BLOCKCHAIN', 'FOREX TRADER']}
+              text={['REACT JS', 'NODEJS+EXPRESS JS', 'ETH/BLOCKCHAIN', 'FOREX TRADER']}
               speed={50}
               eraseDelay={1500}
+
               typingDelay={500}
               cursorColor='#06B6D4'
               displayTextRenderer={text => (

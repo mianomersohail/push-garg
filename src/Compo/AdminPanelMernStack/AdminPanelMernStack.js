@@ -1,28 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './AdminPanelMernStack.css';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from "react-router-dom";
+import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('');
     const [username, setusername] = useState('');
     const [adduserpassword, setadduserpassword] = useState('');
-    const [removeinput, setremoveinput] = useState();
+    const [removeinput, setremoveinput] = useState('');
     const [Updateuser, setupdateuser] = useState('');
     const [RemoveErrorMessage, SetRemoveErrorMessage] = useState('');
     const [role, setRole] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null); // New state for image
+    const [selectedImage, setSelectedImage] = useState(null);
     const navigation = useNavigate();
-    const [oldemail, setoldemail] = useState();
-    const [oldpassword, setoldpassword] = useState();
-    const [newemail, setnewemail] = useState();
-    const [newpassword, setnewpassword] = useState();
+    const [oldemail, setoldemail] = useState('');
+    const [oldpassword, setoldpassword] = useState('');
+    const [newemail, setnewemail] = useState('');
+    const [newpassword, setnewpassword] = useState('');
+
+    const { showToast } = useCustomToast(); // Use the custom toast hook
     const handleRoleSelect = (selectedRole) => setRole(selectedRole);
     const updateadduseremail = (event) => setadduseremail(event.target.value);
     const updateuserpassword = (event) => setadduserpassword(event.target.value);
     const updateremoveinput = (event) => setremoveinput(event.target.value);
-    const { loading, error, data, post, del, put } = useApi('http://localhost:3001');
+    
+    const { loading, error, post, del, put } = useApi('http://localhost:3001');
 
     const AddUser = async () => {
         const token = localStorage.getItem('token');
@@ -45,10 +49,11 @@ export default function AdminPanelMernStack() {
             }
             if (result.message === 'User-Save-Successfully') {
                 updatestatus(result.message);
+                showToast('success', 'User saved successfully!');
             }
         } catch (err) {
             console.error(err);
-            alert(err.message);
+            showToast('error', 'User Alredy Found...');
         }
     };
 
@@ -64,9 +69,10 @@ export default function AdminPanelMernStack() {
                 navigation('/userlogin');
             }
             SetRemoveErrorMessage(result.message);
+            showToast('success', 'User removed successfully!');
         } catch (error) {
             console.log(error.message);
-            alert(error.message);
+            showToast('error', 'User Not Found');
         }
     };
 
@@ -81,8 +87,9 @@ export default function AdminPanelMernStack() {
                 navigation('/userlogin');
             }
             setupdateuser('User Update');
+            showToast('success', 'User updated successfully!');
         } catch (error) {
-            alert(error.message);
+            showToast('error', 'User Not found.');
             console.log(error.message);
         }
     };
@@ -99,7 +106,6 @@ export default function AdminPanelMernStack() {
                                 <p>Loading...</p>
                             </div>
                         )}
-                        {error && <div className="error">Error: {error.message}</div>}
                     </h1>
                     <div className='col-lg-6'>
                         <form className='Mern-form'>

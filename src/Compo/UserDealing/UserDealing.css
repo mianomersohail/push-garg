@@ -206,3 +206,12 @@ display: flex;
 .user1agree{
     margin-top: 3rem;
 }
+.paidwarnbtn{
+    background-color: red;
+    color:white;
+    width: auto;
+
+}
+.paidwarnbtn:hover{
+    background-color: rgb(236, 105, 105);
+}

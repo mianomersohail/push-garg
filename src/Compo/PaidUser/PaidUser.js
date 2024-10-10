@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PaidUser.css';
 import UserDealing from '../UserDealing/UserDealing';
 import Navbar from '../Nav/NavList';
 import { io } from 'socket.io-client';
+import MenuLists from '../../menulist/menulist';
 
 const socket = io('http://localhost:3001'); // Server URL
 
@@ -15,40 +16,30 @@ export default function PaidUser() {
     const [serverMessage, setServerMessage] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
-    
-    const interestRef = useRef();
 
     useEffect(() => {
-        // Listen for server messages
         socket.on('NewSignal Uploaded', (message) => {
             setServerMessage(message);
-            setNotifications(prevNotifications => [...prevNotifications, message]); // Add new message to notifications
-            setShakeBell(true); // Trigger bell shake
+            setNotifications(prevNotifications => [...prevNotifications, message]);
+            setShakeBell(true);
         });
 
-        // Clean up the effect to avoid multiple event listeners
         return () => {
-            socket.off('serverMessage');
+            socket.off('NewSignal Uploaded');
         };
-    }, []);
-
-    // Example of sending a message to the server
-    useEffect(() => {
-        socket.emit('message', 'Hello from the client');
     }, []);
 
     const signout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('image');
-        
+
         setTimeout(() => {
             navigate('/userlogin');
         }, 200);
     };
 
-    const switchTo = () => {
-        const selectedValue = interestRef.current.value;
+    const handleMenuClick = (selectedValue) => {
         if (selectedValue === 'DEALING') {
             setIsDealing(true);
         } else if (selectedValue === 'TRADING/SIGNALS') {
@@ -74,19 +65,17 @@ export default function PaidUser() {
     if (paidUser) {
         return (
             <>
-                <Navbar 
-                    shakeBell={shakeBell} 
-                    notifications={notifications} 
-                    imgsrc={imgURL} 
-                    alt="User" 
-                    name={username} 
-                    // navlinameone={<i className="fa fa-bell-o" style={{ fontSize: "24px" }}></i>} 
+                <Navbar
+                    shakeBell={shakeBell}
+                    notifications={notifications}
+                    imgsrc={imgURL}
+                    alt="User"
+                    name={username}
                     navlinameone={'Home'}
                     linkone={'*'}
-                    navlinametwo={'Sign Out'} 
-                    onClick={signout} 
-                    showNotifications ={true}
-
+                    navlinametwo={'Sign Out'}
+                    onClick={signout}
+                    showNotifications={true}
                 />
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
@@ -100,19 +89,18 @@ export default function PaidUser() {
                                 decisions. Learn where to invest, how to invest smartly, and watch your
                                 skills and portfolio soar to new heights!
                             </p>
-                            <div className="col-lg-6 floating-label">
-                                <input ref={interestRef} type="text" className='paid-user-input-any' list="suggestions" placeholder="Your Interest" />
-                                <datalist id="suggestions">
-                                    <option value="MERN STACK" />
-                                    <option value="BLOCKCHAIN" />
-                                    <option value="DEALING" />
-                                    <option value="TRADING/SIGNALS" />
-                                </datalist>
-                                <button onClick={switchTo} className="paid-btn-one">Switch</button>
-                            </div>
+                            
+                            <MenuLists 
+                                valueone={'MERN STACK'} 
+                                valuetwo={'BLOCKCHAIN'} 
+                                valuethree={'DEALING'} 
+                                valuefour={'TRADING/SIGNALS'}
+                                onSelect={handleMenuClick} // Pass the click handler
+                            />
                         </div>
                     </div>
                 </div>
+
                 {isDealing && <UserDealing />}
             </>
         );

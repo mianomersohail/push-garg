@@ -3,6 +3,7 @@ import AdminPanel from '../AdminPanel/AdminPanel';
 import './TradingSignalAdmin.css';
 import useApi from '../FetchHook/FetchPost';
 import {io} from 'socket.io-client'
+import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 const socket=io('http://localhost:3001')
 export default function TradingList({ assetname, assetimgsrc }) {
     const [file, setFile] = useState();
@@ -10,6 +11,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
     const [MainDescription, setMainDescription] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const { loading, error, data, post } = useApi('http://localhost:3001');
+    const { showToast } = useCustomToast(); // Use the custom toast hook
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -18,7 +20,9 @@ export default function TradingList({ assetname, assetimgsrc }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!MainHeading || !MainDescription || !file) {
-            alert("Please fill in all fields and upload an image.");
+            // alert("Please fill in all fields and upload an image.");
+            showToast('error', 'Please fill in all fields and upload an image!');
+
             return;
         }
 
@@ -46,6 +50,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
             // setFile('');
         } catch (error) {
             console.error('Error uploading:', error);
+         showToast('eror','Signal Not Uploaded')
         }
     };
     return (

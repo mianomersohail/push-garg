@@ -6,7 +6,7 @@
     height: auto;
     padding-top: 10px;
     border-radius: 10px;
-    background-color: #27272A;
+    background-color: #27272A !important;
     color: white;
 }
 
