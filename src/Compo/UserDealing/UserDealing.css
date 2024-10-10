@@ -200,3 +200,9 @@
     position: relative;
     left: 1rem;
 }
+.Deal-status-receive{
+display: flex;
+}
+.user1agree{
+    margin-top: 3rem;
+}

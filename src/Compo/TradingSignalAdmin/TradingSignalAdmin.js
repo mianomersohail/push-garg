@@ -41,9 +41,9 @@ export default function TradingList({ assetname, assetimgsrc }) {
             socket.on('NewSignal Uploaded', () => {
                 console.log("New signal uploaded successfully");
             });
-            setMainHeading('');
-            setMainDescription('');
-            setFile(null);
+            // setMainHeading('');
+            // setMainDescription('');
+            // setFile('');
         } catch (error) {
             console.error('Error uploading:', error);
         }

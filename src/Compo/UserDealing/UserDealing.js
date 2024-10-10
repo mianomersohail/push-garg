@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import useApi from '../FetchHook/FetchPost';
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
+import Footer from '../Footer/Footer'
 export default function UserDealing() {
     const [balance, setBalance] = useState('');
     const [deals, setDeals] = useState('');
@@ -17,6 +18,7 @@ export default function UserDealing() {
     const [CheckLockamount, setCheckLockamount] = useState('')
     const [AmountReceived, setAmountReceived] = useState('')
     const [User1, SetUsers1] = useState('')
+    const [User1id,SetUser1id]=useState()
     const [MetaMask, SetMetaMask] = useState('')
     const handleNewDealClick = () => {
         setShowNewDealInputs(prev => !prev);
@@ -181,17 +183,17 @@ export default function UserDealing() {
 //     }
 // };
 const checklockamount = async () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const headers = {
         Authorization: `Bearer ${token}`,
     };
     try {
-        const result = await post('/LockAmount', { Data: MetaMask, CheckLockamount: CheckLockamount }, headers)
-        console.log(result)
-        setAmountReceived(result)
+        const result = await post('/LockAmount', { Data: MetaMask, CheckLockamount: CheckLockamount }, headers);
+        console.log(result);
+        setAmountReceived(result.amount); // Ensure you set the specific property
     } catch (error) {
         console.log(error.message);
-        alert(error.message)
+        alert(error.message);
     }
 };
 const UseroneAgree = async () => {
@@ -201,7 +203,7 @@ const UseroneAgree = async () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ Data: User1, Datas: MetaMask })
+            body: JSON.stringify({ Data: MetaMask, Id:User1id })
         }))
         if (!Response) {
             throw new Error(`HTTP error! Status: ${Response.status}`);
@@ -291,10 +293,14 @@ const UseroneAgree = async () => {
                         <div className={`input-container ${showLockInput ? 'open' : ''}`}>
                             <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
                             <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
+
                         </div>
+                        <input className="Deal-m-top" value={User1id} onChange={(event)=>{SetUser1id(event.target.value)}} placeholder="Enter Your Address" />
+
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

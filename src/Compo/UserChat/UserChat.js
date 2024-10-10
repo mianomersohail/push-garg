@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Footer from '../Footer/Footer'
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
   const { name } = location.state?.Data || {};
-  // Handle sending a new message
+
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       setMessages([...messages, { text: newMessage, sender: 'user' }]);
@@ -19,7 +18,15 @@ const ChatComponent = () => {
   };
   return (
     <>
-            <Box
+    <div className='container'>
+      <div className='row'>
+        <div className='offset-lg-2'>
+          <span style={{color:'#06B6D4',fontSize:'32px'}}>L</span><span>EAVE</span><span style={{color:"#06B6D4",fontSize:"32px"}}>Y</span><span>OUR</span><span style={{color:"#06B6D4",fontSize:"32px"}}>M</span><span>ESSAGE</span>
+ 
+        </div>
+      </div>
+    </div>
+            <Box 
         sx={{
           maxWidth: '400px',
           margin: 'auto',
@@ -29,7 +36,8 @@ const ChatComponent = () => {
           border: '1px solid #ccc',
           borderRadius: '8px',
           overflow: 'hidden',
-          backgroundColor: '#f0f0f0',
+          marginTop:'50px',
+          backgroundColor: '#f0f0f0'
         }}
       >
         {/* Chat messages area */}
@@ -57,6 +65,7 @@ const ChatComponent = () => {
                   color: message.sender === 'user' ? '#fff' : '#000',
                   maxWidth: '70%',
                   wordWrap: 'break-word',
+                 
                 }}
               >
                 {message.text}
@@ -93,7 +102,6 @@ const ChatComponent = () => {
           </Button>
         </Box>
       </Box>
-      <Footer />
     </>
   );
 };

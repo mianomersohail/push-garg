@@ -34,7 +34,7 @@ export default function FrontEndSignal() {
     return (
         <>
             <PaidUser />
-            <div className='container offset-lg-1'>
+            <div className='container offset-lg-0'>
                 <div className='row'>
                     <BitcoinPrice />
                     <div className='col-lg-12'>

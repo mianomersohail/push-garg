@@ -10,20 +10,33 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
     const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+        if (isDarkMode) {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        } else {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        }
+    };
+
+    // Function to mark a specific notification as read
+    const markAsRead = (index) => {
+        const updatedNotifications = [...notifications];
+        updatedNotifications[index].read = true;
+        setNotifications(updatedNotifications);
+        const unread = updatedNotifications.filter(notification => !notification.read).length;
+        setUnreadCount(unread); // Update unread count
+    };
 
     // Function to mark all notifications as read
     const markAllAsRead = () => {
         const updatedNotifications = notifications.map(notification => ({ ...notification, read: true }));
         setNotifications(updatedNotifications);
         setUnreadCount(0); // Reset unread count
-    };
-
-    // Function to mark a specific notification as read
-    const markAsRead = (index) => {
-        const updatedNotifications = [...notifications];
-        updatedNotifications[index].read = true; // Mark the notification at the given index as read
-        setNotifications(updatedNotifications);
-        setUnreadCount(prevCount => prevCount > 0 ? prevCount - 1 : 0); // Decrease unread count
     };
 
     const toggleMenu = () => {
@@ -38,14 +51,12 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
     };
 
     useEffect(() => {
-        // Listen for new notifications from the server
         socket.on('NewSignal Uploaded', (message) => {
             const newNotification = { message: 'New trading signal uploaded!', read: false };
             setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
             setUnreadCount((prevCount) => prevCount + 1); // Increase unread count
         });
 
-        // Clean up the event listener on unmount
         return () => {
             socket.off('NewSignal Uploaded');
         };
@@ -70,7 +81,6 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             </Link>
                         </li>
                     </ul>
-                    {/* Bell Icon for Notifications, shown based on the prop */}
                     {showNotifications && (
                         <div className={`bell-icon ${unreadCount > 0 ? 'shake' : ''}`} onClick={toggleNotifications}>
                             🔔
@@ -87,7 +97,7 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                                         <li
                                             key={index}
                                             className={note.read ? 'read' : 'unread'}
-                                            onClick={() => markAsRead(index)} // Call markAsRead when clicking the notification
+                                            onClick={() => markAsRead(index)} // Correct function call here
                                         >
                                             {note.message}
                                         </li>
@@ -96,6 +106,10 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             )}
                         </div>
                     )}
+                    <button 
+                        className={`theme-toggle-btn ${isDarkMode ? 'stars' : 'sun'}`} 
+                        onClick={toggleTheme}
+                    />
                 </div>
             </div>
         </div>

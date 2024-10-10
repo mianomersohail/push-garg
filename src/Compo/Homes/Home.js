@@ -14,6 +14,7 @@ import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
 import { useNavigate } from 'react-router-dom';
 import count from '../../contex/context';
+import Chat from '../UserChat/UserChat'
 const LinkData = Links;
 export default function Home() {
   const { usename, setusename } = useContext(count)
@@ -139,6 +140,7 @@ export default function Home() {
       <FillingEffect />
       <CountEffect />
       <Courses />
+      <Chat/>
       <EthSection />
       <Trusted />
       <Footer />
