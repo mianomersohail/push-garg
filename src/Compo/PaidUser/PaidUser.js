@@ -89,14 +89,17 @@ export default function PaidUser() {
                                 decisions. Learn where to invest, how to invest smartly, and watch your
                                 skills and portfolio soar to new heights!
                             </p>
-                            
+                            <div className='MenuLists'>
+
                             <MenuLists 
-                                valueone={'MERN STACK'} 
-                                valuetwo={'BLOCKCHAIN'} 
-                                valuethree={'DEALING'} 
-                                valuefour={'TRADING/SIGNALS'}
-                                onSelect={handleMenuClick} // Pass the click handler
+                            
+                            valueone={'MERN STACK'} 
+                            valuetwo={'BLOCKCHAIN'} 
+                            valuethree={'DEALING'} 
+                            valuefour={'TRADING/SIGNALS'}
+                            onSelect={handleMenuClick} // Pass the click handler
                             />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -18,9 +18,10 @@
 }
 
 .Mern-form input {
-    width: 100%;
+    width: auto;
+    padding: 4px;
     height: 32px;
-    border-radius: 6px;
+    border-radius: 2px;
 }
 @media screen and (max-width:768px) {
     .Mern-form input{
@@ -149,9 +150,8 @@
 
 }
 .Mern-form{
-    padding: 50px;
-    border: solid;
-    border-color: #06B6D4;
+    padding: 20px 0 0 20px;
+    
 }
 @media screen and (max-width:1200px) {
     .Main-Admin{
@@ -190,11 +190,11 @@ font-size: 25px;
 }
 
 .mern-btn-top-m{
-    margin-top: 3.5rem;
+    
 
 }
 .mern-btn-top-m-two{
-    margin-top: 11.6rem;
+    margin-top: 2rem;
 
 }
 .paid-btn-tops{

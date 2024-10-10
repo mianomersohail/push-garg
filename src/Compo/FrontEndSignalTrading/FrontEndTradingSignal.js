@@ -4,6 +4,7 @@ import FrontEndSignalList from './FrontEndList';
 import BitcoinPrice from '../BitcoinPrice/Bitcoinprice';
 import { useEffect, useState } from 'react';
 import useApi from '../FetchHook/FetchPost';
+import Footer from '../Footer2.js/Footer2'
 
 export default function FrontEndSignal() {
     const { loading, error, post } = useApi('http://localhost:3001');
@@ -34,7 +35,7 @@ export default function FrontEndSignal() {
     return (
         <>
             <PaidUser />
-            <div className='container offset-lg-0'>
+            <div className='container offset-lg-1'>
                 <div className='row'>
                     <BitcoinPrice />
                     <div className='col-lg-12'>
@@ -68,6 +69,7 @@ export default function FrontEndSignal() {
                     )}
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

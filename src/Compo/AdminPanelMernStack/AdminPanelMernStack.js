@@ -4,6 +4,11 @@ import './AdminPanelMernStack.css';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from "react-router-dom";
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
+import errorsound from '../../audio/error.mp3';
+import successsound from '../../audio/success.mp3';
+import Footer from '../Footer2.js/Footer2'
+
+
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('');
@@ -28,7 +33,14 @@ export default function AdminPanelMernStack() {
     
     const { loading, error, post, del, put } = useApi('http://localhost:3001');
 
+    const clearMessages = () => {
+        updatestatus('');
+        SetRemoveErrorMessage('');
+    };
+
     const AddUser = async () => {
+        clearMessages(); // Clear previous messages
+
         const token = localStorage.getItem('token');
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -44,51 +56,85 @@ export default function AdminPanelMernStack() {
 
         try {
             const result = await post('/NewUser', formData, headers);
+
+            // Check for logout
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
+                return; // Exit if logged out
             }
+            
             if (result.message === 'User-Save-Successfully') {
-                updatestatus(result.message);
                 showToast('success', 'User saved successfully!');
+                updatestatus(result.message);
+                const successaudio = new Audio(successsound);
+                successaudio.play();
+            } else {
+                showToast('error', 'Unexpected error occurred.');
+                const audio = new Audio(errorsound);
+                audio.play();
             }
         } catch (err) {
+            showToast('error', 'User Already Found...');
             console.error(err);
-            showToast('error', 'User Alredy Found...');
+            const audio = new Audio(errorsound);
+            audio.play();
         }
     };
 
     const removeuser = async () => {
+        clearMessages(); // Clear previous messages
+
         const token = localStorage.getItem('token');
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
         };
+
         try {
             const result = await del('/NewUser', JSON.stringify({ removeinput }), headers);
+
+            // Check for logout
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
+                return; // Exit if logged out
             }
+
             SetRemoveErrorMessage(result.message);
+            const successaudio = new Audio(successsound);
+            successaudio.play();
             showToast('success', 'User removed successfully!');
         } catch (error) {
+            const audio = new Audio(errorsound);
+            audio.play();
             console.log(error.message);
             showToast('error', 'User Not Found');
         }
     };
 
     const UpdateUser = async () => {
+        clearMessages(); // Clear previous messages
+
         const token = localStorage.getItem('token');
         const headers = {
             Authorization: `Bearer ${token}`
         };
+
         try {
             const result = await put('/NewUser', { oldemail, newemail, oldpassword, newpassword, role }, headers);
+
+            // Check for logout
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
+                return; // Exit if logged out
             }
+
             setupdateuser('User Update');
+            const successaudio = new Audio(successsound);
+            successaudio.play();
             showToast('success', 'User updated successfully!');
         } catch (error) {
+            const audio = new Audio(errorsound);
+            audio.play();
             showToast('error', 'User Not found.');
             console.log(error.message);
         }
@@ -129,15 +175,6 @@ export default function AdminPanelMernStack() {
                         </form>
                     </div>
                     <div className='col-lg-6'>
-                        <form className='Mern-form'>
-                            <p>{RemoveErrorMessage}</p>
-                            <div><h1>REMOVE USER</h1></div>
-                            <div><label>Email</label></div>
-                            <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
-                        </form>
-                    </div>
-                    <div className='col-lg-12'>
                         <form className='Mern-form Mern-Form-two'>
                             <h1>{Updateuser}</h1>
                             <div><h1 className='Admincolor'>Update USER</h1></div>
@@ -160,8 +197,19 @@ export default function AdminPanelMernStack() {
                             <button type="button" onClick={UpdateUser} className='paid-btn-one mern-btn-top-m'>Update</button>
                         </form>
                     </div>
+                    <div className='col-lg-6'>
+                        <form className='Mern-form'>
+                            <p>{RemoveErrorMessage}</p>
+                            <div><h1>REMOVE USER</h1></div>
+                            <div><label>Email</label></div>
+                            <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
+                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
+                        </form>
+                    </div>
+                    
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

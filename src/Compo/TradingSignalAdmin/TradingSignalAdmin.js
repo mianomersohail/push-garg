@@ -4,6 +4,9 @@ import './TradingSignalAdmin.css';
 import useApi from '../FetchHook/FetchPost';
 import {io} from 'socket.io-client'
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
+import errorsound from '../../audio/error.mp3'
+import successsound from '../../audio/success.mp3'
+import Footer2 from '../Footer2.js/Footer2'
 const socket=io('http://localhost:3001')
 export default function TradingList({ assetname, assetimgsrc }) {
     const [file, setFile] = useState();
@@ -40,6 +43,8 @@ export default function TradingList({ assetname, assetimgsrc }) {
             const result = await post('/TradeSignal', formData, headers);
             console.log(result);
             setSuccessMessage('Upload successful!'); 
+            const succeesaudio=new Audio(successsound)
+            succeesaudio.play()
             //send server a notification of successfull uploaded
             socket.emit('SignalUploaded')
             socket.on('NewSignal Uploaded', () => {
@@ -49,6 +54,8 @@ export default function TradingList({ assetname, assetimgsrc }) {
             // setMainDescription('');
             // setFile('');
         } catch (error) {
+            const audio = new Audio(errorsound); // Create a new audio object
+      audio.play(); // Play the audio
             console.error('Error uploading:', error);
          showToast('eror','Signal Not Uploaded')
         }
@@ -67,7 +74,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
                 <div className="row">
                 {successMessage && <h1 className="success" >{successMessage}</h1>} {/* Display success message */}           
 
-                    <div className="col-lg-6 AdminSignalbox">
+                    <div className="col-lg-12 AdminSignalbox">
                         <form onSubmit={handleSubmit}>
                             <h3>Upload an asset image  {assetname}</h3>
                             <input
@@ -95,6 +102,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
                     </div>
                 </div>
             </div>
+            <Footer2/>
         </>
     );
 }

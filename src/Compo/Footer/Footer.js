@@ -1,10 +1,9 @@
 import "./Footer.css";
 import { Link } from "react-router-dom";
-
 export default function Footer() {
   return (
     <>
-      <div className="footer-container offset-lg-1">
+      <div className="footer-container ">
         <div className=" footer-row">
           <div className="col-lg-12  footer-box">
             <img

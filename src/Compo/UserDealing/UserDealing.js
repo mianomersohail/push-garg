@@ -4,7 +4,8 @@ import { Fade, ScaleFade, Slide, SlideFade, Collapse ,useDisclosure,Button,Box} 
 import useApi from '../FetchHook/FetchPost';
 import PaidUser from "../PaidUser/PaidUser";
 import './UserDealing.css';
-import Footer from '../Footer/Footer'
+import Footer from '../Footer2.js/Footer2'
+
 export default function UserDealing() {
     const { isOpen, onToggle } = useDisclosure()
 
@@ -255,7 +256,7 @@ const UseroneAgree = async () => {
                     </div>
                 </div>
             </div>
-            <div className="container offset-lg-1">
+            <div className="container">
                 <div className="row Deal-Main">
                
                     <div className="col-lg-12 Deal-Main">
@@ -284,18 +285,16 @@ const UseroneAgree = async () => {
                         </div>
                     </div>
 
-                    <div className="col-lg-12 Deal-Main deal-or">
-                        <div className="Deal-Input" style={{ position: 'relative' }}>
-                            <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
-                            <div className={`new-deal-inputs ${showNewDealInputs ? 'open' : ''}`}>
-                                <div><input value={DealAmount} type="Number" onChange={UpdateDealAmount} placeholder="Amount (in USD)" /></div>
-                                <div><input value={DealAddress1} onChange={UpdateDealAddress1} placeholder="User1 Address" /></div>
-                                <div><input value={DealAddress2} onChange={UpdateDealAddress2} placeholder="User2 Address" /></div>
-                                <button onClick={newdeal} className="transact-button">
-                                    Submit
-                                </button>
-                            </div>
+                    
+                    <div className="Deal-Input col-lg-12">
+                        <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
+                        <div className={`input-container ${showLockInput ? 'open' : ''}`}>
+                            <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
+                            <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
+
                         </div>
+                        {/* <input className="Deal-m-top" value={User1id} onChange={(event)=>{SetUser1id(event.target.value)}} placeholder="Enter Your Address" /> */}
+
                     </div>
                     <div className="col-lg-12 Deal-Main">
                         <div className="Deal-Input">
@@ -306,6 +305,7 @@ const UseroneAgree = async () => {
                             </div>
                         </div>
                     </div>
+                    
                     <div className="col-lg-12 ">
                         <div className="Deal-status-receive">
                             <h5>DEAL ID: {DealStatusReceive.dealId}</h5>
@@ -319,16 +319,21 @@ const UseroneAgree = async () => {
                             <h5>Current Status: {DealStatusReceive.currentStatus}</h5>
                         </div>
                     </div>
-                    <div className="Deal-Input col-lg-12">
-                        <div onClick={handleLockInputClick} className="Dealing-div Deal-blue Deal-left">User 1 Agree</div>
-                        <div className={`input-container ${showLockInput ? 'open' : ''}`}>
-                            <input className="Deal-m-top" value={User1} onChange={SetUser1} placeholder="Enter Your Address" />
-                            <button className="paid-btn-one " onClick={UseroneAgree}>Check</button>
-
+                    <div className="col-lg-12 Deal-Main deal-or">
+                        <div className="Deal-Input" style={{ position: 'relative' }}>
+                            <div onClick={handleNewDealClick} className="Dealing-div Deal-Orange">New Deal</div>
+                            <div className={`new-deal-inputs ${showNewDealInputs ? 'open' : ''}`}>
+                                <div><input value={DealAmount} type="Number" onChange={UpdateDealAmount} placeholder="Amount (in USD)" /></div>
+                                <div><input value={DealAddress1} onChange={UpdateDealAddress1} placeholder="User1 Address" /></div>
+                                <div><input value={DealAddress2} onChange={UpdateDealAddress2} placeholder="User2 Address" /></div>
+                                <button onClick={newdeal} className="transact-button">
+                                    Submit
+                                </button>
+                            </div>
                         </div>
-                        <input className="Deal-m-top" value={User1id} onChange={(event)=>{SetUser1id(event.target.value)}} placeholder="Enter Your Address" />
 
                     </div>
+                   
                 </div>
             </div>
             <Footer/>

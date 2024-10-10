@@ -5,7 +5,7 @@ import Navbar from '../Nav/NavList';
 import WorkExperience from '../workexp/workexp';
 import Courses from '../courses/Courses';
 import Trusted from '../trustedanimation/Trusted';
-import Footer from '../Footer/Footer';
+import Footer from '../Footer2.js/Footer2'
 import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
@@ -102,7 +102,7 @@ export default function Home() {
           <p>Loading...</p>
         </div>
       )}
-      <div className='container offset-lg-1 offset-xxl-3' >
+      <div className='container offset-lg-1 offset-xxl-1' >
         <div className='row'>
           <div className='col-lg-6 home-main'>
             <TypingEffect

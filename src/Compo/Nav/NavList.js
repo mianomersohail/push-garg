@@ -64,7 +64,7 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
     }, []);
 
     return (
-        <div className="container offset-lg-1 offset-xxl-3">
+        <div className="container offset-lg-1 ">
             <div className="row nav-row">
                 <div className="col-lg-5 nav-main">
                     <div className="nav-flex">

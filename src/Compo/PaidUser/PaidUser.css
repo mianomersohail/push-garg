@@ -92,3 +92,11 @@
     border: solid !important;
     background-color: red;
 }
+.MenuLists{
+    width: 6rem !important;
+    background-color:#212121;
+    color:white !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

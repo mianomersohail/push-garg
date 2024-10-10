@@ -203,6 +203,9 @@
 .Deal-status-receive{
 display: flex;
 }
+.Deal-status-receive h5{
+    font-size: 16px;
+}
 .user1agree{
     margin-top: 3rem;
 }

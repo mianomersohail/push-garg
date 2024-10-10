@@ -1,11 +1,13 @@
 import './LoginPage.css';
 import { useState, useEffect, useContext } from 'react';
 import Navbar from '../Nav/NavList';
-import Footer from '../Footer/Footer';
+import Footer from '../Footer2.js/Footer2'
+
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from 'react-router-dom';
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 import { Input } from '@chakra-ui/react'
+import errorsound from '../../audio/error.mp3'
 export default function UserLogin() {
   const { showToast } = useCustomToast(); // Use the custom toast hook
 
@@ -39,6 +41,8 @@ export default function UserLogin() {
         navigation('/AdminPanel');
       }
     } catch (err) {
+      const audio = new Audio(errorsound); // Create a new audio object
+      audio.play(); // Play the audio
       showToast('error', 'Check Email Password And Try Agian...');
 
       console.error(err);
