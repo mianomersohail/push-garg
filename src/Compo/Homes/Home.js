@@ -128,7 +128,7 @@ export default function Home() {
             <button className='cv-download' onClick={cvdownload}>MY CV download</button>
           </div>
           <div className="col-lg-4 offset-lg-1">
-            <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5622AQG0tF4iC4n2cw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1728340315513?e=1730937600&v=beta&t=jKmVwqZOBhRus1n9QUjJ-HorhfY_r-6--euL7MS2V8o" alt="Profile" />
+            <img className="home-img-one" src="https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727442009142?e=1733961600&v=beta&t=TRxeRmiPOkpKjphyNUpfIavbSmIfAoDP4JWwTS5PqXs" alt="Profile" />
             <div>
               <ul className='home-first-ul'>
                 {LinkData.map((item, index) => (
