@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './PaidUser.css';
 import UserDealing from '../UserDealing/UserDealing';
 import Navbar from '../Nav/NavList';
+import TypingEffect from 'react-typing-effect';
+
 import { io } from 'socket.io-client';
 import MenuLists from '../../menulist/menulist';
 
@@ -81,7 +83,22 @@ export default function PaidUser() {
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
                         <div className="col-lg-6 Paid-welcome">
-                            <h1 style={{ color: '#4077B6' }}>Welcome {username}</h1>
+                            {/* <h1 style={{ color: '#4077B6' }}>Welcome {username}</h1> */}
+                            <TypingEffect
+              text={[`Welcome ${username}`, 'Latest Trading Signals', 'Mern Stack Course','Decentralize Your Buying Selling','Porgramming Fundaments', 'Much More']}
+              speed={50}
+              eraseDelay={1500}
+
+              typingDelay={500}
+              cursorColor='#06B6D4'
+              displayTextRenderer={text => (
+                <h3 className='home-typing-animation'>
+                  {text.split('').map((char, i) => (
+                    <span className='typing-home' key={i} style={{ color: char === ' ' ? 'inherit' : '#06B6D4' }}>{char}</span>
+                  ))}
+                </h3>
+              )}
+            />
                             <p style={{ color: '#958984' }}>
                                 Join us on a journey where you'll not only master the MERN stack
                                 but also gain insights that can transform your investment strategy.

@@ -30,7 +30,7 @@ export default function AdminPanelMernStack() {
     const updateadduseremail = (event) => setadduseremail(event.target.value);
     const updateuserpassword = (event) => setadduserpassword(event.target.value);
     const updateremoveinput = (event) => setremoveinput(event.target.value);
-    
+
     const { loading, error, post, del, put } = useApi('http://localhost:3001');
 
     const clearMessages = () => {
@@ -62,7 +62,7 @@ export default function AdminPanelMernStack() {
                 navigation('/userlogin');
                 return; // Exit if logged out
             }
-            
+
             if (result.message === 'User-Save-Successfully') {
                 showToast('success', 'User saved successfully!');
                 updatestatus(result.message);
@@ -166,7 +166,7 @@ export default function AdminPanelMernStack() {
                             <div><label>Upload Image</label></div>
                             <div>
                                 <input
-                                style={{color:'white'}}
+                                    style={{ color: 'white' }}
                                     type="file"
                                     accept="image/*"
                                     onChange={(event) => setSelectedImage(event.target.files[0])}
@@ -178,7 +178,7 @@ export default function AdminPanelMernStack() {
                     <div className='col-lg-6'>
                         <form className='Mern-form Mern-Form-two'>
                             <h1>{Updateuser}</h1>
-                            <div><h1 className='Admincolor'>Update USER</h1></div>
+                            <div><h1 className='Admincolor'>UPDATE USER</h1></div>
                             <div><label>User Old Email</label></div>
                             <div><input value={oldemail} onChange={(event) => { setoldemail(event.target.value) }} type="email" placeholder='Enter User Old Email' /></div>
                             <div><label>User New Email</label></div>
@@ -189,28 +189,29 @@ export default function AdminPanelMernStack() {
                             <div><input value={newpassword} onChange={(event) => { setnewpassword(event.target.value) }} type="password" placeholder='Enter User New Password' /></div>
                             <div>
                                 <label>Role:</label>
-                                <select value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
-                                    <option value="">Select a role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
+                                <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
+                                    <option style={{ color: "black" }} value="admin">Admin</option>
+                                    <option style={{ color: 'black' }} value="user">User</option>
                                 </select>
                             </div>
                             <button type="button" onClick={UpdateUser} className='paid-btn-one mern-btn-top-m'>Update</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>
-                        <form className='Mern-form'>
+                        <form className='Mern-form offset-lg-6' style={{ marginTop: '3rem' }}>
                             <p>{RemoveErrorMessage}</p>
                             <div><h1>REMOVE USER</h1></div>
                             <div><label>Email</label></div>
                             <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <button type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
+                            <div>
+                                <button  type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
+                            </div>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 }

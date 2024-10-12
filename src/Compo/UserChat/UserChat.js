@@ -58,7 +58,7 @@ const ChatComponent = () => {
     <>
       <div className='container'>
         <div className='row'>
-          <div className='offset-lg-2'>
+          <div className='col-lg-8 offset-lg-4'>
             <span style={{ color: '#06B6D4', fontSize: '32px' }}>L</span>
             <span>EAVE</span>
             <span style={{ color: "#06B6D4", fontSize: "32px" }}>Y</span>

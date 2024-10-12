@@ -150,7 +150,7 @@
 
 }
 .Mern-form{
-    padding: 20px 0 0 20px;
+    padding: 20px 0 20px 20px;
     
 }
 @media screen and (max-width:1200px) {
@@ -198,7 +198,7 @@ font-size: 25px;
 
 }
 .paid-btn-tops{
-    margin-top: 1rem;
+    margin-top: 2.3rem;
 }
 .loading{
     display: flex;

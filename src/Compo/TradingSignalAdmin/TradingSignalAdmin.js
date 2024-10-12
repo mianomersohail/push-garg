@@ -81,6 +81,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
                         <form onSubmit={handleSubmit}>
                             <h3>Upload an asset image  {assetname}</h3>
                             <input
+                            style={{color:'white'}}
                                 type="file"
                                 accept="image/*"
                                 onChange={handleFileChange}

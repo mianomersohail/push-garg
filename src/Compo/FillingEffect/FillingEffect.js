@@ -32,11 +32,8 @@ export default function FillingEffect() {
     return (
         <div className="container Filling-main ">
             <div className="row">
-                <div className="col-lg-2 offset-lg-1">
-                    <img className='Filling-img'
-                        src="https://media.licdn.com/dms/image/v2/D5603AQHNxqJ-f0xuuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726896992279?e=1732752000&v=beta&t=OKZ_z1ZLv_AIjc9CqeqXcTbHBEy6M9o2foOgHYbIMaY"
-                        alt="Profile"
-                    />
+                <div className="col-lg-4 offset-lg-1">
+                    <img  src='https://media.licdn.com/dms/image/v2/D5622AQGnRLSb1Awggw/feedshare-shrink_800/feedshare-shrink_800/0/1728720237857?e=1731542400&v=beta&t=IH5gJnn19vOpp5xzOYkclVvaS-Kk1X7ZSOk0cm_BxeE' className='Filling-img'alt="Profile"/>
                 </div>
                 <div className="col-lg-6  filling-box-two" ref={skillRef}>
                     <div className="skill">

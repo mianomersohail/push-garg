@@ -21,8 +21,8 @@ export default function Home() {
   const [username, setusername] = useState()
   const navigation = useNavigate();
   const { loading, error, data, post, get } = useApi('http://localhost:3001');
-  const namefromlocal=localStorage.getItem('username')
-  const image=localStorage.getItem('image')  
+  const namefromlocal = localStorage.getItem('username')
+  const image = localStorage.getItem('image')
   const cvdownload = async () => {
     try {
       const result = await get('/Cv', { headers: { 'Content-Type': 'application/pdf' } });
@@ -64,7 +64,7 @@ export default function Home() {
         else {
           localStorage.setItem('username', result.user.username)
           setusername(result.user.username)
-       return   navigation('/paiduser')
+          return navigation('/paiduser')
         }
         // setusername(result.user.username)
         // setusename(result.user.username)
@@ -72,11 +72,11 @@ export default function Home() {
         // navigation('/paiduser',{ state: { Data: { username:result.user.username } } })
       }
       if (result.user.role == 'Admin') {
-       return navigation('/AdminPanel')
+        return navigation('/AdminPanel')
       }
     } catch (err) {
       console.error(err);
-      showToast( 'error','No Token Found');
+      showToast('error', 'No Token Found');
 
     }
   };
@@ -84,21 +84,21 @@ export default function Home() {
   useEffect(() => {
   }, []);
   const baseURL = 'http://localhost:3001/';
-const imgURL = image ? `${baseURL}${image}` : 'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4';
+  const imgURL = image ? `${baseURL}${image}` : 'https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg';
 
 
   return (
     <>
       <Navbar
-  imgsrc={imgURL}
-  name={namefromlocal || 'welcome'}
-  navlinameone={'Docs'}
-  navlinametwo={'Login'} // Optional chaining to avoid error
-  linkone={'/Documentation'}
-  onClick={navlogin}
-  showNotifications={!!namefromlocal} // Pass true if username exists
+        imgsrc={imgURL}
+        name={namefromlocal || 'Welcome Coders'}
+        navlinameone={'Docs'}
+        navlinametwo={namefromlocal ? 'WelcomeBack' : 'Login'} // Optional chaining to avoid error
+        linkone={'/Documentation'}
+        onClick={navlogin}
+        showNotifications={!!namefromlocal} // Pass true if username exists
 
-/>
+      />
 
 
       {loading && (
@@ -111,7 +111,7 @@ const imgURL = image ? `${baseURL}${image}` : 'https://media.licdn.com/dms/image
         <div className='row'>
           <div className='col-lg-6 home-main'>
             <TypingEffect
-              text={['REACT JS', 'NODEJS+EXPRESS JS', 'ETH/BLOCKCHAIN', 'FOREX TRADER']}
+              text={['REACT JS', 'NODE+EXPRESS JS', 'BLOCKCHAIN SOFT DEV','MONGO DB','RESTFULL API`S', 'FOREX TRADER']}
               speed={50}
               eraseDelay={1500}
 
@@ -148,7 +148,7 @@ const imgURL = image ? `${baseURL}${image}` : 'https://media.licdn.com/dms/image
       <FillingEffect />
       <CountEffect />
       <Courses />
-      <Chat/>
+      <Chat />
       <EthSection />
       <Trusted />
       <Footer />

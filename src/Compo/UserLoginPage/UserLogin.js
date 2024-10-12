@@ -2,7 +2,17 @@ import './LoginPage.css';
 import { useState, useEffect, useContext } from 'react';
 import Navbar from '../Nav/NavList';
 import Footer from '../Footer2.js/Footer2'
-
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from '@chakra-ui/react'
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from 'react-router-dom';
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
@@ -25,13 +35,13 @@ export default function UserLogin() {
     };
     try {
       const result = await post('/Login', { email, password }, headers); 
-      localStorage.setItem('image',result.Result.image)
       console.log(result)
       if (result.Result.token) {
         localStorage.setItem('token', result.Result.token)
       }
      
       if (result.Result.role == 'User') {
+        localStorage.setItem('image',result.Result.image)
         localStorage.setItem('username',result.Result.username)
         localStorage.setItem('userId',result.Result.userId)
         setusername(result.username)
@@ -52,18 +62,18 @@ export default function UserLogin() {
       <Navbar imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGtLVATlqQ3VA/feedshare-shrink_800/feedshare-shrink_800/0/1728340545336?e=1730937600&v=beta&t=jQdyuxozIrhfU9xPT9h7-e4DjpE8FwEz00yqzB_ln78'} name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
       <div className="container Login-Page-Main">
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-4">
             <img
               className="login-page-img"
-              src="https://media.licdn.com/dms/image/v2/D5622AQGtLVATlqQ3VA/feedshare-shrink_800/feedshare-shrink_800/0/1728340545336?e=1730937600&v=beta&t=jQdyuxozIrhfU9xPT9h7-e4DjpE8FwEz00yqzB_ln78"
+              src="https://media.licdn.com/dms/image/v2/D5622AQGnRLSb1Awggw/feedshare-shrink_800/feedshare-shrink_800/0/1728720237857?e=1731542400&v=beta&t=IH5gJnn19vOpp5xzOYkclVvaS-Kk1X7ZSOk0cm_BxeE"
               alt="Login"
             />
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-8">
             <form className="login-page-form" onSubmit={submitLoginForm}>
               <div><p style={{ color: '#06B5D3' }}>{serverMessage}</p></div>
-              <div><h3>Login</h3></div>
-              <div><label>Email/Phone</label></div>
+              <div className='login-center'><h3>Login</h3></div>
+              <div><label className='login-center'>Email/Phone</label></div>
               {/* <div>
                 <input
                   value={email}
@@ -74,8 +84,9 @@ export default function UserLogin() {
                   required
                 />
               </div> */}
-              <div>
+              <div className='login-center'>
                 <Input placeholder='Enter Your Email' value={email}
+
                   onChange={(e) => setEmail(e.target.value)}
                   name="email"
                   type="email"
@@ -83,7 +94,7 @@ export default function UserLogin() {
                   required size='md' />
                   </div>
 
-              <div><label>Password</label></div>
+              <div className='login-center'><label>Password</label></div>
               {/* <div>
                 <input
                   value={password}
@@ -94,8 +105,9 @@ export default function UserLogin() {
                   required
                 />
               </div> */}
-              <div>
+              <div className='login-center'>
               <Input placeholder='Enter Your Password' size='md'value={password}
+              
                   onChange={(e) => setPassword(e.target.value)}
                   name="password"
                   type="password"
@@ -103,7 +115,7 @@ export default function UserLogin() {
                  />
 
               </div>
-              <div><button type="submit">Login</button></div>
+              <div className='login-center'><button type="submit">Login</button></div>
               {loading && (
                 <div className="spinner-container">
                   <div className="spinner"></div>
@@ -114,6 +126,7 @@ export default function UserLogin() {
           </div>
         </div>
       </div>
+      
       <Footer />
     </>
   );

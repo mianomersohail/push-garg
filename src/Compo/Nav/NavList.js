@@ -68,13 +68,12 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
             }
         } catch (err) {
             console.error(err);
-            showToast('error', 'No Token Found');
+            // showToast('error', 'No Token Found');
         }
     };
 
     useEffect(() => {
         fetchNotifications(); // Fetch notifications on initial load
-
         socket.on('NewSignal Uploaded', (data) => {
             console.log('Notification received:', data);
             const newNotification = { message: 'New trading signal uploaded!', read: false };
@@ -109,12 +108,12 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             </Link>
                         </li>
                     </ul>
-                    {loading && (
+                    {/* {loading && (
                         <div className="spinner-container">
                             <div className="spinner"></div>
                             <p>Loading...</p>
                         </div>
-                    )}
+                    )} */}
                     {showNotifications && (
                         <div className={`bell-icon ${unreadCount > 0 ? 'shake' : ''}`} onClick={toggleNotifications}>
                             🔔
