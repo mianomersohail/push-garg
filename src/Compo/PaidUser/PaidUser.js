@@ -19,7 +19,7 @@ export default function PaidUser() {
 
     useEffect(() => {
         socket.on('NewSignal Uploaded', (message) => {
-            setServerMessage(message);
+            console.log(message)
             setNotifications(prevNotifications => [...prevNotifications, message]);
             setShakeBell(true);
         });
@@ -33,6 +33,7 @@ export default function PaidUser() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('image');
+        localStorage.removeItem('userId')
 
         setTimeout(() => {
             navigate('/userlogin');

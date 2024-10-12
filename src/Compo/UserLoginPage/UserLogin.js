@@ -13,10 +13,8 @@ export default function UserLogin() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [serverMessage, setServerMessage] = useState(null);
   const [username,setusername]=useState('')
-
   const navigation = useNavigate();
   const { loading, error, data, post } = useApi('http://localhost:3001'); 
   const submitLoginForm = async (event) => {
@@ -27,24 +25,25 @@ export default function UserLogin() {
     };
     try {
       const result = await post('/Login', { email, password }, headers); 
-      localStorage.setItem('image',result.image)
-      if (result.token) {
-        localStorage.setItem('token', result.token)
+      localStorage.setItem('image',result.Result.image)
+      console.log(result)
+      if (result.Result.token) {
+        localStorage.setItem('token', result.Result.token)
       }
      
-      if (result.role == 'User') {
-        localStorage.setItem('username',result.username)
+      if (result.Result.role == 'User') {
+        localStorage.setItem('username',result.Result.username)
+        localStorage.setItem('userId',result.Result.userId)
         setusername(result.username)
         navigation('/paiduser')
       }
-      if (result.role == 'Admin') {
+      if (result.Result.role == 'Admin') {
         navigation('/AdminPanel');
       }
     } catch (err) {
       const audio = new Audio(errorsound); // Create a new audio object
       audio.play(); // Play the audio
       showToast('error', 'Check Email Password And Try Agian...');
-
       console.error(err);
     }
   };

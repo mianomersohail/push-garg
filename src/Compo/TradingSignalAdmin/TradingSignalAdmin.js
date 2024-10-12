@@ -7,7 +7,10 @@ import useCustomToast from '../usetoast/usetoast'; // Import the custom toast ho
 import errorsound from '../../audio/error.mp3'
 import successsound from '../../audio/success.mp3'
 import Footer2 from '../Footer2.js/Footer2'
-const socket=io('http://localhost:3001')
+
+const userId = localStorage.getItem('userId'); // Or wherever you're storing the user ID
+const socket = io('http://localhost:3001', { query: { userId } });
+
 export default function TradingList({ assetname, assetimgsrc }) {
     const [file, setFile] = useState();
     const [MainHeading, setMainHeading] = useState('');

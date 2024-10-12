@@ -17,12 +17,12 @@ import Chat from '../UserChat/UserChat'
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 const LinkData = Links;
 export default function Home() {
-
   const { showToast } = useCustomToast(); // Use the custom toast hook
-
   const [username, setusername] = useState()
   const navigation = useNavigate();
   const { loading, error, data, post, get } = useApi('http://localhost:3001');
+  const namefromlocal=localStorage.getItem('username')
+  const image=localStorage.getItem('image')  
   const cvdownload = async () => {
     try {
       const result = await get('/Cv', { headers: { 'Content-Type': 'application/pdf' } });
@@ -43,7 +43,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
   const navlogin = async () => {
     const token = localStorage.getItem('token')
     const headers = {
@@ -65,7 +64,7 @@ export default function Home() {
         else {
           localStorage.setItem('username', result.user.username)
           setusername(result.user.username)
-          navigation('/paiduser')
+       return   navigation('/paiduser')
         }
         // setusername(result.user.username)
         // setusename(result.user.username)
@@ -73,7 +72,7 @@ export default function Home() {
         // navigation('/paiduser',{ state: { Data: { username:result.user.username } } })
       }
       if (result.user.role == 'Admin') {
-        navigation('/AdminPanel')
+       return navigation('/AdminPanel')
       }
     } catch (err) {
       console.error(err);
@@ -84,18 +83,24 @@ export default function Home() {
 
   useEffect(() => {
   }, []);
+  const baseURL = 'http://localhost:3001/';
+const imgURL = image ? `${baseURL}${image}` : 'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4';
+
 
   return (
     <>
       <Navbar
-        imgsrc={'https://media.licdn.com/dms/image/v2/D5622AQGcfzrXrBLDkA/feedshare-shrink_800/feedshare-shrink_800/0/1728340701041?e=1730937600&v=beta&t=L5wJ7fcORdsKVARAC7xGIMM9qs5jM27o66KH4VFAYx4'}
-        name={'Mian Omer'}
-        navlinameone={'Docs'}
-        navlinametwo={'Login'}
-        linkone={'/Documentation'}
-        onClick={navlogin}
-        showNotifications ={false}
-      />
+  imgsrc={imgURL}
+  name={namefromlocal || 'welcome'}
+  navlinameone={'Docs'}
+  navlinametwo={'Login'} // Optional chaining to avoid error
+  linkone={'/Documentation'}
+  onClick={navlogin}
+  showNotifications={!!namefromlocal} // Pass true if username exists
+
+/>
+
+
       {loading && (
         <div className="spinner-container">
           <div className="spinner"></div>

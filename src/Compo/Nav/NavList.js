@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import useApi from '../FetchHook/FetchPost';
 import './Nav.css';
+import useCustomToast from '../usetoast/usetoast';
 
-
-const socket = io('http://localhost:3001'); // Server URL
+const userId = localStorage.getItem('userId'); // User ID
+const socket = io('http://localhost:3001', { query: { userId } });
 
 export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinametwo, linkone, showNotifications }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,59 +14,84 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const { showToast } = useCustomToast();
+    const { loading, get } = useApi('http://localhost:3001');
 
     const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-        if (isDarkMode) {
-            document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
-        } else {
-            document.body.classList.add('dark-mode');
-            document.body.classList.remove('light-mode');
-        }
+        setIsDarkMode((prev) => {
+            document.body.classList.toggle('light-mode', !prev);
+            document.body.classList.toggle('dark-mode', prev);
+            return !prev;
+        });
     };
 
-    // Function to mark a specific notification as read
     const markAsRead = (index) => {
         const updatedNotifications = [...notifications];
         updatedNotifications[index].read = true;
         setNotifications(updatedNotifications);
-        const unread = updatedNotifications.filter(notification => !notification.read).length;
-        setUnreadCount(unread); // Update unread count
+        setUnreadCount(updatedNotifications.filter(notification => !notification.read).length);
     };
 
-    // Function to mark all notifications as read
     const markAllAsRead = () => {
         const updatedNotifications = notifications.map(notification => ({ ...notification, read: true }));
         setNotifications(updatedNotifications);
-        setUnreadCount(0); // Reset unread count
+        setUnreadCount(0);
     };
 
     const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setIsMenuOpen(prev => !prev);
     };
 
-    const toggleNotifications = () => {
-        setShowNotificationsDropdown(!showNotificationsDropdown);
+    const toggleNotifications = async () => {
+        setShowNotificationsDropdown(prev => !prev);
         if (!showNotificationsDropdown) {
-            markAllAsRead(); // Mark all as read when dropdown is opened
+            await fetchNotifications();
+        } else {
+            markAllAsRead();
+        }
+    };
+
+    const fetchNotifications = async () => {
+        const token = localStorage.getItem('token');
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        try {
+            const result = await get('/Notifications', {}, headers);
+            if (result && result.unreadNotifications) {
+                // Filter out duplicates
+                const newNotifications = result.unreadNotifications.filter(
+                    newNote => !notifications.some(note => note.message === newNote.message)
+                );
+                setNotifications(prev => [...prev, ...newNotifications]);
+                setUnreadCount(prev => prev + newNotifications.length);
+            }
+        } catch (err) {
+            console.error(err);
+            showToast('error', 'No Token Found');
         }
     };
 
     useEffect(() => {
-        socket.on('NewSignal Uploaded', (message) => {
+        fetchNotifications(); // Fetch notifications on initial load
+
+        socket.on('NewSignal Uploaded', (data) => {
+            console.log('Notification received:', data);
             const newNotification = { message: 'New trading signal uploaded!', read: false };
-            setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
-            setUnreadCount((prevCount) => prevCount + 1); // Increase unread count
+            // Only add if not already present
+            if (!notifications.some(note => note.message === newNotification.message)) {
+                setNotifications(prev => [...prev, newNotification]);
+                setUnreadCount(prev => prev + 1);
+            }
         });
 
         return () => {
-            socket.off('NewSignal Uploaded');
+            socket.off('NewSignal Uploaded'); // Clean up socket listener
         };
-    }, []);
+    }, []); // Empty dependency array to run only on mount
 
     return (
-        <div className="container offset-lg-1 ">
+        <div className="container offset-lg-1">
             <div className="row nav-row">
                 <div className="col-lg-5 nav-main">
                     <div className="nav-flex">
@@ -82,6 +109,12 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             </Link>
                         </li>
                     </ul>
+                    {loading && (
+                        <div className="spinner-container">
+                            <div className="spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    )}
                     {showNotifications && (
                         <div className={`bell-icon ${unreadCount > 0 ? 'shake' : ''}`} onClick={toggleNotifications}>
                             🔔
@@ -98,7 +131,7 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                                         <li
                                             key={index}
                                             className={note.read ? 'read' : 'unread'}
-                                            onClick={() => markAsRead(index)} // Correct function call here
+                                            onClick={() => markAsRead(index)}
                                         >
                                             {note.message}
                                         </li>
@@ -107,8 +140,8 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             )}
                         </div>
                     )}
-                    <button 
-                        className={`theme-toggle-btn ${isDarkMode ? 'stars' : 'sun'}`} 
+                    <button
+                        className={`theme-toggle-btn ${isDarkMode ? 'stars' : 'sun'}`}
                         onClick={toggleTheme}
                     />
                 </div>

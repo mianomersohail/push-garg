@@ -166,6 +166,7 @@ export default function AdminPanelMernStack() {
                             <div><label>Upload Image</label></div>
                             <div>
                                 <input
+                                style={{color:'white'}}
                                     type="file"
                                     accept="image/*"
                                     onChange={(event) => setSelectedImage(event.target.files[0])}
