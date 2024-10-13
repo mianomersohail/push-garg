@@ -21,7 +21,7 @@ export default function PaidUser() {
 
     useEffect(() => {
         socket.on('NewSignal Uploaded', (message) => {
-            console.log(message)
+            console.log(message);
             setNotifications(prevNotifications => [...prevNotifications, message]);
             setShakeBell(true);
         });
@@ -35,7 +35,7 @@ export default function PaidUser() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('image');
-        localStorage.removeItem('userId')
+        localStorage.removeItem('userId');
 
         setTimeout(() => {
             navigate('/userlogin');
@@ -82,23 +82,23 @@ export default function PaidUser() {
                 />
                 <div className="container offset-lg-1">
                     <div className="row Paid-User-Main">
-                        <div className="col-lg-6 Paid-welcome">
-                            {/* <h1 style={{ color: '#4077B6' }}>Welcome {username}</h1> */}
-                            <TypingEffect
-              text={[`Welcome ${username}`, 'Latest Trading Signals', 'Mern Stack Course','Decentralize Your Buying Selling','Porgramming Fundaments', 'Much More']}
-              speed={50}
-              eraseDelay={1500}
-
-              typingDelay={500}
-              cursorColor='#06B6D4'
-              displayTextRenderer={text => (
-                <h3 className='home-typing-animation'>
-                  {text.split('').map((char, i) => (
-                    <span className='typing-home' key={i} style={{ color: char === ' ' ? 'inherit' : '#06B6D4' }}>{char}</span>
-                  ))}
-                </h3>
-              )}
-            />
+                        <div className="col-lg-6 Paid-welcome ">
+                            <div className="typing-container">
+                                <TypingEffect
+                                    text={[`Welcome ${username}`, 'Latest Trading Signals', 'Mern Stack Course', 'Decentralize Buying Selling', 'Programming Fundamentals', 'Much More']}
+                                    speed={50}
+                                    eraseDelay={1500}
+                                    typingDelay={500}
+                                    cursorColor='#06B6D4'
+                                    displayTextRenderer={text => (
+                                        <h3 className='home-typing-animation gradient-text'>
+                                            {text.split('').map((char, i) => (
+                                                <span className='typing-home' key={i} style={{ color: char === ' ' ? 'inherit' : '#06B6D4' }}>{char}</span>
+                                            ))}
+                                        </h3>
+                                    )}
+                                />
+                            </div>
                             <p style={{ color: '#958984' }}>
                                 Join us on a journey where you'll not only master the MERN stack
                                 but also gain insights that can transform your investment strategy.
@@ -107,16 +107,12 @@ export default function PaidUser() {
                                 decisions. Learn where to invest, how to invest smartly, and watch your
                                 skills and portfolio soar to new heights!
                             </p>
-                            <div className='MenuLists'>
-
-                            <MenuLists 
-                            
-                            valueone={'MERN STACK'} 
-                            valuetwo={'BLOCKCHAIN'} 
-                            valuethree={'DEALING'} 
-                            valuefour={'TRADING/SIGNALS'}
-                            onSelect={handleMenuClick} // Pass the click handler
-                            />
+                            <div className='MenuLists menu-list-paiduser'>
+                                <MenuLists 
+                                    valuethree={'DEALING'} 
+                                    valuefour={'TRADING/SIGNALS'}
+                                    onSelect={handleMenuClick} // Pass the click handler
+                                />
                             </div>
                         </div>
                     </div>

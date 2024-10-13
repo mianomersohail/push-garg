@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 import errorsound from '../../audio/error.mp3';
 import successsound from '../../audio/success.mp3';
-import Footer from '../Footer2.js/Footer2'
-
+import Footer from '../Footer2.js/Footer2';
+import AllUser from './Allusers';
 
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
@@ -26,16 +26,16 @@ export default function AdminPanelMernStack() {
     const [newpassword, setnewpassword] = useState('');
 
     const { showToast } = useCustomToast(); // Use the custom toast hook
-    const handleRoleSelect = (selectedRole) => setRole(selectedRole);
-    const updateadduseremail = (event) => setadduseremail(event.target.value);
-    const updateuserpassword = (event) => setadduserpassword(event.target.value);
-    const updateremoveinput = (event) => setremoveinput(event.target.value);
-
     const { loading, error, post, del, put } = useApi('http://localhost:3001');
 
     const clearMessages = () => {
         updatestatus('');
         SetRemoveErrorMessage('');
+    };
+
+    const handleRoleSelect = (selectedRole) => {
+        console.log("Selected role:", selectedRole); // Debugging log
+        setRole(selectedRole);
     };
 
     const AddUser = async () => {
@@ -50,6 +50,7 @@ export default function AdminPanelMernStack() {
         formData.append('adduseremail', adduseremail);
         formData.append('adduserpassword', adduserpassword);
         formData.append('username', username);
+        formData.append('role', role); // Include role here
         if (selectedImage) {
             formData.append('image', selectedImage);
         }
@@ -155,14 +156,14 @@ export default function AdminPanelMernStack() {
                     </h1>
                     <div className='col-lg-6'>
                         <form className='Mern-form'>
-                            <div><h1 className='Admincolor'>NEW USER</h1></div>
+                            <div><h1 className='Admincolor gradient-text'>NEW USER</h1></div>
                             {status}
                             <div><label>Email</label></div>
-                            <div><input value={adduseremail} onChange={updateadduseremail} type='email' placeholder='Enter User Email' /></div>
+                            <div><input value={adduseremail} onChange={(event) => setadduseremail(event.target.value)} type='email' placeholder='Enter User Email' /></div>
                             <div><label>Password</label></div>
-                            <div><input value={adduserpassword} onChange={updateuserpassword} type='password' placeholder='Enter User Password' /></div>
+                            <div><input value={adduserpassword} onChange={(event) => setadduserpassword(event.target.value)} type='password' placeholder='Enter User Password' /></div>
                             <div><label>User Name</label></div>
-                            <div><input placeholder='Enter User Name' value={username} onChange={(event) => { setusername(event.target.value) }} /></div>
+                            <div><input placeholder='Enter User Name' value={username} onChange={(event) => setusername(event.target.value)} /></div>
                             <div><label>Upload Image</label></div>
                             <div>
                                 <input
@@ -172,13 +173,20 @@ export default function AdminPanelMernStack() {
                                     onChange={(event) => setSelectedImage(event.target.files[0])}
                                 />
                             </div>
+                            <div>
+                                <label>Role:</label>
+                                <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
+                                    <option style={{ color: "black" }} value="admin">Admin</option>
+                                    <option style={{ color: 'black' }} value="user">User</option>
+                                </select>
+                            </div>
                             <button type="button" onClick={AddUser} className='paid-btn-one paid-btn-tops'>Submit</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>
                         <form className='Mern-form Mern-Form-two'>
                             <h1>{Updateuser}</h1>
-                            <div><h1 className='Admincolor'>UPDATE USER</h1></div>
+                            <div><h1 className='Admincolor gradient-text'>UPDATE USER</h1></div>
                             <div><label>User Old Email</label></div>
                             <div><input value={oldemail} onChange={(event) => { setoldemail(event.target.value) }} type="email" placeholder='Enter User Old Email' /></div>
                             <div><label>User New Email</label></div>
@@ -200,15 +208,13 @@ export default function AdminPanelMernStack() {
                     <div className='col-lg-6'>
                         <form className='Mern-form offset-lg-6' style={{ marginTop: '3rem' }}>
                             <p>{RemoveErrorMessage}</p>
-                            <div><h1>REMOVE USER</h1></div>
+                            <div><h1 className='gradient-text'> REMOVE USER</h1></div>
                             <div><label>Email</label></div>
-                            <div><input type='email' value={removeinput} onChange={updateremoveinput} placeholder='Enter User Email' /></div>
-                            <div>
-                                <button  type="button" onClick={removeuser} className='paid-btn-one mern-btn-top-m-two'>Remove</button>
-                            </div>
+                            <div><input type='email' value={removeinput} onChange={(event) => setremoveinput(event.target.value)} placeholder='Remove User Email' /></div>
+                            <button type="button" onClick={removeuser} className='paid-btn-one paid-btn-tops'>Remove</button>
                         </form>
                     </div>
-
+                    <AllUser />
                 </div>
             </div>
             <Footer />

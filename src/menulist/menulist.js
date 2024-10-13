@@ -18,19 +18,13 @@ export default function MenuLists({ valueone, valuetwo, valuethree, valuefour, o
                 Menu
             </MenuButton>
             <MenuList minWidth='240px'>
-                <MenuOptionGroup title='Interests' type='radio'>
-                    <MenuItemOption value={valueone} onClick={() => onSelect(valueone)}>
-                        {valueone}
-                    </MenuItemOption>
-                    <MenuItemOption value={valuetwo} onClick={() => onSelect(valuetwo)}>
-                        {valuetwo}
-                    </MenuItemOption>
-                </MenuOptionGroup>
-                <MenuDivider />
-                <MenuOptionGroup title='More Options' type='checkbox'>
+               
+                
+                <MenuOptionGroup title='' type='checkbox'>
                     <MenuItemOption value={valuethree} onClick={() => onSelect(valuethree)}>
                         {valuethree}
                     </MenuItemOption>
+                    
                     <MenuItemOption value={valuefour} onClick={() => onSelect(valuefour)}>
                         {valuefour}
                     </MenuItemOption>

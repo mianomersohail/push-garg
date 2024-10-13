@@ -1,0 +1,51 @@
+.profile-card {
+    background: white;
+    overflow: scroll;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-image {
+ 
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    border-radius: 50%; /* Make it circular */
+   
+    /* Ensures the image covers the entire area without distortion */
+}
+
+.username {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.email {
+    font-size: 16px;
+    color: #777;
+}
+
+.edit-button {
+    background-color: #06B6D4; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #0490a8; /* Darker shade */
+}

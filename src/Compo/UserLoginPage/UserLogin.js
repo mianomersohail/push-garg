@@ -2,17 +2,7 @@ import './LoginPage.css';
 import { useState, useEffect, useContext } from 'react';
 import Navbar from '../Nav/NavList';
 import Footer from '../Footer2.js/Footer2'
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
-} from '@chakra-ui/react'
+
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from 'react-router-dom';
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
@@ -24,26 +14,26 @@ export default function UserLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
-  const [username,setusername]=useState('')
+  const [username, setusername] = useState('')
   const navigation = useNavigate();
-  const { loading, error, data, post } = useApi('http://localhost:3001'); 
+  const { loading, error, data, post } = useApi('http://localhost:3001');
   const submitLoginForm = async (event) => {
     event.preventDefault()
     const token = localStorage.getItem('token')
     const headers = {
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     };
     try {
-      const result = await post('/Login', { email, password }, headers); 
+      const result = await post('/Login', { email, password }, headers);
       console.log(result)
       if (result.Result.token) {
         localStorage.setItem('token', result.Result.token)
       }
-     
+
       if (result.Result.role == 'User') {
-        localStorage.setItem('image',result.Result.image)
-        localStorage.setItem('username',result.Result.username)
-        localStorage.setItem('userId',result.Result.userId)
+        localStorage.setItem('image', result.Result.image)
+        localStorage.setItem('username', result.Result.username)
+        localStorage.setItem('userId', result.Result.userId)
         setusername(result.username)
         navigation('/paiduser')
       }
@@ -74,48 +64,31 @@ export default function UserLogin() {
               <div><p style={{ color: '#06B5D3' }}>{serverMessage}</p></div>
               <div className='login-center'><h3>Login</h3></div>
               <div><label className='login-center'>Email/Phone</label></div>
-              {/* <div>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  type="email"
-                  placeholder="Enter your Email/Phone"
-                  required
-                />
-              </div> */}
+
               <div className='login-center'>
                 <Input placeholder='Enter Your Email' value={email}
 
                   onChange={(e) => setEmail(e.target.value)}
                   name="email"
                   type="email"
-                
+
                   required size='md' />
-                  </div>
+              </div>
 
               <div className='login-center'><label>Password</label></div>
-              {/* <div>
-                <input
-                  value={password}
+
+              <div className='login-center'>
+                <Input placeholder='Enter Your Password' size='md' value={password}
+
                   onChange={(e) => setPassword(e.target.value)}
                   name="password"
                   type="password"
-                  placeholder="Enter Your Password"
                   required
                 />
-              </div> */}
-              <div className='login-center'>
-              <Input placeholder='Enter Your Password' size='md'value={password}
-              
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="password"
-                  type="password"
-                  required
-                 />
 
               </div>
               <div className='login-center'><button type="submit">Login</button></div>
+              
               {loading && (
                 <div className="spinner-container">
                   <div className="spinner"></div>
@@ -126,7 +99,7 @@ export default function UserLogin() {
           </div>
         </div>
       </div>
-      
+
       <Footer />
     </>
   );

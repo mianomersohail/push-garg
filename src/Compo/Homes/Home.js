@@ -81,8 +81,7 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-  }, []);
+  
   const baseURL = 'http://localhost:3001/';
   const imgURL = image ? `${baseURL}${image}` : 'https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg';
 

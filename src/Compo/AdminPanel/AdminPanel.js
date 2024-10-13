@@ -33,7 +33,7 @@ export default function PaidUser() {
         } else if (switchValue === 'TRADING/SIGNALS') {
             navigate('/TradingSignalAdmin');
         } else if (switchValue === 'BLOCKCHAIN') {
-
+            navigate('/Blockchain')
         }
 
     };
@@ -47,7 +47,7 @@ export default function PaidUser() {
             <div className='container offset-lg-1'>
                 <div className='row Paid-User-Main'>
                     <div className='col-lg-6 Paid-welcome'>
-                        <h1 style={{ color: '#4077B6' }}>Welcome {name || 'John'}</h1>
+                        <h1 className='gradient-text'>Welcome {name || 'Admin'}</h1>
                         <p style={{ color: '#958984' }}>
                             Hi Admin, hope your day was good. Please select the section you want to update for users.
                         </p>
