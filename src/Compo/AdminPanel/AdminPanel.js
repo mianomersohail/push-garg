@@ -71,7 +71,7 @@ export default function PaidUser() {
                                     </ul>
                                 )}
                             </div>
-                            <button onClick={switchTo} className='paid-btn-one'>Switch</button>
+                            <button onClick={switchTo} className='morph-btn'>Switch</button>
                         </div>
                     </div>
                 </div>

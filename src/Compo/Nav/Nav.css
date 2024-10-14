@@ -278,22 +278,11 @@
     --bg-color-dark: black;
     --text-color-dark: #ffffff;
     --accent-color: #06B6D4; /* Accent color for links and other interactive elements */
+    --gradient-right-left: linear-gradient(to left, #FF7D67, #FEB65B);
 }
 
 /* Transition for theme change */
-* {
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-body.light-mode {
-    background-color: var(--bg-color-light);
-    color: var(--text-color-light);
-}
-
-body.dark-mode {
-    background-color: var(--bg-color-dark);
-    color: var(--text-color-dark);
-}
 
 .nav-main {
     display: flex;
@@ -307,10 +296,7 @@ body.dark-mode {
     color: var(--text-color-dark);
 }
 
-body.light-mode .nav-main {
-    background-color: var(--bg-color-light);
-    color: var(--text-color-light);
-}
+
 
 /* Theme Toggle Button */
 .theme-toggle-btn {
@@ -375,4 +361,21 @@ body.light-mode .bell-icon {
 body.dark-mode .notification-dropdown {
     background-color: var(--bg-color-dark);
     color: var(--text-color-dark);
+}
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode .nav-main{
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+body.light-mode .nav-main {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
 }

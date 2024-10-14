@@ -101,7 +101,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
                                 placeholder='Enter Signal Details'
                                 required
                             />
-                            <button className='paid-btn-one' type="submit">Upload</button>
+                            <button className='morph-btn' type="submit">Upload</button>
                         </form>
                     </div>
                 </div>

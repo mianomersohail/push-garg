@@ -30,12 +30,14 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
         updatedNotifications[index].read = true;
         setNotifications(updatedNotifications);
         setUnreadCount(updatedNotifications.filter(notification => !notification.read).length);
+        localStorage.setItem('notifications', JSON.stringify(updatedNotifications)); // Update localStorage
     };
 
     const markAllAsRead = () => {
         const updatedNotifications = notifications.map(notification => ({ ...notification, read: true }));
         setNotifications(updatedNotifications);
         setUnreadCount(0);
+        localStorage.setItem('notifications', JSON.stringify(updatedNotifications)); // Update localStorage
     };
 
     const toggleMenu = () => {
@@ -59,27 +61,42 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
         try {
             const result = await get('/Notifications', {}, headers);
             if (result && result.unreadNotifications) {
-                // Filter out duplicates
                 const newNotifications = result.unreadNotifications.filter(
                     newNote => !notifications.some(note => note.message === newNote.message)
                 );
-                setNotifications(prev => [...prev, ...newNotifications]);
+                setNotifications(prev => {
+                    const updatedNotifications = [...prev, ...newNotifications];
+                    localStorage.setItem('notifications', JSON.stringify(updatedNotifications)); // Update localStorage
+                    return updatedNotifications;
+                });
                 setUnreadCount(prev => prev + newNotifications.length);
             }
         } catch (err) {
             console.error(err);
-            // showToast('error', 'No Token Found');
+        }
+    };
+
+    const loadNotificationsFromLocalStorage = () => {
+        const storedNotifications = localStorage.getItem('notifications');
+        if (storedNotifications) {
+            const parsedNotifications = JSON.parse(storedNotifications);
+            setNotifications(parsedNotifications);
+            setUnreadCount(parsedNotifications.filter(note => !note.read).length);
         }
     };
 
     useEffect(() => {
-        fetchNotifications(); // Fetch notifications on initial load
+        loadNotificationsFromLocalStorage(); // Load notifications from local storage on mount
+        fetchNotifications(); // Fetch notifications from API on initial load
+
         socket.on('NewSignal Uploaded', (data) => {
-            console.log('Notification received:', data);
             const newNotification = { message: 'New trading signal uploaded!', read: false };
-            // Only add if not already present
             if (!notifications.some(note => note.message === newNotification.message)) {
-                setNotifications(prev => [...prev, newNotification]);
+                setNotifications(prev => {
+                    const updatedNotifications = [...prev, newNotification];
+                    localStorage.setItem('notifications', JSON.stringify(updatedNotifications)); // Update localStorage
+                    return updatedNotifications;
+                });
                 setUnreadCount(prev => prev + 1);
             }
         });
@@ -108,12 +125,6 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                             </Link>
                         </li>
                     </ul>
-                    {/* {loading && (
-                        <div className="spinner-container">
-                            <div className="spinner"></div>
-                            <p>Loading...</p>
-                        </div>
-                    )} */}
                     {showNotifications && (
                         <div className={`bell-icon ${unreadCount > 0 ? 'shake' : ''}`} onClick={toggleNotifications}>
                             🔔

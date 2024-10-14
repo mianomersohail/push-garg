@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import showToast from '../usetoast/usetoast';
+import showToasts from '../usetoast/usetoast';
 import UserProfile from './List'; // Adjust the path if necessary
 import './AllUser.css';
 import useApi from '../FetchHook/FetchPost';
 
 const UserProfiles = () => {
     const [users, setUsers] = useState([]);
+    const  showToast  = showToasts(); 
+
     const navigate = useNavigate();
 
     const { loading, error, data, get } = useApi('http://localhost:3001');
@@ -21,14 +23,20 @@ const UserProfiles = () => {
         setUsers(result)
       
       } catch (err) {
+        showToast('error', 'Unexpected error occurred.');
         console.error(err);
       }
     };
 
     return (
         <div className="container">
-            <button className='paid-btn-one' onClick={navlogin}>All Users</button>
-            {loading && <p>Loading users...</p>} {/* Loading state */}
+            <button className='morph-btn' onClick={navlogin}>All Users</button>
+            {loading && (
+                            <div className="spinner-container">
+                                <div className="spinner"></div>
+                                <p>Loading...</p>
+                            </div>
+                        )}
             {error && <p className="error-message">{error.message || 'An error occurred'}</p>} {/* Error state */}
             <div className="row">
                 {users.length > 0 ? (

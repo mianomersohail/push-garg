@@ -3,7 +3,7 @@ import AdminPanel from '../AdminPanel/AdminPanel';
 import './AdminPanelMernStack.css';
 import useApi from '../FetchHook/FetchPost';
 import { useNavigate } from "react-router-dom";
-import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
+import useCustomToast from '../usetoast/usetoast'; 
 import errorsound from '../../audio/error.mp3';
 import successsound from '../../audio/success.mp3';
 import Footer from '../Footer2.js/Footer2';
@@ -25,7 +25,7 @@ export default function AdminPanelMernStack() {
     const [newemail, setnewemail] = useState('');
     const [newpassword, setnewpassword] = useState('');
 
-    const { showToast } = useCustomToast(); // Use the custom toast hook
+    const { showToast } = useCustomToast(); 
     const { loading, error, post, del, put } = useApi('http://localhost:3001');
 
     const clearMessages = () => {
@@ -34,12 +34,12 @@ export default function AdminPanelMernStack() {
     };
 
     const handleRoleSelect = (selectedRole) => {
-        console.log("Selected role:", selectedRole); // Debugging log
+        console.log("Selected role:", selectedRole); 
         setRole(selectedRole);
     };
 
     const AddUser = async () => {
-        clearMessages(); // Clear previous messages
+        clearMessages(); 
 
         const token = localStorage.getItem('token');
         const headers = {
@@ -49,8 +49,8 @@ export default function AdminPanelMernStack() {
         const formData = new FormData();
         formData.append('adduseremail', adduseremail);
         formData.append('adduserpassword', adduserpassword);
+        formData.append('role', role); 
         formData.append('username', username);
-        formData.append('role', role); // Include role here
         if (selectedImage) {
             formData.append('image', selectedImage);
         }
@@ -58,10 +58,10 @@ export default function AdminPanelMernStack() {
         try {
             const result = await post('/NewUser', formData, headers);
 
-            // Check for logout
+            
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
-                return; // Exit if logged out
+                return; 
             }
 
             if (result.message === 'User-Save-Successfully') {
@@ -83,7 +83,7 @@ export default function AdminPanelMernStack() {
     };
 
     const removeuser = async () => {
-        clearMessages(); // Clear previous messages
+        clearMessages(); 
 
         const token = localStorage.getItem('token');
         const headers = {
@@ -94,10 +94,10 @@ export default function AdminPanelMernStack() {
         try {
             const result = await del('/NewUser', JSON.stringify({ removeinput }), headers);
 
-            // Check for logout
+            
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
-                return; // Exit if logged out
+                return; 
             }
 
             SetRemoveErrorMessage(result.message);
@@ -113,7 +113,7 @@ export default function AdminPanelMernStack() {
     };
 
     const UpdateUser = async () => {
-        clearMessages(); // Clear previous messages
+        clearMessages(); 
 
         const token = localStorage.getItem('token');
         const headers = {
@@ -123,10 +123,10 @@ export default function AdminPanelMernStack() {
         try {
             const result = await put('/NewUser', { oldemail, newemail, oldpassword, newpassword, role }, headers);
 
-            // Check for logout
+           
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
-                return; // Exit if logged out
+                return; 
             }
 
             setupdateuser('User Update');
@@ -176,11 +176,11 @@ export default function AdminPanelMernStack() {
                             <div>
                                 <label>Role:</label>
                                 <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
-                                    <option style={{ color: "black" }} value="admin">Admin</option>
-                                    <option style={{ color: 'black' }} value="user">User</option>
+                                    <option style={{ color: "black" }} value="Admin">Admin</option>
+                                    <option style={{ color: 'black' }} value="User">User</option>
                                 </select>
                             </div>
-                            <button type="button" onClick={AddUser} className='paid-btn-one paid-btn-tops'>Submit</button>
+                            <button type="button" onClick={AddUser} className='morph-btn paid-btn-tops'>Submit</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>
@@ -198,11 +198,11 @@ export default function AdminPanelMernStack() {
                             <div>
                                 <label>Role:</label>
                                 <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
-                                    <option style={{ color: "black" }} value="admin">Admin</option>
-                                    <option style={{ color: 'black' }} value="user">User</option>
+                                    <option style={{ color: "black" }} value="Admin">Admin</option>
+                                    <option style={{ color: 'black' }} value="User">User</option>
                                 </select>
                             </div>
-                            <button type="button" onClick={UpdateUser} className='paid-btn-one mern-btn-top-m'>Update</button>
+                            <button type="button" onClick={UpdateUser} className='morph-btn paid-btn-tops'>Update</button>
                         </form>
                     </div>
                     <div className='col-lg-6'>
@@ -211,7 +211,7 @@ export default function AdminPanelMernStack() {
                             <div><h1 className='gradient-text'> REMOVE USER</h1></div>
                             <div><label>Email</label></div>
                             <div><input type='email' value={removeinput} onChange={(event) => setremoveinput(event.target.value)} placeholder='Remove User Email' /></div>
-                            <button type="button" onClick={removeuser} className='paid-btn-one paid-btn-tops'>Remove</button>
+                            <button type="button" onClick={removeuser} className='morph-btn paid-btn-tops'>Remove</button>
                         </form>
                     </div>
                     <AllUser />
