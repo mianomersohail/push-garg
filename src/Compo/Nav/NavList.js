@@ -106,6 +106,10 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
         };
     }, []); // Empty dependency array to run only on mount
 
+    // Separate unread and read notifications
+    const unreadNotifications = notifications.filter(note => !note.read);
+    const readNotifications = notifications.filter(note => note.read);
+
     return (
         <div className="container offset-lg-1">
             <div className="row nav-row">
@@ -133,20 +137,39 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                     )}
                     {showNotificationsDropdown && (
                         <div className="notification-dropdown">
-                            {notifications.length === 0 ? (
+                            {unreadNotifications.length === 0 && readNotifications.length === 0 ? (
                                 <p>No new notifications</p>
                             ) : (
-                                <ul>
-                                    {notifications.map((note, index) => (
-                                        <li
-                                            key={index}
-                                            className={note.read ? 'read' : 'unread'}
-                                            onClick={() => markAsRead(index)}
-                                        >
-                                            {note.message}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <>
+                                    {unreadNotifications.length > 0 && (
+                                        <div>
+                                            <strong>Unread Notifications</strong>
+                                            <ul>
+                                                {unreadNotifications.map((note, index) => (
+                                                    <li
+                                                        key={index}
+                                                        className="unread"
+                                                        onClick={() => markAsRead(notifications.indexOf(note))}
+                                                    >
+                                                        {note.message}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                    {readNotifications.length > 0 && (
+                                        <div>
+                                            <strong>Read Notifications</strong>
+                                            <ul>
+                                                {readNotifications.map((note, index) => (
+                                                    <li key={index} className="read">
+                                                        {note.message}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
                     )}

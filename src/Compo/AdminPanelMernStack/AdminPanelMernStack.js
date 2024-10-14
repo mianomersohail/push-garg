@@ -17,7 +17,7 @@ export default function AdminPanelMernStack() {
     const [removeinput, setremoveinput] = useState('');
     const [Updateuser, setupdateuser] = useState('');
     const [RemoveErrorMessage, SetRemoveErrorMessage] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState(''); // Role state
     const [selectedImage, setSelectedImage] = useState(null);
     const navigation = useNavigate();
     const [oldemail, setoldemail] = useState('');
@@ -35,7 +35,7 @@ export default function AdminPanelMernStack() {
 
     const handleRoleSelect = (selectedRole) => {
         console.log("Selected role:", selectedRole); 
-        setRole(selectedRole);
+        setRole(selectedRole); // Set the role based on selection
     };
 
     const AddUser = async () => {
@@ -49,16 +49,16 @@ export default function AdminPanelMernStack() {
         const formData = new FormData();
         formData.append('adduseremail', adduseremail);
         formData.append('adduserpassword', adduserpassword);
-        formData.append('role', role); 
+        formData.append('role', role); // Ensure role is appended
         formData.append('username', username);
         if (selectedImage) {
             formData.append('image', selectedImage);
         }
 
-        try {
+        try {            
             const result = await post('/NewUser', formData, headers);
 
-            
+            // Check for token validity
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
                 return; 
@@ -94,7 +94,7 @@ export default function AdminPanelMernStack() {
         try {
             const result = await del('/NewUser', JSON.stringify({ removeinput }), headers);
 
-            
+            // Check for token validity
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
                 return; 
@@ -123,7 +123,7 @@ export default function AdminPanelMernStack() {
         try {
             const result = await put('/NewUser', { oldemail, newemail, oldpassword, newpassword, role }, headers);
 
-           
+            // Check for token validity
             if (result.message === 'You are logged out. No token provided.' || result.error === 'You are logged out. Invalid token.') {
                 navigation('/userlogin');
                 return; 
@@ -176,6 +176,7 @@ export default function AdminPanelMernStack() {
                             <div>
                                 <label>Role:</label>
                                 <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
+                                    <option style={{ color: "black" }} value="">Select Role</option> {/* Default option */}
                                     <option style={{ color: "black" }} value="Admin">Admin</option>
                                     <option style={{ color: 'black' }} value="User">User</option>
                                 </select>
@@ -198,6 +199,7 @@ export default function AdminPanelMernStack() {
                             <div>
                                 <label>Role:</label>
                                 <select style={{ color: 'black' }} value={role} onChange={(event) => handleRoleSelect(event.target.value)}>
+                                    <option style={{ color: "black" }} value="">Select Role</option> {/* Default option */}
                                     <option style={{ color: "black" }} value="Admin">Admin</option>
                                     <option style={{ color: 'black' }} value="User">User</option>
                                 </select>

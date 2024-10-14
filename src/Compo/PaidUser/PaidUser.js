@@ -6,7 +6,7 @@ import Navbar from '../Nav/NavList';
 import TypingEffect from 'react-typing-effect';
 
 import { io } from 'socket.io-client';
-import MenuLists from '../../menulist/menulist';
+import MenuLists from '../menulist/menulist';
 
 const socket = io('http://localhost:3001'); // Server URL
 

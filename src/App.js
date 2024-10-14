@@ -12,6 +12,7 @@ import UserChat from './Compo/UserChat/UserChat';
 import Blockchain from './Compo/Blockchain/Blockchain';
 import TradingFrontEnd from './Compo/FrontEndSignalTrading/FrontEndTradingSignal'
 import FrontEndSignal from './Compo/FrontEndSignalTrading/FrontEndTradingSignal';
+import SignUp from './Compo/SignUpPage/SignUp'
 import { ChakraProvider } from '@chakra-ui/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -45,6 +46,8 @@ function App() {
           <Route path="/UserChat" element={<UserChat/>} />
           <Route path="/FrontEndTrading" element={<FrontEndSignal/>} />
           <Route path='/Blockchain' element={<Blockchain/>} />
+          <Route path='/SignUpUser' element={<SignUp/>} />
+
 
           </Routes>
         </Router>  
