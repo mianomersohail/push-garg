@@ -13,7 +13,6 @@ import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
 import { useNavigate } from 'react-router-dom';
-import Chat from '../UserChat/UserChat'
 import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
 const LinkData = Links;
 export default function Home() {
@@ -147,7 +146,6 @@ export default function Home() {
       <FillingEffect />
       <CountEffect />
       <Courses />
-      <Chat />
       <EthSection />
       <Trusted />
       <Footer />

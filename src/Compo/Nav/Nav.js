@@ -47,8 +47,11 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
             setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
             setUnreadCount((prevCount) => prevCount + 1); // Increase unread count
         });
-
-        return () => {
+        socket.on('receiveMessage', (message) => {
+            const newNotification = { message: 'New trading signal uploaded!', read: false };
+            setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
+            setUnreadCount((prevCount) => prevCount + 1); // Increase unread count
+        });        return () => {
             socket.off('NewSignal Uploaded');
         };
     }, []);
