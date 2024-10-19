@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,46 +13,67 @@ const ChatComponent = () => {
   const [newMessage, setNewMessage] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const { loading, error, post } = useApi('http://localhost:3001');
+  const { loading, error, post, get } = useApi('http://localhost:3001');
+  const messagesContainerRef = useRef(null); // Ref for the messages container
 
   useEffect(() => {
-    // Socket listener for receiving messages
+    // Fetch all old messages when the component mounts
+    const fetchMessages = async () => {
+      try {
+        const oldMessages = await get('/UserMessage');
+        const formattedMessages = oldMessages.map(msg => ({
+          message: msg.message,
+          role: 'server'
+        }));
+        setMessages(formattedMessages);
+      } catch (error) {
+        console.log('Error fetching old messages:', error);
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
+  useEffect(() => {
+    // Socket listener for receiving messages in real-time
     socket.on('receiveMessage', (message) => {
-      setMessages((prevMessages) => [...prevMessages, { text: message, sender: 'server' }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { message, role: 'server' },
+      ]);
     });
 
     return () => {
-      socket.off('receiveMessage'); // Clean up the event listener on unmount
+      socket.off('receiveMessage');
     };
   }, []);
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      console.log('No token found');
-      return;
-    }
-
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-
     try {
       if (newMessage.trim()) {
-        // Send the message via API
-        await post('UserMessage', { message: newMessage }, headers);
-      
-        // Send the message via socket
-        socket.emit('sendMessage', newMessage);
-
-        // Add the new message to the UI
-        setMessages([...messages, { text: newMessage, sender: 'user' }]);
-        setNewMessage(''); // Clear the input field
+        socket.emit('sendMessage', newMessage, token);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { message: newMessage, role: 'User' },
+        ]);
+        setNewMessage('');
       }
     } catch (error) {
       console.log('Error sending message:', error);
     }
   };
+
+  // Scroll to the bottom of the messages container when messages change
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      const { scrollHeight, clientHeight } = messagesContainerRef.current;
+      messagesContainerRef.current.scrollTop = scrollHeight - clientHeight; // Scroll to the bottom
+    }
+  }, [messages]);
 
   return (
     <>
@@ -73,30 +94,34 @@ const ChatComponent = () => {
         sx={{
           maxWidth: '400px',
           margin: 'auto',
+        
           height: 'auto',
+          maxHeight:'50vh',
           display: 'flex',
           flexDirection: 'column',
           border: '1px solid #ccc',
           borderRadius: '8px',
           overflow: 'hidden',
           marginTop: '50px',
-          backgroundColor: '#f0f0f0'
+          backgroundColor: '#f0f0f0',
         }}
       >
         {/* Chat messages area */}
         <Box
+          ref={messagesContainerRef} // Reference for the messages container
           sx={{
             flexGrow: 1,
             padding: '16px',
             overflowY: 'auto',
+            maxHeight: '50vw', // Set max height to 50vw
           }}
         >
-          {messages.map((message, index) => (
+          {messages.map((messageData, index) => (
             <Box
               key={index}
               sx={{
                 display: 'flex',
-                justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
+                justifyContent: messageData.role === 'User' ? 'flex-end' : 'flex-start',
                 marginBottom: '10px',
               }}
             >
@@ -104,13 +129,13 @@ const ChatComponent = () => {
                 sx={{
                   padding: '10px',
                   borderRadius: '15px',
-                  backgroundColor: message.sender === 'user' ? '#06B6D4' : '#ddd',
-                  color: message.sender === 'user' ? '#fff' : '#000',
+                  backgroundColor: messageData.role === 'User' ? '#06B6D4' : '#ddd',
+                  color: messageData.role === 'User' ? '#fff' : '#000',
                   maxWidth: '70%',
                   wordWrap: 'break-word',
                 }}
               >
-                {message.text}
+                {messageData.message}
               </Box>
             </Box>
           ))}

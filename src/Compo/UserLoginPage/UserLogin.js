@@ -88,7 +88,7 @@ export default function UserLogin() {
 
               </div>
               <Link className='login-center signup-link' to="/SignUpUser">Sign Up</Link>
-              <div className='login-center'><button type="submit">Login</button></div>
+              <div className='login-center '><button type="submit">Login</button></div>
               
               {loading && (
                 <div className="spinner-container">

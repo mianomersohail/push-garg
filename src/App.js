@@ -15,7 +15,9 @@ import SignUp from './Compo/SignUpPage/SignUp'
 import { ChakraProvider } from '@chakra-ui/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavDeal from '../src/Compo/PanelDeal/PanelDeal'
-
+import ClaimReward from '../src/Compo/PanelDeal/MainPanel/Claim'
+import DealHome from '../src/Compo/PanelDeal/PanelDeal'
+import PanelDeal from '../src/Compo/PanelDeal/PanelDeal';
 // Define the MUI theme
 const muiTheme = createTheme({
   typography: {
@@ -47,6 +49,10 @@ function App() {
           <Route path='/Blockchain' element={<Blockchain/>} />
           <Route path='/SignUpUser' element={<SignUp/>} />
           <Route path='/NavDeal' element={<NavDeal/>} />
+          <Route path='/Claim Reward' element={<ClaimReward/>} />
+          <Route path='/Panel Deal' element={<PanelDeal/>} />
+
+
 
 
 

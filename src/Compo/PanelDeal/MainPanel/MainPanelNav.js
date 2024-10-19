@@ -12,7 +12,7 @@ export default function MainPanel() {
                                 <li>All</li>
                                 <li>Open</li>
                                 <li>Closed</li>
-                                <li>My Offers</li>
+                                <li>Offers</li>
                             </ul>
                             <div className="search-bar-container">
                                 <input type="text" className="search-bar-input" placeholder="Search..." />

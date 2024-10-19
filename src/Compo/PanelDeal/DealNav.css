@@ -32,7 +32,7 @@
     flex-wrap: wrap; /* Allows items to wrap on smaller screens */
 }
 
-.DealingNaving-ul li {
+.dealnav-li {
     font-size: 1rem; /* Use rem for scalability */
     margin-top: 0.7rem;
     display: flex;
@@ -50,7 +50,7 @@
     transition: background-position 0.3s ease; /* Transition for background position */
 }
 
-.DealingNaving-ul li:hover {
+.dealnav-li:hover {
     background-position: left bottom; /* Move the gradient to the left on hover */
 }
 
@@ -77,7 +77,7 @@
         margin-left: 10px; /* Adjust margin for mobile */
     }
 
-    .DealingNaving-ul li {
+    .dealnav-li {
         margin-left: 1.5rem; /* Less margin for smaller screens */
         font-size: 0.9rem; /* Smaller font size */
         width: auto;
@@ -98,7 +98,7 @@
         font-size: 0.5rem; /* Smaller button font size */
         padding: 5px 10px; /* Further adjust padding */
     }
-    .DealingNaving-ul li{
+    .dealnav-li{
         margin-top: 1.1rem;
         height: 50%;
         margin-left: 1rem;

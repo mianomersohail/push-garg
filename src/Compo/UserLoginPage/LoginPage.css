@@ -103,6 +103,12 @@
     .login-page-img {
         display: none;
     }
+    .login-page-form input{
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
 }
 
 /* Add this to your LoginPage.css */
