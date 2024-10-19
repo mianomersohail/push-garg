@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PaidUser.css';
-import UserDealing from '../UserDealing/UserDealing';
 import Navbar from '../Nav/NavList';
 import TypingEffect from 'react-typing-effect';
 
@@ -44,7 +43,7 @@ export default function PaidUser() {
 
     const handleMenuClick = (selectedValue) => {
         if (selectedValue === 'DEALING') {
-            setIsDealing(true);
+            navigate('/NavDeal')
         } else if (selectedValue === 'TRADING/SIGNALS') {
             navigate('/FrontEndTrading');
         }
@@ -118,7 +117,6 @@ export default function PaidUser() {
                     </div>
                 </div>
 
-                {isDealing && <UserDealing />}
             </>
         );
     }

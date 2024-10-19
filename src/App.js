@@ -6,7 +6,6 @@ import PaidUser from './Compo/PaidUser/PaidUser';
 import AdminPanel from './Compo/AdminPanel/AdminPanel'
 import AdminPanelMernStack from './Compo/AdminPanelMernStack/AdminPanelMernStack';
 import Documentation from './Compo/SolDocs/SolDocs';
-import UserDealing from './Compo/UserDealing/UserDealing';
 import TradingSignalAdmin from './Compo/TradingSignalAdmin/TradingSignalAdmin';
 import UserChat from './Compo/UserChat/UserChat';
 import Blockchain from './Compo/Blockchain/Blockchain';
@@ -15,6 +14,7 @@ import FrontEndSignal from './Compo/FrontEndSignalTrading/FrontEndTradingSignal'
 import SignUp from './Compo/SignUpPage/SignUp'
 import { ChakraProvider } from '@chakra-ui/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import NavDeal from '../src/Compo/PanelDeal/PanelDeal'
 
 // Define the MUI theme
 const muiTheme = createTheme({
@@ -41,12 +41,13 @@ function App() {
           <Route path="/AdminPanel" element={<AdminPanel/>} />
           <Route path="/AdminPanelMernStack" element={<AdminPanelMernStack/>}/>
           <Route path="/Documentation" element={<Documentation/>} />
-          <Route path="/UserDealing" element={<UserDealing/>} />
           <Route path="/TradingSignalAdmin" element={<TradingSignalAdmin/>} />
           <Route path="/UserChat" element={<UserChat/>} />
           <Route path="/FrontEndTrading" element={<FrontEndSignal/>} />
           <Route path='/Blockchain' element={<Blockchain/>} />
           <Route path='/SignUpUser' element={<SignUp/>} />
+          <Route path='/NavDeal' element={<NavDeal/>} />
+
 
 
           </Routes>

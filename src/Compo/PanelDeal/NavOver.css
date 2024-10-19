@@ -1,0 +1,43 @@
+.navover-main{
+    padding: 10px 0px 10px 10px;
+}
+/* .navover-small{
+    font-size: 10px;
+    margin-top: 2rem;
+} */
+
+
+
+
+@media screen and (max-width:768px) {
+    .navover-box p {
+        padding:0px;
+        margin:0px;
+       
+    }
+    .navover-box-top{
+        margin-top: 1rem;
+    }
+
+    .navover-small{
+        font-size: 10px;
+        margin-top: 2rem;
+    }
+    .navover-flexend{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        
+    }
+    .market-price-nav{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .flex-navover{
+        
+        display: flex;
+        justify-content:flex-end;
+        margin-right: 3rem;
+      
+    }
+}
