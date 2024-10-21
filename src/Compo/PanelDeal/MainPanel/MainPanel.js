@@ -7,9 +7,6 @@ export default function MainPanel(){
         <div className='container'>
             <div className='row'>
                 <div className='col-lg-8'>
-                    
-                    
-
                 </div>
             </div>
         </div>

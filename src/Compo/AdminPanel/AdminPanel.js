@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import React from 'react';
+import UserChat from '../UserChat/UserChat'
 import './AdminPanel.css';
 import Navbar from '../Nav/NavList';
 export default function PaidUser() {
@@ -76,6 +77,7 @@ export default function PaidUser() {
                     </div>
                 </div>
             </div>
+            <UserChat/>
         </>
     );
 }

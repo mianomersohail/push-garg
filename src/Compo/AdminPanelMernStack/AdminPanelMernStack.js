@@ -12,6 +12,7 @@ import AllUser from './Allusers';
 export default function AdminPanelMernStack() {
     const [adduseremail, setadduseremail] = useState('');
     const [status, updatestatus] = useState('');
+    const [phonenum,setphonenum]=useState()
     const [username, setusername] = useState('');
     const [adduserpassword, setadduserpassword] = useState('');
     const [removeinput, setremoveinput] = useState('');
@@ -49,6 +50,8 @@ export default function AdminPanelMernStack() {
         const formData = new FormData();
         formData.append('adduseremail', adduseremail);
         formData.append('adduserpassword', adduserpassword);
+        formData.append('phone', phonenum); // Ensure role is appended
+
         formData.append('role', role); // Ensure role is appended
         formData.append('username', username);
         if (selectedImage) {
@@ -162,6 +165,8 @@ export default function AdminPanelMernStack() {
                             <div><input value={adduseremail} onChange={(event) => setadduseremail(event.target.value)} type='email' placeholder='Enter User Email' /></div>
                             <div><label>Password</label></div>
                             <div><input value={adduserpassword} onChange={(event) => setadduserpassword(event.target.value)} type='password' placeholder='Enter User Password' /></div>
+                            <div><label>Phone Num</label></div>
+                            <div><input value={phonenum} onChange={(event) => setphonenum(event.target.value)} type='number' placeholder='Enter User Phone Num' /></div>
                             <div><label>User Name</label></div>
                             <div><input placeholder='Enter User Name' value={username} onChange={(event) => setusername(event.target.value)} /></div>
                             <div><label>Upload Image</label></div>

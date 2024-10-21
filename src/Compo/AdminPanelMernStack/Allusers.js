@@ -45,12 +45,15 @@ const UserProfiles = () => {
                             <UserProfile
                                 username={user.username}
                                 email={user.email}
+                                id={user._id}
+                                Phone={user.phone}
+                                role={user.role}
                                 image={`http://localhost:3001/${user.image}`} 
                             />
                         </div>
                     ))
                 ) : (
-                    <p>No users found.</p>
+                    <p></p>
                 )}
             </div>
         </div>

@@ -6,7 +6,7 @@ export default function NavOver() {
   <div className="row navover-main">
     <div className="col-lg-1 col-md-2 col-sm-6 col-6 navover-box">
       <p>Pair</p>
-      <h4>FND.ETH</h4>
+      <h5>FND.ETH</h5>
     </div>
     <div className="col-lg-2 col-md-2 col-sm-6 col-6 navover-box navover-flexend">
       <p className="market-price-nav">Market Price/Token</p>
@@ -25,6 +25,7 @@ export default function NavOver() {
     </div>
     <div className="col-lg-1 col-md-2 col-sm-3 col-3 navover-box navover-box-top">
       <p className="navover-small">All Orders</p>
+      
       <span style={{fontWeight: "bold", fontSize: "18px"}}>2</span>
     </div>
     <div className="col-lg-1 col-md-2 col-sm-3 col-3 navover-box navover-box-top">

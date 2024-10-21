@@ -38,6 +38,9 @@ export default function UserLogin() {
         navigation('/paiduser')
       }
       if (result.Result.role == 'Admin') {
+        localStorage.setItem('image', result.Result.image)
+        localStorage.setItem('username', result.Result.username)
+        localStorage.setItem('userId', result.Result.userId)
         navigation('/AdminPanel');
       }
     } catch (err) {

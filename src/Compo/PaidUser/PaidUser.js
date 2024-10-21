@@ -70,6 +70,7 @@ export default function PaidUser() {
       <>
         <Navbar
           shakeBell={shakeBell}
+          navlimsgs={'Msgs'}
           notifications={notifications}
           imgsrc={imgURL}
           alt="User"

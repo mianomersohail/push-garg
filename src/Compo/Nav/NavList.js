@@ -4,6 +4,7 @@ import { io } from 'socket.io-client';
 import useApi from '../FetchHook/FetchPost';
 import './Nav.css';
 import useCustomToast from '../usetoast/usetoast';
+import userChat from '../UserChat/UserChat'
 
 const userId = localStorage.getItem('userId'); // User ID
 const socket = io('http://localhost:3001', { query: { userId } });
@@ -84,6 +85,9 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
             setUnreadCount(parsedNotifications.filter(note => !note.read).length);
         }
     };
+    const chatopner=()=>{
+
+    }
 
     useEffect(() => {
         loadNotificationsFromLocalStorage(); // Load notifications from local storage on mount
@@ -128,6 +132,7 @@ export default function Navbar({ imgsrc, name, onClick, navlinameone, navlinamet
                                 {navlinametwo}
                             </Link>
                         </li>
+                        
                     </ul>
                     {showNotifications && (
                         <div className={`bell-icon ${unreadCount > 0 ? 'shake' : ''}`} onClick={toggleNotifications}>

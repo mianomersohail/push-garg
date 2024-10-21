@@ -1,5 +1,5 @@
 import './MainPanelNav.css';
-
+import All from './All';
 export default function MainPanel() {
     return (
         <>
@@ -27,6 +27,8 @@ export default function MainPanel() {
                     </div>
                 </div>
             </div>
+            <All/>
         </>
+
     );
 }
