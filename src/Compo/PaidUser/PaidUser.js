@@ -4,12 +4,13 @@ import "./PaidUser.css";
 import Navbar from "../Nav/NavList";
 import TypingEffect from "react-typing-effect";
 import UserChat from "../UserChat/UserChat";
-
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { io } from "socket.io-client";
-import MenuLists from "../menulist/menulist";
-
-const socket = io("http://localhost:3001"); // Server URL
-
+const socket = io("http://localhost:3001"); 
 export default function PaidUser() {
   const [paidUser, setPaidUser] = useState(true);
   const [isDealing, setIsDealing] = useState(false);
@@ -18,6 +19,23 @@ export default function PaidUser() {
   const [serverMessage, setServerMessage] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [menu, setmenu] = useState("");
+
+  const handleChange = (event) => {
+    setmenu(event.target.value);
+    const selectmenu = event.target.value;
+    switch (selectmenu) {
+      case "Deal":
+        navigate("/NavDeal");
+        break;
+      case "Mern":
+        navigate("/FrontMern");
+         break;
+
+      case "Trade":
+        navigate("/FrontEndTrading");
+    }
+  };
 
   useEffect(() => {
     socket.on("NewSignal Uploaded", (message) => {
@@ -42,15 +60,6 @@ export default function PaidUser() {
     }, 200);
   };
 
-  const handleMenuClick = (selectedValue) => {
-    if (selectedValue === "DEALING") {
-      navigate("/NavDeal");
-    } else if (selectedValue === "TRADING/SIGNALS") {
-      navigate("/FrontEndTrading");
-    }
-    console.log("Selected Interest:", selectedValue);
-  };
-
   useEffect(() => {
     if (isDealing) {
       const timeout = setTimeout(() => {
@@ -70,7 +79,7 @@ export default function PaidUser() {
       <>
         <Navbar
           shakeBell={shakeBell}
-          navlimsgs={'Msgs'}
+          navlimsgs={"Msgs"}
           notifications={notifications}
           imgsrc={imgURL}
           alt="User"
@@ -83,16 +92,15 @@ export default function PaidUser() {
         />
         <div className="container col-lg-8 offset-lg-1">
           <div className="row Paid-User-Main">
-            <div className="col-lg-6 Paid-welcome ">
+            <div className="col-lg-6 Paid-welcome">
               <div className="typing-container">
                 <TypingEffect
                   text={[
                     `Welcome ${username}`,
-                    "Latest Trading Signals",
-                    "Mern Stack Course",
-                    "Decentralize Buying Selling",
-                    "Programming Fundamentals",
-                    "Much More",
+                    "REACT JS",
+                    "MERN",
+                    "SOLIDITY",
+                    "FOREX TRADES",
                   ]}
                   speed={50}
                   eraseDelay={1500}
@@ -124,16 +132,37 @@ export default function PaidUser() {
                 invest smartly, and watch your skills and portfolio soar to new
                 heights!
               </p>
-              <div className="MenuLists menu-list-paiduser">
-                <MenuLists
-                  valuethree={"DEALING"}
-                  valuefour={"TRADING/SIGNALS"}
-                  onSelect={handleMenuClick} // Pass the click handler
-                />
-              </div>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl
+                  fullWidth
+                  sx={{
+                    width: "20%",
+                    background: "linear-gradient(to right, #FF7469, #FEAB5E)",
+                  }}
+                >
+                  <InputLabel
+                    id="demo-simple-select-label"
+                    style={{ color: "white" }}
+                  >
+                    MENU
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={menu}
+                    label="menu"
+                    onChange={handleChange}
+                    style={{ color: "white" }}
+                  >
+                    <MenuItem value={"Mern"}>MERN STACK</MenuItem>
+                    <MenuItem value={"BlockChain"}>BlockChain</MenuItem>
+                    <MenuItem value={"Deal"}>DEALING</MenuItem>
+                    <MenuItem value={"Trade"}>TRADING SIGNALS</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </div>
             <UserChat />
-
           </div>
         </div>
       </>

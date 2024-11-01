@@ -16,7 +16,6 @@
     transition: opacity 0.3s ease;
 }
 
-/* Play video on hover */
 .course-box:hover .course-one-img{
     opacity: 1;
 }

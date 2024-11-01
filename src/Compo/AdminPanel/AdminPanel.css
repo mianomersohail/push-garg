@@ -35,12 +35,12 @@
     
 }
 .gradient-text{
-    font-size: 60px; /* Adjust font size as needed */
-    background: linear-gradient(45deg, #FF7D67, #FEB65B); /* Define your gradient colors */
-    -webkit-background-clip: text; /* For Safari */
-    -webkit-text-fill-color: transparent; /* For Safari */
-    background-clip: text; /* For other browsers */
-    color: transparent; /* Ensure the text color is transparent */
+    font-size: 60px; 
+    background: linear-gradient(45deg, #FF7D67, #FEB65B); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+    color: transparent; 
 
 }
 

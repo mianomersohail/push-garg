@@ -113,16 +113,16 @@
     display: hidden;
 }
 .typing-container {
-    height: 80px; /* Set a fixed height for the typing effect */
-    overflow: hidden; /* Prevent overflow if needed */
+    height: 80px; 
+    overflow: hidden; 
 }
 
 .home-typing-animation {
-    font-size: 24px; /* Example font size */
-    line-height: 1.2; /* Ensure consistent line height */
+    font-size: 24px; 
+    line-height: 1.2; 
 }
 
 .typing-home {
-    transition: color 0.3s ease; /* Smooth transition for color change */
+    transition: color 0.3s ease; 
 }
 

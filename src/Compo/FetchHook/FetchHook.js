@@ -1,37 +1,38 @@
-import { useNavigate } from 'react-router-dom';
+import {useState} from 'react'
+import axios from 'axios'
+export default function useApi(baseUrl){
+const [error,seterror]=useState(false)
+const [loading,setloading]=useState(null)
+const [data,setdata]=useState(null)
+async function req(method,url,body=null,headers={}){
+  setloading(true)
+  seterror(null)
+  try{
+    const response=await axios({
+      method,
+      url:baseUrl,
+      data:body,
+      headers,
+    })
+    setdata(response.data)
+    return response.data
 
-export default async function UseFetch(uri) {
-  const navigate= useNavigate();
-  const localstorate = localStorage.getItem('token');
-  const response = await fetch(uri, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localstorate}`
-    }
-  });
 
-  if (!response) {
-    const errorText = await response.text(); 
-    console.error('Error:', errorText); 
-    return { error: 'Error fetching data' };
+  }catch(error){
+    seterror(error)
+    throw error
+    setloading(false)
+
+  }finally{
+    setloading(false)
   }
 
-  const data = await response.json();
-
-  console.log(data);
-
-  if (data.message =='Invalid Token') {
-    navigate('/userlogin')
-  } else if (data.role == 'User') {
-      navigate('/paiduser');
-  }else if (data.role=='Admin'){
-      navigate('/AdminPanel')
-
-  } else if (data.errormessage) {
-     console.log(data.errormessage)
-  } else {
-      navigate('/userlogin')
-  }
-  return data; 
 }
+
+const get=req(()=>{'GET',url,body,headers})
+const post=req(()=>{'POST',url,body,headers})
+const put=req(()=>{'PUT',url,body,headers})
+const del=(()=>{'DELETE',url,body,headers})
+  return {loading,error,data,get,post,put,del}
+}
+

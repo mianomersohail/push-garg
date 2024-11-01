@@ -1,23 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import ChatIcon from "@mui/icons-material/Chat"; // Import chat icon
+import ChatIcon from "@mui/icons-material/Chat";
 import { io } from "socket.io-client";
-import useApi from "../FetchHook/FetchPost"; // Assuming this is your custom hook for API calls
+import useApi from "../FetchHook/FetchPost";
 import './userchat.css';
 import sendsound from '../../audio/send.mp3';
 import receivesound from '../../audio/rev.mp3';
-
+const username=localStorage.getItem('username')
 const userId = localStorage.getItem("userId");
 const socket = io("http://localhost:3001", { query: { userId } });
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [isOpen, setIsOpen] = useState(false); // Popup state
+  const [isTyping, setIsTyping] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [typename,settypename]=useState(''); 
   const { get } = useApi("http://localhost:3001");
-  const baseURL = 'http://localhost:3001/'; // Base URL for images
+  const baseURL = 'http://localhost:3001/';
   const messagesContainerRef = useRef(null);
+  const typingTimeout = useRef(null);
 
   // Toggle popup
   const togglePopup = () => {
@@ -39,7 +42,6 @@ const ChatComponent = () => {
           imgurl: `${baseURL}${msg.pic}`,
           timestamp: new Date(msg.createdAt).toLocaleString(),
         }));
-
         setMessages(formattedMessages);
       } catch (error) {
         console.error("Error fetching old messages:", error);
@@ -47,15 +49,15 @@ const ChatComponent = () => {
     };
 
     fetchMessages();
-  }, []);
+  }, [get]);
 
-  // Scroll to the bottom of the messages container when messages change or chat opens
+  // Scroll to the bottom of the messages container
   useEffect(() => {
     if (messagesContainerRef.current) {
       const { scrollHeight, clientHeight } = messagesContainerRef.current;
       messagesContainerRef.current.scrollTop = scrollHeight - clientHeight;
     }
-  }, [messages, isOpen]); // Include isOpen in the dependency array
+  }, [messages, isOpen]);
 
   // Socket listener for real-time messages
   useEffect(() => {
@@ -70,12 +72,19 @@ const ChatComponent = () => {
       ]);
     });
 
+    socket.on("displayTyping", (data) => {
+      console.log("Typing status received:", data);
+      setIsTyping(data.isTyping);
+      settypename(data.username)
+
+    });
+
     return () => {
       socket.off("receiveMessage");
+      socket.off("displayTyping");
     };
   }, []);
 
-  // Handle sending a new message
   const handleSendMessage = async () => {
     const token = localStorage.getItem("token");
     const audio = new Audio(sendsound);
@@ -84,6 +93,7 @@ const ChatComponent = () => {
       if (newMessage.trim()) {
         const timestamp = new Date().toLocaleString();
         socket.emit("sendMessage", newMessage, token);
+        socket.emit("stopTyping", username); 
         setMessages((prevMessages) => [
           ...prevMessages,
           { message: newMessage, role: "User", name: "You", timestamp, imgurl: `${baseURL}${localStorage.getItem('image')}` },
@@ -95,9 +105,19 @@ const ChatComponent = () => {
     }
   };
 
+  const handleTyping = (e) => {
+    setNewMessage(e.target.value);
+    socket.emit("typing", username);
+
+    if (typingTimeout.current) clearTimeout(typingTimeout.current);
+
+    typingTimeout.current = setTimeout(() => {
+      socket.emit("userStoppedTyping", username);
+    }, 1000); 
+  };
+
   return (
     <>
-      {/* Button to open chat popup */}
       <Button
         onClick={togglePopup}
         sx={{
@@ -105,8 +125,8 @@ const ChatComponent = () => {
           bottom: "20px",
           right: "20px",
           zIndex: 1000,
-          width: "50px", // Set fixed width for the button
-          height: "50px", // Set fixed height for the button
+          width: "50px",
+          height: "50px",
           borderRadius: "50%",
           background: "linear-gradient(to right, #FF8166, #FE9E60,#FEB15C)",
           color: "#fff",
@@ -116,16 +136,11 @@ const ChatComponent = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
         }}
         variant="contained"
-        startIcon={<ChatIcon />} // Add chat icon
-      >
-      </Button>
+        startIcon={<ChatIcon />}
+      />
 
-      {/* Apply blur background when chat is open */}
-      <Box className={isOpen ? "blur-background" : ""}>
-        {/* Your main page content goes here */}
-      </Box>
+      <Box className={isOpen ? "blur-background" : ""} />
 
-      {/* Chat popup */}
       {isOpen && (
         <Box
           className="chat-popup"
@@ -142,12 +157,8 @@ const ChatComponent = () => {
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             zIndex: 1001,
             overflow: "hidden",
-            transition: "opacity 0.3s ease, transform 0.3s ease",
-            opacity: isOpen ? 1 : 0,
-            transform: isOpen ? 'translate(-50%, -50%)' : 'translate(-50%, -45%)',
           }}
         >
-          {/* Close button */}
           <Button
             className="close-btn"
             onClick={togglePopup}
@@ -164,7 +175,6 @@ const ChatComponent = () => {
             ×
           </Button>
 
-          {/* Chat messages area */}
           <Box
             ref={messagesContainerRef}
             sx={{
@@ -199,20 +209,8 @@ const ChatComponent = () => {
                     marginRight: messageData.role === "User" ? "0" : "8px",
                   }}
                 />
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    maxWidth: "70%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "#555",
-                      fontSize: "0.85rem",
-                      marginBottom: "2px",
-                    }}
-                  >
+                <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "70%" }}>
+                  <Box sx={{ color: "#555", fontSize: "0.85rem", marginBottom: "2px" }}>
                     {messageData.name}
                   </Box>
                   <Box
@@ -240,37 +238,26 @@ const ChatComponent = () => {
                 </Box>
               </Box>
             ))}
+            {isTyping && (
+              <Box sx={{ color: "black", fontSize: "0.85rem", fontStyle: "italic" }}>
+                {typename}User is typing...
+              </Box>
+            )}
           </Box>
 
-          {/* Input area */}
-          <Box
-            sx={{
-              display: "flex",
-              padding: "10px",
-              borderTop: "1px solid #ccc",
-            }}
-          >
+          <Box sx={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
             <TextField
-              fullWidth
               variant="outlined"
-              placeholder="Type a message"
+              fullWidth
+              placeholder="Type your message..."
               value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSendMessage();
-              }}
+              onChange={handleTyping}
+              sx={{ marginRight: "8px" }}
             />
             <Button
-              sx={{
-                marginLeft: "10px",
-                background: "linear-gradient(to right, #FF8166, #FE9E60,#FEB15C)",
-                color: "#fff",
-                '&:hover': {
-                  background: "linear-gradient(to right, #C1A348, #D8C978)",
-                }
-              }}
               variant="contained"
               onClick={handleSendMessage}
+              sx={{ backgroundColor: "#D8C978", color: "#000" }}
             >
               <SendIcon />
             </Button>

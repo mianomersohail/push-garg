@@ -1,9 +1,7 @@
-/* Blurred background when chat is open */
 .blur-background {
     filter: blur(180px) !important;
 }
 
-/* Chat popup styles */
 .chat-popup {
     z-index: 1001;
 }
