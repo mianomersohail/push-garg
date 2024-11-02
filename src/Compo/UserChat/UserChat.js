@@ -4,21 +4,22 @@ import SendIcon from "@mui/icons-material/Send";
 import ChatIcon from "@mui/icons-material/Chat";
 import { io } from "socket.io-client";
 import useApi from "../FetchHook/FetchPost";
-import './userchat.css';
-import sendsound from '../../audio/send.mp3';
-import receivesound from '../../audio/rev.mp3';
-const username=localStorage.getItem('username')
+import "./userchat.css";
+import sendsound from "../../audio/send.mp3";
+import receivesound from "../../audio/rev.mp3";
+const username = localStorage.getItem("username");
+const img=localStorage.getItem('image');
 const userId = localStorage.getItem("userId");
 const socket = io("http://localhost:3001", { query: { userId } });
-
 const ChatComponent = () => {
+  const [typeimg,settypeimg]=useState('')
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [typename,settypename]=useState(''); 
+  const [typename, settypename] = useState("");
   const { get } = useApi("http://localhost:3001");
-  const baseURL = 'http://localhost:3001/';
+  const baseURL = "http://localhost:3001/";
   const messagesContainerRef = useRef(null);
   const typingTimeout = useRef(null);
 
@@ -31,7 +32,7 @@ const ChatComponent = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       const token = localStorage.getItem("token");
-      const id = localStorage.getItem('userId');
+      const id = localStorage.getItem("userId");
       try {
         const response = await get("/UserMessage");
         const oldMessages = response?.messages || [];
@@ -72,18 +73,25 @@ const ChatComponent = () => {
       ]);
     });
 
-    socket.on("displayTyping", (data) => {
+    socket.on("displayTyping", (data,image) => {
       console.log("Typing status received:", data);
       setIsTyping(data.isTyping);
-      settypename(data.username)
-
+      settypeimg(data.image)
+      console.log("h",data.image)
+      settypename(data.username);
     });
+
 
     return () => {
       socket.off("receiveMessage");
       socket.off("displayTyping");
     };
   }, []);
+  
+  // const typerimg = typeimg ? `${baseURL}${typeimg}` : "https://path/to/fallback/image.jpg";
+  const typerimg =typeimg ? `${baseURL}${typeimg}`:""
+
+console.log(typerimg)
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem("token");
@@ -93,10 +101,16 @@ const ChatComponent = () => {
       if (newMessage.trim()) {
         const timestamp = new Date().toLocaleString();
         socket.emit("sendMessage", newMessage, token);
-        socket.emit("stopTyping", username); 
+        socket.emit("stopTyping", username,img);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { message: newMessage, role: "User", name: "You", timestamp, imgurl: `${baseURL}${localStorage.getItem('image')}` },
+          {
+            message: newMessage,
+            role: "User",
+            name: "You",
+            timestamp,
+            imgurl: `${baseURL}${localStorage.getItem("image")}`,
+          },
         ]);
         setNewMessage("");
       }
@@ -107,13 +121,15 @@ const ChatComponent = () => {
 
   const handleTyping = (e) => {
     setNewMessage(e.target.value);
-    socket.emit("typing", username);
+    socket.emit("typing", username,img);
 
     if (typingTimeout.current) clearTimeout(typingTimeout.current);
 
     typingTimeout.current = setTimeout(() => {
-      socket.emit("userStoppedTyping", username);
-    }, 1000); 
+      socket.emit("userStoppedTyping", username,img);
+      settypename("");
+
+    }, 1000);
   };
 
   return (
@@ -130,7 +146,7 @@ const ChatComponent = () => {
           borderRadius: "50%",
           background: "linear-gradient(to right, #FF8166, #FE9E60,#FEB15C)",
           color: "#fff",
-          '&:hover': {
+          "&:hover": {
             background: "linear-gradient(to right, #C1A348, #D8C978)",
           },
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
@@ -188,7 +204,8 @@ const ChatComponent = () => {
                 key={index}
                 sx={{
                   display: "flex",
-                  flexDirection: messageData.role === "User" ? "row-reverse" : "row",
+                  flexDirection:
+                    messageData.role === "User" ? "row-reverse" : "row",
                   alignItems: "flex-start",
                   marginBottom: "10px",
                 }}
@@ -198,7 +215,8 @@ const ChatComponent = () => {
                   src={messageData.imgurl}
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = 'https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg';
+                    e.target.src =
+                      "https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg";
                   }}
                   alt={messageData.name}
                   sx={{
@@ -209,15 +227,28 @@ const ChatComponent = () => {
                     marginRight: messageData.role === "User" ? "0" : "8px",
                   }}
                 />
-                <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "70%" }}>
-                  <Box sx={{ color: "#555", fontSize: "0.85rem", marginBottom: "2px" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    maxWidth: "70%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      color: "#555",
+                      fontSize: "0.85rem",
+                      marginBottom: "2px",
+                    }}
+                  >
                     {messageData.name}
                   </Box>
                   <Box
                     sx={{
                       padding: "10px",
                       borderRadius: "15px",
-                      backgroundColor: messageData.role === "User" ? "#06B6D4" : "#ddd",
+                      backgroundColor:
+                        messageData.role === "User" ? "#06B6D4" : "#ddd",
                       color: messageData.role === "User" ? "#fff" : "#000",
                       wordWrap: "break-word",
                       position: "relative",
@@ -238,14 +269,37 @@ const ChatComponent = () => {
                 </Box>
               </Box>
             ))}
-            {isTyping && (
-              <Box sx={{ color: "black", fontSize: "0.85rem", fontStyle: "italic" }}>
-                {typename}User is typing...
-              </Box>
-            )}
+           // Typing indicator
+{isTyping && (
+  <Box className="typing-indicator" sx={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 0" }}>
+    {console.log("Typing image URL:", typerimg)}
+    <Box
+      component="img"
+      src={typerimg}
+      alt="Typing indicator"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg";
+      }}
+      sx={{
+        width: "30px",
+        height: "30px",
+        borderRadius: "50%",
+        marginRight: "8px",
+      }}
+    />
+    <Box sx={{ color: "#555", fontSize: "0.85rem" }}>{typename}</Box>
+    <Box className="dot"></Box>
+    <Box className="dot"></Box>
+    <Box className="dot"></Box>
+  </Box>
+)}
+
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", marginTop: "10px" }}
+          >
             <TextField
               variant="outlined"
               fullWidth
