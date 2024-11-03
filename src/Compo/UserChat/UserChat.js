@@ -77,7 +77,6 @@ const ChatComponent = () => {
       console.log("Typing status received:", data);
       setIsTyping(data.isTyping);
       settypeimg(data.image)
-      console.log("h",data.image)
       settypename(data.username);
     });
 
@@ -87,12 +86,7 @@ const ChatComponent = () => {
       socket.off("displayTyping");
     };
   }, []);
-  
-  // const typerimg = typeimg ? `${baseURL}${typeimg}` : "https://path/to/fallback/image.jpg";
   const typerimg =typeimg ? `${baseURL}${typeimg}`:""
-
-console.log(typerimg)
-
   const handleSendMessage = async () => {
     const token = localStorage.getItem("token");
     const audio = new Audio(sendsound);
@@ -128,6 +122,8 @@ console.log(typerimg)
     typingTimeout.current = setTimeout(() => {
       socket.emit("userStoppedTyping", username,img);
       settypename("");
+      settypeimg('')
+
 
     }, 1000);
   };

@@ -26,7 +26,9 @@
         height: 15px;
     }
     
+    
 }
+
 
 .dropdown {
     position: relative;
@@ -211,5 +213,15 @@ font-size: 25px;
     .role-dropdown-container {
         width: 100%;
     }
+    .Mern-form label{
+        font-size: 16px;
+    }
+    .Mern-form {
+        margin-top:1rem;
+        padding:6px;
     
+    }
+    .Main-Admin{
+        padding: 5px;
+    }
 }

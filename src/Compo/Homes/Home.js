@@ -13,10 +13,10 @@ import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
 import { useNavigate } from 'react-router-dom';
-import useCustomToast from '../usetoast/usetoast'; // Import the custom toast hook
+import useCustomToast from '../usetoast/usetoast'; 
 const LinkData = Links;
 export default function Home() {
-  const { showToast } = useCustomToast(); // Use the custom toast hook
+  const { showToast } = useCustomToast(); 
   const [username, setusername] = useState()
   const navigation = useNavigate();
   const { loading, error, data, post, get } = useApi('http://localhost:3001');
@@ -26,7 +26,6 @@ export default function Home() {
     try {
       const result = await get('/Cv', { headers: { 'Content-Type': 'application/pdf' } });
 
-      // To trigger download, you can use the following line:
       const blob = new Blob([result], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -65,22 +64,14 @@ export default function Home() {
           setusername(result.user.username)
           return navigation('/paiduser')
         }
-        // setusername(result.user.username)
-        // setusename(result.user.username)
-        // navigation('/paiduser')
-        // navigation('/paiduser',{ state: { Data: { username:result.user.username } } })
       }
       if (result.user.role == 'Admin') {
         return navigation('/AdminPanel')
       }
     } catch (err) {
       console.error(err);
-      showToast('error', 'No Token Found');
-
     }
   };
-
-  
   const baseURL = 'http://localhost:3001/';
   const imgURL = image ? `${baseURL}${image}` : 'https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg';
 
@@ -91,10 +82,10 @@ export default function Home() {
         imgsrc={imgURL}
         name={namefromlocal || 'Welcome Coders'}
         navlinameone={'Docs'}
-        navlinametwo={namefromlocal ? 'WelcomeBack' : 'Login'} // Optional chaining to avoid error
+        navlinametwo={namefromlocal ? 'WelcomeBack' : 'Login'} 
         linkone={'/Documentation'}
         onClick={navlogin}
-        showNotifications={!!namefromlocal} // Pass true if username exists
+        showNotifications={!!namefromlocal} 
 
       />
 

@@ -93,7 +93,7 @@ export default function FrontEndSignal() {
               );
             })
           ) : (
-            <p>No signals available.</p> // Fallback message if no data
+            <p>No signals available.</p> 
           )}
         </div>
       </div>

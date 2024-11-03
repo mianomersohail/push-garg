@@ -46,8 +46,17 @@ export default function UserLogin() {
     } catch (err) {
       const audio = new Audio(errorsound); // Create a new audio object
       audio.play(); // Play the audio
-      showToast('error', 'Check Email Password And Try Agian...');
+      // showToast('error', 'Check Email Password And Try Agian...');
       console.error(err);
+      if(err.status==400){
+        showToast('error',"Check Your Email Or Password and try Again")
+        return
+
+      }
+      if(err.status==500){
+        showToast('error',"Server Not Respond")
+      }
+      showToast('error',`${err.message}`)
     }
   };
   return (
@@ -55,14 +64,8 @@ export default function UserLogin() {
       <Navbar   imgsrc={'https://t4.ftcdn.net/jpg/06/27/76/77/240_F_627767769_1rl3WsMnO8GuXic8C6I7aEnMWp0Mz5vc.jpg'} name={'Mian Omer'} navlinameone={'Home'} linktwo={'/'} linkone={'*'} />
       <div className="container Login-Page-Main">
         <div className="row">
-          <div className="col-lg-4">
-            <img
-              className="login-page-img"
-              src="https://media.licdn.com/dms/image/v2/D5622AQGnRLSb1Awggw/feedshare-shrink_800/feedshare-shrink_800/0/1728720237857?e=1731542400&v=beta&t=IH5gJnn19vOpp5xzOYkclVvaS-Kk1X7ZSOk0cm_BxeE"
-              alt="Login"
-            />
-          </div>
-          <div className="col-lg-8">
+          
+          <div className="col-lg-12">
             <form className="login-page-form" onSubmit={submitLoginForm}>
               <div><p style={{ color: '#06B5D3' }}>{serverMessage}</p></div>
               <div className='login-center'><h3>Login</h3></div>
@@ -91,7 +94,7 @@ export default function UserLogin() {
 
               </div>
               <Link className='login-center signup-link' to="/SignUpUser">Sign Up</Link>
-              <div className='login-center '><button type="submit">Login</button></div>
+              <div className='login-center '><button type="submit" className='paid-btn-one'>Login</button></div>
               
               {loading && (
                 <div className="spinner-container">

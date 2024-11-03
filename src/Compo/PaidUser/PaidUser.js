@@ -9,9 +9,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useMediaQuery } from "@mui/material";
+
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3001"); 
 export default function PaidUser() {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const [paidUser, setPaidUser] = useState(true);
   const [isDealing, setIsDealing] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -26,7 +30,7 @@ export default function PaidUser() {
     const selectmenu = event.target.value;
     switch (selectmenu) {
       case "Deal":
-        navigate("/NavDeal");
+        navigate("/Web3dealing");
         break;
       case "Mern":
         navigate("/FrontMern");
@@ -136,7 +140,7 @@ export default function PaidUser() {
                 <FormControl
                   fullWidth
                   sx={{
-                    width: "20%",
+                    width: isMobile ? "40%" : "20%",
                     background: "linear-gradient(to right, #FF7469, #FEAB5E)",
                   }}
                 >

@@ -65,7 +65,7 @@ export default function AdminPanelMernStack() {
         navigation("/userlogin");
         return;
       }
-
+      
       if (result.message === "User-Save-Successfully") {
         showToast("success", "User saved successfully!");
         updatestatus(result.message);
@@ -83,16 +83,16 @@ export default function AdminPanelMernStack() {
       audio.play();
     }
   };
-
+  
   const removeuser = async () => {
     clearMessages();
-
+    
     const token = localStorage.getItem("token");
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-
+    
     try {
       const result = await del(
         "/NewUser",
@@ -106,7 +106,7 @@ export default function AdminPanelMernStack() {
         navigation("/userlogin");
         return;
       }
-
+      
       SetRemoveErrorMessage(result.message);
       const successaudio = new Audio(successsound);
       successaudio.play();
@@ -118,7 +118,7 @@ export default function AdminPanelMernStack() {
       showToast("error", "User Not Found");
     }
   };
-
+  
   const UpdateUser = async () => {
     clearMessages();
 
@@ -126,7 +126,7 @@ export default function AdminPanelMernStack() {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-
+    
     try {
       const result = await put(
         "/NewUser",
@@ -155,6 +155,7 @@ export default function AdminPanelMernStack() {
     <>
       <AdminPanel />
       <div className="container">
+            <AllUser />
         <div className="row Main-Admin">
           <h1>
             {loading && (
@@ -367,7 +368,6 @@ export default function AdminPanelMernStack() {
               </button>
             </form>
           </div>
-          <AllUser />
         </div>
       </div>
       <Footer />

@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
 import React from "react";
 import UserChat from "../UserChat/UserChat";
 import "./AdminPanel.css";
@@ -8,18 +7,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Navbar from "../Nav/NavList";
-import {
-  Skeleton,
-  Stack,
-  SkeletonCircle,
-  SkeletonText,
-} from "@chakra-ui/react";
-
+import { useMediaQuery } from "@mui/material";
 export default function PaidUser() {
+  const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
   const location = useLocation();
   const { name } = location.state?.Data || {};
-
   const signout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("image");
@@ -27,10 +20,8 @@ export default function PaidUser() {
       navigate("/userlogin");
     }, 200);
   };
-
   const handleChange = (event) => {
     const selectedMenu = event.target.value;
-
     switch (selectedMenu) {
       case "NEWUSER":
         navigate("/AdminPanelMernStack");
@@ -42,11 +33,9 @@ export default function PaidUser() {
         break;
     }
   };
-
   const img =
     "https://media.licdn.com/dms/image/v2/D5603AQG7sb04QQr5sg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727442009142?e=1733961600&v=beta&t=U9gYfE2pVodsQPOVlQiCbaYV8JFS17xo6aQBlcP69Lo";
   console.log(img);
-
   return (
     <>
       <Navbar
@@ -69,7 +58,7 @@ export default function PaidUser() {
           <FormControl
             fullWidth
             sx={{
-              width: "20%",
+              width: isMobile ? "40%" : "10%",
               background: "linear-gradient(to right, #FF7469, #FF9A8B)",
             }}
           >

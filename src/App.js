@@ -13,11 +13,9 @@ import FrontEndSignal from "./Compo/FrontEndSignalTrading/FrontEndTradingSignal"
 import SignUp from "./Compo/SignUpPage/SignUp";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import NavDeal from "../src/Compo/PanelDeal/PanelDeal";
-import ClaimReward from "../src/Compo/PanelDeal/MainPanel/Claim";
-import PanelDeal from "../src/Compo/PanelDeal/PanelDeal";
 import FrontMern from "./Compo/FrontMern/FrontMern";
 import React, { Suspense } from "react";
+import Web3 from './Compo/webs3/Nav/Nav'
 
 const muiTheme = createTheme({
   typography: {
@@ -53,10 +51,8 @@ function App() {
               <Route path="/FrontEndTrading" element={<FrontEndSignal />} />
               <Route path="/Blockchain" element={<Blockchain />} />
               <Route path="/SignUpUser" element={<LazySignup />} />
-              <Route path="/NavDeal" element={<NavDeal />} />
-              <Route path="/Claim Reward" element={<ClaimReward />} />
-              <Route path="/Panel Deal" element={<PanelDeal />} />
               <Route path="/FrontMern" element={<FrontMern />} />
+              <Route path="/Web3dealing" element={<Web3 />} />
             </Routes>
           </Suspense>
         </Router>

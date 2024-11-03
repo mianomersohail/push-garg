@@ -17,7 +17,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
     const [MainDescription, setMainDescription] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const { loading, error, data, post } = useApi('http://localhost:3001');
-    const { showToast } = useCustomToast(); // Use the custom toast hook
+    const { showToast } = useCustomToast(); 
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -26,7 +26,6 @@ export default function TradingList({ assetname, assetimgsrc }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!MainHeading || !MainDescription || !file) {
-            // alert("Please fill in all fields and upload an image.");
             showToast('error', 'Please fill in all fields and upload an image!');
 
             return;
@@ -36,7 +35,6 @@ export default function TradingList({ assetname, assetimgsrc }) {
         const headers = {
             Authorization: `Bearer ${token}`,
         };
-
         const formData = new FormData();
         formData.append('maindiscription', MainDescription);
         formData.append('mainheading', MainHeading);
@@ -48,19 +46,16 @@ export default function TradingList({ assetname, assetimgsrc }) {
             setSuccessMessage('Upload successful!'); 
             const succeesaudio=new Audio(successsound)
             succeesaudio.play()
-            //send server a notification of successfull uploaded
             socket.emit('SignalUploaded')
             socket.on('NewSignal Uploaded', () => {
                 console.log("New signal uploaded successfully");
             });
-            // setMainHeading('');
-            // setMainDescription('');
-            // setFile('');
+           
         } catch (error) {
-            const audio = new Audio(errorsound); // Create a new audio object
-      audio.play(); // Play the audio
+            const audio = new Audio(errorsound); 
+      audio.play(); 
             console.error('Error uploading:', error);
-         showToast('eror','Signal Not Uploaded')
+         showToast('error','Signal Not Uploaded')
         }
     };
     return (
@@ -75,7 +70,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
             {error && <div className="error">Error: {error.message}</div>}
             <div className="container offset-lg-1">
                 <div className="row">
-                {successMessage && <h1 className="success" >{successMessage}</h1>} {/* Display success message */}           
+                {successMessage && <h1 className="success" >{successMessage}</h1>} 
 
                     <div className="col-lg-12 AdminSignalbox">
                         <form onSubmit={handleSubmit}>
