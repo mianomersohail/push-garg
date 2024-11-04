@@ -9,14 +9,17 @@ import Footer from '../Footer2.js/Footer2'
 import TypingEffect from 'react-typing-effect';
 import FillingEffect from '../FillingEffect/FillingEffect';
 import CountEffect from '../CountEffect/CountEffect';
+import Accordian from '../Accordian/Accordian'
 import EthSection from '../EthSection/EthSection';
 import HomeList from '../Homes/HomeList';
 import Links from '../Homes/staticdata';
+import useCustomToast from '../usetoast/usetoast';
+
 import { useNavigate } from 'react-router-dom';
-import useCustomToast from '../usetoast/usetoast'; 
 const LinkData = Links;
 export default function Home() {
-  const { showToast } = useCustomToast(); 
+  const { showToast, ToastComponent } = useCustomToast(); 
+
   const [username, setusername] = useState()
   const navigation = useNavigate();
   const { loading, error, data, post, get } = useApi('http://localhost:3001');
@@ -34,10 +37,10 @@ export default function Home() {
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
+      showToast('success', 'CV downloaded successfully.');
 
     } catch (error) {
       showToast('error', 'Cv Not found.');
-
       console.log(error);
     }
   };
@@ -82,12 +85,14 @@ export default function Home() {
         imgsrc={imgURL}
         name={namefromlocal || 'Welcome Coders'}
         navlinameone={'Docs'}
-        navlinametwo={namefromlocal ? 'WelcomeBack' : 'Login'} 
+        navlinametwo={namefromlocal ? 'Paid Users' : 'Login'} 
         linkone={'/Documentation'}
         onClick={navlogin}
         showNotifications={!!namefromlocal} 
 
       />
+            <ToastComponent />
+
 
 
       {loading && (
@@ -135,6 +140,7 @@ export default function Home() {
       </div>
       <WorkExperience />
       <FillingEffect />
+      <Accordian/>
       <CountEffect />
       <Courses />
       <EthSection />

@@ -16,6 +16,9 @@ export default function PaidUser() {
   const signout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("image");
+    localStorage.removeItem('username')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('notifications')
     setTimeout(() => {
       navigate("/userlogin");
     }, 200);

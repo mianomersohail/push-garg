@@ -8,7 +8,6 @@ import useApi from "../FetchHook/FetchPost";
 
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
-  const showToast = useCustomToast();
   const navigate = useNavigate();
   const { loading, error, data, get } = useApi("http://localhost:3001");
 
@@ -31,6 +30,8 @@ const UserProfiles = () => {
       }
     }
   };
+  const { showToast, ToastComponent } = useCustomToast(); 
+
 
   return (
     <div className="container">
@@ -75,6 +76,7 @@ const UserProfiles = () => {
             </div>
           ))}
       </div>
+      <ToastComponent/>
     </div>
   );
 };

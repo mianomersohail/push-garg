@@ -22,19 +22,18 @@ const ChatComponent = () => {
   const baseURL = "http://localhost:3001/";
   const messagesContainerRef = useRef(null);
   const typingTimeout = useRef(null);
-
+console.log('im mmm')
   // Toggle popup
   const togglePopup = () => {
     setIsOpen((prev) => !prev);
   };
-
-  // Fetch old messages once when the component mounts
   useEffect(() => {
     const fetchMessages = async () => {
       const token = localStorage.getItem("token");
       const id = localStorage.getItem("userId");
       try {
         const response = await get("/UserMessage");
+      
         const oldMessages = response?.messages || [];
         const formattedMessages = oldMessages.map((msg) => ({
           message: msg.message,
@@ -50,9 +49,8 @@ const ChatComponent = () => {
     };
 
     fetchMessages();
-  }, [get]);
+  }, []);
 
-  // Scroll to the bottom of the messages container
   useEffect(() => {
     if (messagesContainerRef.current) {
       const { scrollHeight, clientHeight } = messagesContainerRef.current;
@@ -60,7 +58,6 @@ const ChatComponent = () => {
     }
   }, [messages, isOpen]);
 
-  // Socket listener for real-time messages
   useEffect(() => {
     socket.on("receiveMessage", (message, name, image) => {
       const audio = new Audio(receivesound);

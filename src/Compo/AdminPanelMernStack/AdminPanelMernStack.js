@@ -25,8 +25,7 @@ export default function AdminPanelMernStack() {
   const [oldpassword, setoldpassword] = useState("");
   const [newemail, setnewemail] = useState("");
   const [newpassword, setnewpassword] = useState("");
-
-  const { showToast } = useCustomToast();
+  const { showToast, ToastComponent } = useCustomToast(); 
   const { loading, error, post, del, put } = useApi("http://localhost:3001");
 
   const clearMessages = () => {
@@ -370,6 +369,7 @@ export default function AdminPanelMernStack() {
           </div>
         </div>
       </div>
+      <ToastComponent/>
       <Footer />
     </>
   );

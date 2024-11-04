@@ -17,7 +17,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
     const [MainDescription, setMainDescription] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const { loading, error, data, post } = useApi('http://localhost:3001');
-    const { showToast } = useCustomToast(); 
+    const { showToast, ToastComponent } = useCustomToast(); 
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -44,6 +44,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
             const result = await post('/TradeSignal', formData, headers);
             console.log(result);
             setSuccessMessage('Upload successful!'); 
+            showToast("success", "Signal Uploaded Successfully.");
             const succeesaudio=new Audio(successsound)
             succeesaudio.play()
             socket.emit('SignalUploaded')
@@ -53,6 +54,8 @@ export default function TradingList({ assetname, assetimgsrc }) {
            
         } catch (error) {
             const audio = new Audio(errorsound); 
+            showToast("error", "Unexpected error occurred");
+
       audio.play(); 
             console.error('Error uploading:', error);
          showToast('error','Signal Not Uploaded')
@@ -101,6 +104,7 @@ export default function TradingList({ assetname, assetimgsrc }) {
                     </div>
                 </div>
             </div>
+            <ToastComponent/>
             <Footer2/>
         </>
     );

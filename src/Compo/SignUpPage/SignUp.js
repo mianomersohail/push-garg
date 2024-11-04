@@ -5,7 +5,7 @@ import Navbar from "../Nav/NavList";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer2.js/Footer2";
 export default function CustomSignupFormik() {
-  const navigation = useNavigate();
+  console.log('IM NAVIGATIO')
   return (
     <>
       <Navbar

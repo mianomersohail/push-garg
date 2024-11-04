@@ -15,8 +15,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FrontMern from "./Compo/FrontMern/FrontMern";
 import React, { Suspense } from "react";
-import Web3 from './Compo/webs3/Nav/Nav'
-
+import Web3 from "./Compo/webs3/any";
 const muiTheme = createTheme({
   typography: {
     body1: {
@@ -25,8 +24,8 @@ const muiTheme = createTheme({
   },
 });
 const theme = {};
-// Correctly lazy load the SignUp component
 const LazySignup = React.lazy(() => import("./Compo/SignUpPage/SignUp"));
+const Userchatlazy = React.lazy(() => import("./Compo/UserChat/UserChat"));
 function App() {
   return (
     <ChakraProvider theme={theme}>
@@ -47,10 +46,10 @@ function App() {
                 path="/TradingSignalAdmin"
                 element={<TradingSignalAdmin />}
               />
-              <Route path="/UserChat" element={<UserChat />} />
               <Route path="/FrontEndTrading" element={<FrontEndSignal />} />
               <Route path="/Blockchain" element={<Blockchain />} />
               <Route path="/SignUpUser" element={<LazySignup />} />
+              <Route path="/UserChat" element={Userchatlazy} />
               <Route path="/FrontMern" element={<FrontMern />} />
               <Route path="/Web3dealing" element={<Web3 />} />
             </Routes>
